@@ -1,11 +1,14 @@
+// grab sensitive information from .env file
+require('dotenv').config({path: require('find-config')('.env')})
+
 import express, { Express, Request, Response } from 'express';
 
 // instantiate express app
 const app: Express = express();
-const port: number = 4000;
+const port = process.env.SERVER_PORT || 4000;
 
 app.get('/', (_req: Request, res: Response) => {
-  res.send('Express and typescripasdfast is set asdfup!!!asasdfldkfjas! asd asdff');
+  res.send('Express and Typescript working!');
 });
 
 app.listen(port, () => {
