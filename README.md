@@ -13,7 +13,7 @@
     ```sh
     yarn install
     ```
-4. Move into the server app and start it
+4. Move into the server app and start it. If you run into an error, exit the process and try again.
     ```sh
     cd server
     yarn start
