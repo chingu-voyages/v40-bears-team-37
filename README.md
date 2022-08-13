@@ -1,14 +1,25 @@
-# voyage-tasks
+# Lesson Planning App 
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+# How to run this project locally
+1. Clone this repository
+    ```sh
+    git clone https://github.com/chingu-voyages/v40-bears-team-37.git
+    ```
+2. Move into v40-bears-team-37 directory 
+    ```sh
+    cd v40-bears-team-37 
+    ```
+3. Install dependencies
+    ```sh
+    yarn install
+    ```
+4. Start the development server for the client and the server at the same time
+    ```sh
+    yarn start
+    ```
+5. The application should be running!
+    For client go to: `localhost:3000`
+    For server go to: `localhost:4000`
+6.  Create a .env file in the root directory when you get a chance. For now it can be empty.
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
-
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
-
-> Own it & Make it your Own!
+How to make a README: [Keys to a well written README](https://tinyurl.com/yk3wubft).
