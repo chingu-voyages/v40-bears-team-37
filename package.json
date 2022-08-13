@@ -1,4 +1,15 @@
 {
     "private": true,
-    "workspaces": ["client", "server"]
+    "scripts": {
+        "watch-client" : "yarn workspace client start",
+        "watch-server" : "yarn workspace server start",
+        "start": "concurrently --kill-others-on-fail \"yarn watch-client\"  \"yarn watch-server\""
+    },
+    "workspaces": [
+        "client",
+        "server"
+    ],
+    "dependencies": {
+        "concurrently": "^7.3.0"
+    }
 }
