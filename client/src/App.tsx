@@ -1,6 +1,8 @@
+import CalendarView from './components/CalendarView';
+
 function App() {
   return (
-    <p>Hello from React!</p>
+    <CalendarView />
   );
 }
 
