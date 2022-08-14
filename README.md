@@ -13,7 +13,7 @@
     ```sh
     yarn install
     ```
-4. You can start the server and client together by moving into the root directory and running
+4. You can start the server and client together by running
     ```sh
     yarn start
     ```
