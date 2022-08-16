@@ -1,0 +1,22 @@
+name: Deploy Server to Heroku
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "server/**"
+      - ".github/workflows/server-deploy.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Add server remote origin
+        run: git remote add lesson-plans-backend https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
+      
+      - name: Deploy server to Heroku
+        run: git push lesson-plans-backend `git subtree split --prefix server main`:refs/heads/main --force
