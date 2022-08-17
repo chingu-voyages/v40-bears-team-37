@@ -13,6 +13,7 @@ app.get('/', (_req: Request, res: Response) => {
 
 app.get('/favicon.ico', (_req, res) => res.status(204).send());
 
+// created new heroku app for backend
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
