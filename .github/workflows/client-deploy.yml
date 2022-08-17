@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set client/** as root
-        run: git subtree split --prefix client client
+        run: git subtree split --prefix client main
       
       - name: npm install
         run: npm install
