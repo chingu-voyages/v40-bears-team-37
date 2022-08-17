@@ -53,7 +53,7 @@ app.get("/", (_req: Request, res: Response) => {
   res.send("Express and Typescript working! Welcome to Notum backend!");
 });
 
-// mongoose connection
+// mongodb connection
 mongoose.connect(MONGO_URL).then(() => {
   console.log("{ MongoDB is running }");
   app.listen(PORT, () => {
