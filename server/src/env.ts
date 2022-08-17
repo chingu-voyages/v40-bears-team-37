@@ -5,12 +5,12 @@ const getEnvSafely = (envKey: string) => {
   const envValue = process.env[envKey];
 
   if (!envValue) {
-    throw new Error(`Couldn't get environment variables:: ${envKey}`);
+    throw new Error(`Couldn't get environment variable:: ${envKey}`);
   }
   return envValue;
 };
 
-// from .env
+// from .env file
 export const BACKEND_URL = getEnvSafely("BACKEND_URL");
 export const FRONTEND_URL = getEnvSafely("FRONTEND_URL");
 export const MONGO_URL = getEnvSafely("MONGO_URL");

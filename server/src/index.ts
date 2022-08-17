@@ -49,6 +49,7 @@ app.use(passport.session());
 require("./config/passport.config")(passport);
 
 
+// routes
 app.get("/", (_req: Request, res: Response) => {
   res.send("Express and Typescript working! Welcome to Notum backend!");
 });
