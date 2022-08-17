@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: remove yarn.lock
-        run: git rm yarn.lock
+        run: rm -rf yarn.lock
       
       - name: Git add and commit
         run: |
