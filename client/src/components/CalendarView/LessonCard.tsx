@@ -29,12 +29,11 @@ const LessonCardStyles = styled.div<LessonStyleProps>`
   .class-detail {
     display: flex;
     flex-direction: row;
+    gap: 20px;
     justify-content: space-between;
   }
 
-  .time {
-    letter-spacing: 0.1rem;
-  }
+
 
   .card-link {
     text-decoration: underline;
@@ -57,7 +56,6 @@ const LessonCard = ({lesson}: LessonCardProps) => {
                 <div className="class-detail">
                     <div>Class: {lesson.class}</div>
                     <div className="time">{lesson.time}</div>
-                    <div>{getBgColorBySubject(lesson.subject)}</div>
                 </div>
                 <div className="card-link">
                     <a>See Full</a>

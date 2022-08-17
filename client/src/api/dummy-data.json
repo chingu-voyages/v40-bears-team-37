@@ -52,6 +52,7 @@
     "days": [
       {
         "day": "Mon",
+        "date": "August 8th",
         "lessons": [
           {
             "id": "1",
@@ -81,6 +82,7 @@
       },
       {
         "day": "Tue",
+        "date": "August 9th",
         "lessons": [
           {
             "id": "5",
@@ -104,6 +106,7 @@
       },
       {
         "day": "Wed",
+        "date": "August 10th",
         "lessons": [
           {
             "id": "5",
@@ -127,6 +130,7 @@
       },
       {
         "day": "Thu",
+        "date": "August 11th",
         "lessons": [
           {
             "id": "5",
@@ -150,6 +154,7 @@
       },
       {
         "day": "Fri",
+        "date": "August 12th",
         "lessons": [
           {
             "id": "5",
