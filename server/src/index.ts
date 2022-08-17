@@ -5,7 +5,7 @@ import {
   FRONTEND_URL,
   MONGO_URL,
   PORT,
-  __isProd__,
+  IS_PROD,
   COOKIE_NAME,
 } from "./env";
 import mongoose from "mongoose";
@@ -21,7 +21,7 @@ const app = express();
 // middlewares
 app.use(
   cors({
-    origin: __isProd__ ? FRONTEND_URL : "*",
+    origin: IS_PROD ? FRONTEND_URL : "*",
     credentials: true,
   })
 );
@@ -43,7 +43,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: __isProd__, // SSL only in production
+      secure: IS_PROD, // SSL only in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
       sameSite: "lax",
