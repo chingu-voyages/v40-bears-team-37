@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project ./",
     "start:dev": "concurrently \"nodemon src/index.ts\"",
-    "start": "npx --project ./ && node dist/index.js"
+    "start": "npx tsc --project ./ && node dist/index.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
