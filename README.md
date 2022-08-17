@@ -1,4 +1,12 @@
-# Lesson Planning App 
+# Notum
+
+A lesson-planning app made for teachers
+
+## Quickstarts
+
+* [Run locally](#how-to-run-this-project-locally)
+* [Branch name guides](#branch-name-guides)
+* [Installing packages guides](#installing-packages-guides)
 
 ## How to run this project locally
 1. Clone this repository
@@ -11,7 +19,7 @@
     ```
 3. Install dependencies
     ```sh
-    yarn install
+    yarn
     ```
 4. You can start the server and client together by running
     ```sh
@@ -25,11 +33,25 @@
 
 ## Branch name guides
 
-1. Please start your branch with one of these options
+1. Please name your branch with one of these options
 
 - `feature/YOUR_BRANCH_NAME_HERE` - If you're making a new feature
 - `fix/YOUR_BRANCH_NAME_HERE` - If you're making some bug fixes
 - `hotfix/YOUR_BRANCH_NAME_HERE` - If you're making a quick fix that needs to merge quickly
 - `refactor/YOUR_BRANCH_NAME_HERE` - If you're making some code refactoring
+
+## Installing packages guides
+
+Make sure to install from the root folder
+
+For frontend:
+```sh
+yarn workspace client add PACKAGES_NAME
+```
+
+For backend:
+```sh
+yarn workspace server add PACKAGES_NAME
+```
 
 How to make a README: [Keys to a well written README](https://tinyurl.com/yk3wubft).
