@@ -4,7 +4,6 @@
         "client-start" : "yarn workspace client start",
         "server-start" : "yarn workspace server start:dev",
         "watch": "concurrently --kill-others-on-fail -n \"server,client\" -c \"yellow,green\" \"yarn client-start\"  \"yarn server-start\"",
-        "heroku-prebuild": "cd server && npm install",
         "start": "cd server && npm run start"
     },
     "workspaces": [
