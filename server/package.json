@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npx tsc --project ./",
     "start:dev": "concurrently \"nodemon src/index.ts\"",
-    "start": "npm install && node dist/index.js"
+    "start": "cd server && npm start"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
