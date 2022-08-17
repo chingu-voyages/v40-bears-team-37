@@ -25,10 +25,11 @@ module.exports = async function (passport: PassportStatic) {
         }
 
         const validPassword = await bcrypt.compare(password, user.password);
-        if (!validPassword)
+        if (!validPassword) {
           return done(null, false, {
             message: "Incorrect email or password.",
           });
+        }
         return done(null, user);
       }
     )
