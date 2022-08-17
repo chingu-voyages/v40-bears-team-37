@@ -21,7 +21,7 @@ jobs:
           git config user.email github-actions@github.com
 
       - name: Set client/** as root
-        run: git subtree split --prefix client main
+        run: git subtree split -P client -b client-deploy
       
       - name: npm install
         run: npm install
@@ -39,4 +39,4 @@ jobs:
         run: git remote add lesson-plans-frontend https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_FRONTEND_APP_NAME  }}.git
       
       - name: Deploy frontend to Heroku
-        run: git push lesson-plans-frontend --force
+        run: git push lesson-plans-frontend client-deploy:refs/heads/main --force
