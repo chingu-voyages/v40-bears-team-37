@@ -2,7 +2,8 @@ export const fontSize = {
     primary: '16px',
     small: '12px',
     h1: '36px',
-    h3: '24px'
+    h3: '24px',
+    h4: '16px'
 };
 
 // transition point from mobile to desktop layout

@@ -10,13 +10,14 @@ const CalendarViewStyles = styled.div`
 `
 
 const CalendarView = () => {
-    const {week}= data;
-    return(
+    const {week} = data;
+    
+    return (
         <CalendarViewStyles>
-            <SideBar />
+            <SideBar/>
             <CalendarWeek week={week}/>
         </CalendarViewStyles>
     )
- }
+}
 
- export default CalendarView
+export default CalendarView

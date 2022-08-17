@@ -11,7 +11,7 @@ const LessonCardStyles = styled.div<LessonStyleProps>`
   flex-direction: column;
   background-color: ${p => p.color};
   font-size: 0.8rem;
-  max-width: 250px;
+  max-width: 200px;
   padding: 10px 15px;
 
   h1 {
@@ -21,24 +21,34 @@ const LessonCardStyles = styled.div<LessonStyleProps>`
   }
 
   .card-content {
-    padding: 10px 0;
     display: flex;
     flex-direction: column;
   }
 
-  .class-detail {
+
+  .time-link-container {
     display: flex;
     flex-direction: row;
-    gap: 20px;
     justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 10px;
   }
 
+  .time {
+    text-align: right;
+  }
 
 
   .card-link {
     text-decoration: underline;
+    text-underline-offset: 2px;
     align-self: flex-end;
-    padding-top: 20px;
+
+  }
+
+
+  .card-link:hover {
+    text-decoration: none;
   }
 `
 
@@ -47,19 +57,18 @@ interface LessonCardProps {
 }
 
 
-
 const LessonCard = ({lesson}: LessonCardProps) => {
     return (
         <LessonCardStyles color={getBgColorBySubject(lesson.subject)}>
             <h1>{lesson.subject}</h1>
             <div className="card-content">
-                <div className="class-detail">
-                    <div>Class: {lesson.class}</div>
+                <div>Lesson: {lesson.class}</div>
+                <div className="time-link-container">
                     <div className="time">{lesson.time}</div>
+                    <a className="card-link" href={`/lessons/${lesson.id}`}>See Full</a>
                 </div>
-                <div className="card-link">
-                    <a>See Full</a>
-                </div>
+
+
             </div>
 
         </LessonCardStyles>

@@ -28,8 +28,8 @@ const CalendarDay = ({day}: CalendarDayProps) => {
                 <small>{day.date}</small>
             </div>
 
-            {day && day.lessons.map((lesson, index) => (
-                <LessonCard key={index} lesson={lesson}/>
+            {day && day.lessons.map((lesson) => (
+                <LessonCard key={lesson.id} lesson={lesson}/>
             ))}
 
 

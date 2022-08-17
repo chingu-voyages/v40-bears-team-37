@@ -17,6 +17,10 @@ const CalendarWeekStyles = styled.div`
     margin-bottom: 50px;
   }
 
+  h1 {
+    padding-bottom: 5px;
+  }
+
   .lesson-grid {
     display: flex;
     flex-direction: row;

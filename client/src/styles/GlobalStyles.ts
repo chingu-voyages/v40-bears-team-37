@@ -34,9 +34,20 @@ const GlobalStyles = createGlobalStyle`
       margin: 0
     }
 
+    h4 {
+      font-size: ${fontSize.h4};
+      margin: 0;
+    }
+
     small {
       font-size: ${fontSize.small};
     }
+
+    a {
+      color: var(--primary-text);
+      text-decoration: none;
+    }
+
 
     button {
       cursor: pointer;
