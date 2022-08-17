@@ -11,12 +11,8 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Express and Typescript working!');
 });
 
-app.get('/favicon.ico', (_req, res) => res.status(204));
+app.get('/favicon.ico', (_req, res) => res.status(204).send());
 
-try {
-  app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-  });
-} catch(e) {
-  console.log(e)
-}
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
