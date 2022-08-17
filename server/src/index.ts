@@ -8,7 +8,7 @@ const app: Express = express();
 const port = process.env.PORT || 4000;
 
 app.get('/', (_req: Request, res: Response) => {
-  res.send('Express and Typescript working!');
+  res.send('Express and Typescript working! Welcome to Notum backend!');
 });
 
 app.listen(port, () => {
