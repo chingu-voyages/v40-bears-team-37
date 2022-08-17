@@ -25,8 +25,11 @@ jobs:
       
       - name: npm install
         run: npm install
+
+      - name: remove yarn.lock
+        run: git rm yarn.lock
       
-      - name: Git  add and commit
+      - name: Git add and commit
         run: |
           git add -A
           git commit -m "by github-actions"
