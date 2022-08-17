@@ -1,5 +1,5 @@
 // grab sensitive information from .env file
-require('dotenv').config({path: require('find-config')('.env')})
+require('dotenv').config();
 
 import express, { Express, Request, Response } from 'express';
 
