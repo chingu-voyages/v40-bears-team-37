@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - hotfix/github-prod-workflow
     paths:
       - "client/**"
       - ".github/workflows/client-deploy.yml"

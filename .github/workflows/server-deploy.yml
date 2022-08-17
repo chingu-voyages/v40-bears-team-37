@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - hotfix/github-prod-workflow
     paths:
       - "server/**"
       - ".github/workflows/server-deploy.yml"
