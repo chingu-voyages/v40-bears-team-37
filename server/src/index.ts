@@ -5,12 +5,12 @@ import express, { Express, Request, Response } from 'express';
 
 // instantiate express app
 const app: Express = express();
-const port = process.env.SERVER_PORT || 4000;
+const port = process.env.PORT || 4000;
 
 app.get('/', (_req: Request, res: Response) => {
-  res.send('Express and Typescript working!');
+  res.send('Express and Typescript working! Welcome to Notum backend!');
 });
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at https://localhost:${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
