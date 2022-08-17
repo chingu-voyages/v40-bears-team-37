@@ -21,7 +21,9 @@ jobs:
           git config user.email github-actions@github.com
 
       - name: Set client/** as root
-        run: git subtree split -P client -b client-deploy
+        run: |
+          git subtree split -P client -b client-deploy
+          git checkout client-deploy
       
       - name: npm install
         run: npm install
