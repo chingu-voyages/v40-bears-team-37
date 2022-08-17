@@ -20,4 +20,4 @@ jobs:
         run: git remote add lesson-plans-backend https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_BACKEND_APP_NAME }}.git
       
       - name: Deploy server to Heroku
-        run: git push lesson-plans-backend `git subtree split --prefix server hotfix/github-prod-workflow:refs/heads/hotfix/github-prod-workflow--force
+        run: git push lesson-plans-backend `git subtree split --prefix server hotfix/github-prod-workflow/`:refs/heads/hotfix/github-prod-workflow --force
