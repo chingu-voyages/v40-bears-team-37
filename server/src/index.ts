@@ -1,6 +1,13 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { COOKIE_SECRET, FRONTEND_URL, MONGO_URL, PORT, __isProd__, COOKIE_NAME } from './env';
+import {
+  COOKIE_SECRET,
+  FRONTEND_URL,
+  MONGO_URL,
+  PORT,
+  __isProd__,
+  COOKIE_NAME,
+} from "./env";
 import mongoose from "mongoose";
 import helmet from "helmet";
 import compression from "compression";
@@ -40,14 +47,13 @@ app.use(
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
       sameSite: "lax",
-      domain: __isProd__ ? FRONTEND_URL : undefined
+      // domain: ''
     },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport.config")(passport);
-
 
 // routes
 app.get("/", (_req: Request, res: Response) => {
