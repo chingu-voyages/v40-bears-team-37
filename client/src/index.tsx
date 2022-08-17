@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './reset.css';
-import './index.css';
+import GlobalStyles from 'styles/GlobalStyles';
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -9,6 +8,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+      <>
+          <GlobalStyles />
+          <App />
+      </>
+
   </React.StrictMode>
 );

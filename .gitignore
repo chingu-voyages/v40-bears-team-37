@@ -1,5 +1,6 @@
 # === Miscellaneous gitignores === 
 node_modules
+/.idea
 .DS_Store
 .env
 .env.local
