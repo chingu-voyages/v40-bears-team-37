@@ -10,8 +10,8 @@ const SidebarStyles = styled.div`
   background-color: var(--primary-dark);
   color: var(--background-color);
   min-width: 220px;
-  height: 100vh;
-
+  min-height: 100vh;
+ 
   h1 {
     text-align: center;
     padding: 20px 0 70px 0;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const UserLogoutStyles = styled.div`
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
   gap: 10px;
   align-items: flex-end;
   justify-content: space-between;
