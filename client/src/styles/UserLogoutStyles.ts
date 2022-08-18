@@ -6,7 +6,6 @@ export const UserLogoutStyles = styled.div`
   gap: 10px;
   align-items: flex-end;
   justify-content: space-between;
-  width: 100%;
   padding: 30px 10px;
 
   img {
