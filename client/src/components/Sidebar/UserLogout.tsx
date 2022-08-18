@@ -15,7 +15,6 @@ const UserLogout = () => {
             <div className="img-container logout">
                 <img src={logoutIcon} alt={`logout-icon`}/>
             </div>
-            s
         </UserLogoutStyles>
     )
 }
