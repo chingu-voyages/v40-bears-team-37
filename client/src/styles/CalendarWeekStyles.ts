@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const CalendarWeekStyles = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 20px auto;
+  padding: 0 10px;
 
   .calendar-header {
     display: flex;
