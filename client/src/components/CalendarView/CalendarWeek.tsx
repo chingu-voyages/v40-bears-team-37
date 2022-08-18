@@ -4,7 +4,6 @@ import {Week} from 'types/Week';
 import leftArrowIcon from 'images/calendar/leftArrow.svg'
 import rightArrowIcon from 'images/calendar/rightArrow.svg'
 
-
 interface CalendarWeekProps {
     week: Week
 }
@@ -35,7 +34,6 @@ const CalendarWeekStyles = styled.div`
     cursor: pointer;
   }
 
-
   h1 {
     padding-bottom: 5px;
   }
@@ -65,14 +63,11 @@ const CalendarWeek = ({week}: CalendarWeekProps) => {
                 </div>
             </div>
 
-
             <div className="lesson-grid">
                 {week && week.days.map((day) => (
                     <CalendarDay key={day.day} day={day}/>
                 ))}
             </div>
-
-
         </CalendarWeekStyles>
     )
 }

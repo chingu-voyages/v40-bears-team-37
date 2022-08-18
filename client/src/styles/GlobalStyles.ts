@@ -54,14 +54,12 @@ const GlobalStyles = createGlobalStyle`
       background-color: var(--primary-dark);
       color: var(--background-color);
       font-size: 1.2rem;
-      border: 2px solid var(--primary-dark);;
+      border: none;
       padding: 10px 15px;
     }
 
-    // TODO: hover effect looks a bit weird
     button: hover {
-      background-color: var(--background-color);
-      color: var(--primary-dark);
+      background-color: var(--primary-text);
     }
   }
 `
