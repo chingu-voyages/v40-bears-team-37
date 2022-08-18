@@ -18,12 +18,14 @@ export const UserLogoutStyles = styled.div`
     height: 30px;
     padding: 5px;
     border-radius: 9999px;
-    background-color: var(--background-color)
+    background-color: var(--background-color);
+    cursor: pointer;
   }
 
   .logout {
     background-color: var(--white);
     width: 20px;
     height: 20px;
+    cursor: pointer;
   }
 `

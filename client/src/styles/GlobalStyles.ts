@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
       --white: #FFFFFF;
       --black: #000000;
 
+      box-sizing: border-box;
       font-family: 'Roboto', sans-serif;
       font-size: ${fontSize.primary};
       color: var(--primary-text);

@@ -11,7 +11,7 @@ const SidebarStyles = styled.div`
   color: var(--background-color);
   min-width: 220px;
   min-height: 100vh;
- 
+
   h1 {
     text-align: center;
     padding: 20px 0 70px 0;
@@ -34,7 +34,6 @@ const SideBar = () => {
                 )}
             </div>
             <UserLogout/>
-
         </SidebarStyles>
     )
 }
