@@ -5,7 +5,6 @@ interface SidebarStylesProps {
 }
 
 const SidebarTabStyles = styled.div<SidebarStylesProps>`
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -14,6 +13,7 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
   padding: 30px 0;
   border-style: solid;
   border-width: 1px;
+  cursor: pointer;
   border-color: ${p => p.isActive ? "var(--primary-medium)" : "var(--primary-dark)"};
   border-width: ${p => p.isActive ? "1px 10px 1px 1px" : "1px"};
 
