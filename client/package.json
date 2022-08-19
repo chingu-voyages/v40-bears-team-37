@@ -7,7 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,md}\""
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,md}\"",
+    "format:staged": "pretty-quick --staged"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +47,7 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
     "eslint": "^8.22.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3"
   }
 }

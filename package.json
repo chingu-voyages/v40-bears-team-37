@@ -7,7 +7,10 @@
     "husky:prepare": "husky install && npx husky add .husky/pre-commit \"yarn format\"",
     "client-format": "cd client && yarn format",
     "server-format": "cd server && yarn format",
-    "format": "yarn client-format && yarn server-format"
+    "format": "yarn client-format && yarn server-format",
+    "client-format:staged": "cd client && yarn format:staged",
+    "server-format:staged": "cd server && yarn format:staged",
+    "format:staged": "yarn client-format:staged && yarn server-format:staged"
   },
   "workspaces": [
     "client",
@@ -22,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "format"
+      "pre-commit": "format:staged"
     }
   }
 }
