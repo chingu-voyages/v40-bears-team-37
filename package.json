@@ -4,9 +4,10 @@
     "client-start": "yarn workspace client start",
     "server-start": "yarn workspace server start:dev",
     "start": "concurrently --kill-others-on-fail -n \"client,server\" -c \"yellow,green\" \"yarn client-start\"  \"yarn server-start\"",
-    "husky:prepare": "husky install && npx husky add .husky/pre-commit \"npx lint-staged\"",
-    "client-format": "yarn workpace client format",
-    "server-format": "yarn workpace server format"
+    "husky:prepare": "husky install && npx husky add .husky/pre-commit \"yarn format\"",
+    "client-format": "cd client && yarn format",
+    "server-format": "cd server && yarn format",
+    "format": "yarn client-format && yarn server-format"
   },
   "eslintConfig": {
     "extends": [
@@ -28,13 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "format"
     }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "client-format",
-      "server-format"
-    ]
   }
 }
