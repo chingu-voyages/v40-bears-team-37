@@ -9,19 +9,12 @@
     "server-format": "cd server && yarn format",
     "format": "yarn client-format && yarn server-format"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "workspaces": [
     "client",
     "server"
   ],
   "dependencies": {
-    "concurrently": "^7.3.0",
-    "eslint": "^8.22.0"
+    "concurrently": "^7.3.0"
   },
   "devDependencies": {
     "husky": "^8.0.0",
