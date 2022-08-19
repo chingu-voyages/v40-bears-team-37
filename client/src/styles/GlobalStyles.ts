@@ -1,5 +1,5 @@
-import {createGlobalStyle} from 'styled-components';
-import {fontSize} from './Sizes';
+import { createGlobalStyle } from "styled-components";
+import { fontSize } from "./Sizes";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -63,6 +63,6 @@ const GlobalStyles = createGlobalStyle`
       background-color: var(--primary-text);
     }
   }
-`
+`;
 
 export default GlobalStyles;

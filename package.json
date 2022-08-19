@@ -5,8 +5,14 @@
     "server-start": "yarn workspace server start:dev",
     "start": "concurrently --kill-others-on-fail -n \"client,server\" -c \"yellow,green\" \"yarn client-start\"  \"yarn server-start\"",
     "husky:prepare": "husky install && npx husky add .husky/pre-commit \"npx lint-staged\"",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix"
+    "client-format": "yarn workpace client format",
+    "server-format": "yarn workpace server format"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "workspaces": [
     "client",
@@ -18,18 +24,17 @@
   },
   "devDependencies": {
     "husky": "^8.0.0",
-    "prettier": "^2.7.1",
-    "pretty-quick": "^3.1.3"
+    "prettier": "^2.7.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged":  {
-    "./**/**/*.{js,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "client-format",
+      "server-format"
     ]
   }
 }
