@@ -24,8 +24,10 @@
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": [
-    "pretty-quick --staged",
-    "eslint --fix"
-  ]
+  "lint-staged":  {
+    "./**/*.{js,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
 }
