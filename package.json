@@ -11,7 +11,8 @@
     "server"
   ],
   "dependencies": {
-    "concurrently": "^7.3.0"
+    "concurrently": "^7.3.0",
+    "eslint": "^8.22.0"
   },
   "devDependencies": {
     "husky": "^8.0.0",
@@ -20,7 +21,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lint-staged"
     }
-  }
+  },
+  "lint-staged": [
+    "pretty-quick --staged",
+    "eslint --fix"
+  ]
 }
