@@ -16,7 +16,7 @@ const lessonSchema = new Schema({
   schedule_id: {
     type: Schema.Types.ObjectId,
     ref: 'Course',
-    reuired: true
+    required: true
   }
 });
 
