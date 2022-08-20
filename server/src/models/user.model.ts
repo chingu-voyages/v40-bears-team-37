@@ -13,6 +13,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  courses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    },
+  ],
 });
 
 const User = model("User", userSchema);
