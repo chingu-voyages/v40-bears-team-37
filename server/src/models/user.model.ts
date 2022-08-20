@@ -13,7 +13,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  course_ids: [
+  courses: [
     {
       type: Schema.Types.ObjectId,
       ref: "Course",
