@@ -11,8 +11,6 @@ const scheduleSchema = new Schema({
   },
 });
 
-export type ScheduleModel = InferSchemaType<typeof scheduleSchema>;
-
 const courseSchema = new Schema({
   name: {
     type: String,
@@ -35,5 +33,7 @@ const courseSchema = new Schema({
 const Course = model("Course", courseSchema);
 export default Course;
 
+// extract types
+export type ScheduleModel = InferSchemaType<typeof scheduleSchema>;
 export type CourseModel = InferSchemaType<typeof courseSchema>;
 export type CourseDocument = Document & CourseModel;
