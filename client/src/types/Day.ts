@@ -1,7 +1,7 @@
-import {Lesson} from 'types/Lesson';
+import { Lesson } from "types/Lesson";
 
 export type Day = {
-    day: string,
-    date: string,
-    lessons: Lesson[],
-}
+  day: string;
+  date: string;
+  lessons: Lesson[];
+};

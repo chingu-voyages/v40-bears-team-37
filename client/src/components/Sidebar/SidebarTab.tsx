@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface SidebarStylesProps {
-    isActive: boolean;
+  isActive: boolean;
 }
 
 const SidebarTabStyles = styled.div<SidebarStylesProps>`
@@ -14,9 +14,9 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
-  border-color: ${p => p.isActive ? "var(--primary-medium)" : "var(--primary-dark)"};
-  border-width: ${p => p.isActive ? "1px 10px 1px 1px" : "1px"};
-
+  border-color: ${(p) =>
+    p.isActive ? "var(--primary-medium)" : "var(--primary-dark)"};
+  border-width: ${(p) => (p.isActive ? "1px 10px 1px 1px" : "1px")};
 
   .img-container {
     display: flex;
@@ -24,31 +24,36 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
     height: 30px;
     padding: 5px;
     border-radius: 9999px;
-    background-color: var(--background-color)
+    background-color: var(--background-color);
   }
 
   img {
     margin: auto;
   }
-`
+`;
 
 interface SidebarTabProps {
-    title: string;
-    description: string;
-    icon: string;
-    isActive: boolean;
+  title: string;
+  description: string;
+  icon: string;
+  isActive: boolean;
 }
 
-const SidebarTab = ({title, description, icon, isActive}: SidebarTabProps) => {
-    return (
-        <SidebarTabStyles isActive={isActive}>
-            <div className="img-container">
-                <img src={require(`images/sidebar/${icon}`)} alt={`${title}-icon`}/>
-            </div>
-            <h4>{title}</h4>
-            <small>{description}</small>
-        </SidebarTabStyles>
-    )
-}
+const SidebarTab = ({
+  title,
+  description,
+  icon,
+  isActive,
+}: SidebarTabProps) => {
+  return (
+    <SidebarTabStyles isActive={isActive}>
+      <div className="img-container">
+        <img src={require(`images/sidebar/${icon}`)} alt={`${title}-icon`} />
+      </div>
+      <h4>{title}</h4>
+      <small>{description}</small>
+    </SidebarTabStyles>
+  );
+};
 
-export default SidebarTab
+export default SidebarTab;

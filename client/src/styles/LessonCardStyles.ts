@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface LessonStyleProps {
-    color: string;
+  color: string;
 }
 
 export const LessonCardStyles = styled.div<LessonStyleProps>`
   display: flex;
   flex-direction: column;
-  background-color: ${p => p.color};
+  background-color: ${(p) => p.color};
   font-size: 0.8rem;
   max-width: 200px;
   padding: 10px 15px;
@@ -36,4 +36,4 @@ export const LessonCardStyles = styled.div<LessonStyleProps>`
   .card-link:hover {
     text-decoration: none;
   }
-`
+`;

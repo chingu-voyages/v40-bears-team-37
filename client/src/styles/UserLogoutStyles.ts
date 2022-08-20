@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const UserLogoutStyles = styled.div`
   box-sizing: border-box;
@@ -28,4 +28,4 @@ export const UserLogoutStyles = styled.div`
     height: 20px;
     cursor: pointer;
   }
-`
+`;

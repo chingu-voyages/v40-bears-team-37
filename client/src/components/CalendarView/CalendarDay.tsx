@@ -1,6 +1,6 @@
-import LessonCard from 'components/CalendarView/LessonCard';
-import {Day} from 'types/Day';
-import styled from 'styled-components';
+import LessonCard from "components/CalendarView/LessonCard";
+import { Day } from "types/Day";
+import styled from "styled-components";
 
 const CalendarDayStyles = styled.div`
   display: flex;
@@ -14,27 +14,26 @@ const CalendarDayStyles = styled.div`
     padding-bottom: 10px;
     border-bottom: 2px solid var(--primary-dark);
   }
-`
+`;
 
 interface CalendarDayProps {
-    day: Day
+  day: Day;
 }
 
-const CalendarDay = ({day}: CalendarDayProps) => {
-    return (
-        <CalendarDayStyles>
-            <div className="day-header">
-                <h3>{day.day}</h3>
-                <small>{day.date}</small>
-            </div>
+const CalendarDay = ({ day }: CalendarDayProps) => {
+  return (
+    <CalendarDayStyles>
+      <div className="day-header">
+        <h3>{day.day}</h3>
+        <small>{day.date}</small>
+      </div>
 
-            {day && day.lessons.map((lesson) => (
-                <LessonCard key={lesson.id} lesson={lesson}/>
-            ))}
+      {day &&
+        day.lessons.map((lesson) => (
+          <LessonCard key={lesson.id} lesson={lesson} />
+        ))}
+    </CalendarDayStyles>
+  );
+};
 
-
-        </CalendarDayStyles>
-    )
-}
-
-export default CalendarDay
+export default CalendarDay;

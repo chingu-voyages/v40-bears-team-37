@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CalendarWeekStyles = styled.div`
   display: flex;
@@ -36,4 +36,4 @@ export const CalendarWeekStyles = styled.div`
     flex-direction: row;
     gap: 20px;
   }
-`
+`;
