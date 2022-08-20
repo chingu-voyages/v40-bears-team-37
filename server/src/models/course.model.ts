@@ -35,5 +35,6 @@ export default Course;
 
 // extract types
 export type ScheduleModel = InferSchemaType<typeof scheduleSchema>;
+export type ScheduleDocument = Document & ScheduleModel;
 export type CourseModel = InferSchemaType<typeof courseSchema>;
 export type CourseDocument = Document & CourseModel;
