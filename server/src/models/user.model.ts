@@ -1,4 +1,4 @@
-import { Document, InferSchemaType, model, Schema, Types } from "mongoose";
+import { Document, InferSchemaType, model, Schema } from "mongoose";
 
 const userSchema = new Schema({
   name: {
@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
   course_ids: [
     {
-      type: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Course",
     },
   ],
