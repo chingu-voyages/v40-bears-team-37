@@ -56,9 +56,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport.config")(passport);
 
+// Document API with Swagger if not in production
+// Docs available at /api/docs
+if (!IS_PROD) {
+  const YAML = require("yamljs");
+  const swaggerUI = require("swagger-ui-express");
+  const swaggerDocument = YAML.load("./src/docs.yaml");
+  app.use(
+    "/api/docs",
+    swaggerUI.serve,
+    swaggerUI.setup(swaggerDocument, {
+      swaggerOptions: { supportedSubmitMethods: [] },
+    })
+  );
+}
+
 // routes
 app.get("/", (_req: Request, res: Response) => {
-  res.send("Express and Typescript working! Welcome to Notum backend!");
+  res.send("Welcome to Notum backend!");
 });
 app.use("/auth", authRouter);
 

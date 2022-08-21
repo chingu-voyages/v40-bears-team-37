@@ -29,14 +29,6 @@ export const register = async (req: Request, res: Response) => {
     return res.status(400).send("Email already exist");
   }
 
-  const isUsernameExist = await User.findOne({
-    name: name.trim().toLowerCase(),
-  });
-
-  if (isUsernameExist) {
-    return res.status(400).send("Name already exist");
-  }
-
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
 

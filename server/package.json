@@ -23,6 +23,8 @@
     "mongoose": "^6.5.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "swagger-ui-express": "^4.5.0",
+    "yamljs": "^0.3.0",
     "zod": "^3.18.0"
   },
   "devDependencies": {
