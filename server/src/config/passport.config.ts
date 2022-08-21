@@ -41,6 +41,10 @@ module.exports = async function (passport: PassportStatic) {
 };
 
 passport.serializeUser<any, any>((_req, user, done) => {
+  /**
+   * passport expecting 'user' is instanceof Express.User rather than UserDocument
+   * need to investigate further later on
+   */
   // @ts-ignore-next-line
   done(null, user._id);
 });
