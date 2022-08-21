@@ -1,6 +1,6 @@
 import Lesson from "../models/lesson.model";
 
-export default async function getLesson() {
+export default async function getLessons() {
     try {
         const lessons = await Lesson.find({})
         return lessons
