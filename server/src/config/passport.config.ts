@@ -15,7 +15,11 @@ module.exports = async function (passport: PassportStatic) {
       async (
         email: string,
         password: string,
-        done: (arg1: any, arg2: any, arg3?: any) => void
+        done: (
+          arg1: null,
+          arg2?: false | UserDocument,
+          arg3?: { message: string }
+        ) => void
       ) => {
         const user = await User.findOne({ email });
         if (!user) {
@@ -37,7 +41,8 @@ module.exports = async function (passport: PassportStatic) {
 };
 
 passport.serializeUser<any, any>((_req, user, done) => {
-  done(null, user);
+  // @ts-ignore-next-line
+  done(null, user._id);
 });
 
 passport.deserializeUser((id, cb) => {
