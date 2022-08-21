@@ -1,23 +1,26 @@
 import { NextFunction, Request, Response } from "express";
 import passport from "passport";
-import User from "../models/user.model";
+import User, { UserDocument } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import { COOKIE_NAME } from "../env";
 import { SignupPayloadType } from "../validators/auth";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
-  passport.authenticate("login", (err, user, info) => {
-    if (err) {
-      return res.status(500).send("Error occured");
+  passport.authenticate(
+    "login",
+    (err: any, user: UserDocument, info: { message: string }) => {
+      if (err) {
+        return res.status(500).send("Error occured");
+      }
+      if (!user) {
+        return res.status(401).send(info.message);
+      }
+      req.logIn(user, (err) => {
+        if (err) return next(err);
+        return res.status(200).send(user._id);
+      });
     }
-    if (!user) {
-      return res.status(401).send(info.message);
-    }
-    req.logIn(user, (err) => {
-      if (err) return next(err);
-      return res.status(200).send("Login successful");
-    });
-  })(req, res, next);
+  )(req, res, next);
 };
 
 export const register = async (req: Request, res: Response) => {
@@ -59,5 +62,13 @@ export const logout = async (req: Request, res: Response) => {
 
       res.status(200).send("Logout successful");
     });
+  });
+};
+
+export const checkIsLoggedIn = (req: Request, res: Response) => {
+  const user = req.user as { id: string } | undefined;
+  return res.send({
+    isLoggedIn: Boolean(user),
+    id: user && user.id,
   });
 };

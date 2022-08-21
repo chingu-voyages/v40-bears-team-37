@@ -58,3 +58,21 @@ paths:
       responses:
         200:
           description: Logout successful
+  /api/auth/check:
+    get:
+      tags:
+        - auth
+      description: For quick checking if the user is logged in or not
+      responses:
+        200:
+          description: Returns an object with isLogged and id (optional).
+          content:
+            application/json:
+              schema:
+                required:
+                  - isLoggedIn
+                properties:
+                  isLoggedIn:
+                    type: boolean
+                  id:
+                    type: string

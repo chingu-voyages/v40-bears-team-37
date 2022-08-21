@@ -49,7 +49,7 @@ passport.serializeUser<any, any>((_req, user, done) => {
   done(null, user._id);
 });
 
-passport.deserializeUser((id, cb) => {
+passport.deserializeUser((id: string, cb) => {
   User.findOne({ _id: id }, (err: NativeError, user: UserDocument) => {
     const userInformation = {
       id: user._id,
