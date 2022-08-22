@@ -14,6 +14,7 @@ import compression from "compression";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import passport from "passport";
+import lessonRouter from "./routes/lesson.route";
 
 // instantiate express app
 const app = express();
@@ -59,6 +60,8 @@ require("./config/passport.config")(passport);
 app.get("/", (_req: Request, res: Response) => {
   res.send("Express and Typescript working! Welcome to Notum backend!");
 });
+
+app.use("/api/lessons", lessonRouter)
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {
