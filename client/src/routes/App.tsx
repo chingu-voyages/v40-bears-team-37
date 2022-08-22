@@ -1,9 +1,7 @@
 import CalendarView from "components/CalendarView";
 
 function App() {
-  return (
-    <CalendarView />
-  );
+  return <CalendarView />;
 }
 
 export default App;
