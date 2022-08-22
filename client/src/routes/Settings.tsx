@@ -1,13 +1,15 @@
-import CalendarView from "components/CalendarView";
 import HelmetWrapper from "components/Helmet/HelmetWrapper";
 import RenderComponentWithSideBar from "components/WithSideBar/WithSideBar";
 
-function App() {
+function SettingsComponent() {
+  return <p>Create your courses on Notum</p>
+}
+function Settings () {
   return (
     <HelmetWrapper>
-      <RenderComponentWithSideBar Component={<CalendarView />} />
+      <RenderComponentWithSideBar Component={<SettingsComponent />} />
     </HelmetWrapper>
   );
 }
 
-export default App;
+export default Settings;

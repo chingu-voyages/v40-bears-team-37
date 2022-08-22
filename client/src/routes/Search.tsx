@@ -1,9 +1,13 @@
 import HelmetWrapper from "components/Helmet/HelmetWrapper";
+import RenderComponentWithSideBar from "components/WithSideBar/WithSideBar";
 
+function SearchComponent() {
+  return <p>Search through your past lessons on Notum</p>
+}
 function Search () {
   return (
     <HelmetWrapper>
-      <p>Search through your past lessons on Notum</p>
+      <RenderComponentWithSideBar Component={<SearchComponent />} />
     </HelmetWrapper>
   );
 }
