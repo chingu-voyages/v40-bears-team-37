@@ -1,14 +1,15 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 interface IProps {
+    title: string,
     children: JSX.Element | JSX.Element[]
 }
 
-export default function HelmetWrapper ({ children }: IProps) {
+export default function HelmetWrapper ({ title, children }: IProps) {
  return (
     <HelmetProvider>
       <Helmet>
-        <title>Notum</title>
+        <title>{title}</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

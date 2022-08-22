@@ -6,7 +6,7 @@ function SearchComponent() {
 }
 function Search () {
   return (
-    <HelmetWrapper>
+    <HelmetWrapper title="Notum Search">
       <RenderComponentWithSideBar Component={<SearchComponent />} />
     </HelmetWrapper>
   );

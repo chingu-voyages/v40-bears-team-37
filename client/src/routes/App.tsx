@@ -4,7 +4,7 @@ import RenderComponentWithSideBar from "components/WithSideBar";
 
 function App() {
   return (
-    <HelmetWrapper>
+    <HelmetWrapper title="Notum">
       <RenderComponentWithSideBar Component={<CalendarView />} />
     </HelmetWrapper>
   );
