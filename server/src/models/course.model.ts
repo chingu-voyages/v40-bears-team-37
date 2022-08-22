@@ -35,7 +35,7 @@ const courseSchema = new Schema({
       wednesday: [],
       thursday: [],
       friday: [],
-    }
+    },
   },
 });
 
