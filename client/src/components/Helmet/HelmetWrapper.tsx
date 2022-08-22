@@ -1,7 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 interface IProps {
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
 
 export default function HelmetWrapper ({ children }: IProps) {

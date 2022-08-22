@@ -12,6 +12,7 @@ import Login from "./routes/Login";
 import Signup from "routes/Signup";
 import PrivateRoute from "components/Auth/PrivateRoute";
 import Search from "routes/Search";
+import Settings from "routes/Settings";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -30,6 +31,7 @@ root.render(
       <Routes>
         <Route path="/" element={<PrivateRoute isAuthed={isAuthed}><App/></PrivateRoute>} />
         <Route path="/search" element={<PrivateRoute isAuthed={isAuthed}><Search/></PrivateRoute>} />
+        <Route path="/settings" element={ <PrivateRoute isAuthed={isAuthed}><Settings /></PrivateRoute>} />
         <Route path="/login" element={ <Login /> } />
         <Route path="/signup" element={ <Signup /> } />
       </Routes>
