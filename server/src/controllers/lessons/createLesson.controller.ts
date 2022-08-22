@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import createLesson from "../services/createLesson";
+import createLesson from "../../services/createLesson";
 
 export default async function (req: Request, res: Response) {
   try {

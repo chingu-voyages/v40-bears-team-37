@@ -1,8 +1,8 @@
 import express, { Router } from "express";
 import { z } from "zod";
 import validateRequestBody from "../utils/validateRequestBody";
-import getLessonController from "../controller/getLesson.controller";
-import createLessonController from "../controller/createLesson.controller";
+import getLessonController from "../controllers/lessons/getLesson.controller";
+import createLessonController from "../controllers/lessons/createLesson.controller";
 
 const lessonRouter: Router = express.Router();
 
