@@ -1,7 +1,7 @@
+import { LessonRequestPayloadType } from "../validators/lessons";
 import Lesson, { LessonDocument } from "../models/lesson.model";
-import { Lesson as ILesson } from "../routes/lesson.route";
 
-export default async function (lesson: ILesson) {
+export default async function (lesson: LessonRequestPayloadType) {
   try {
     const lessonDoc: LessonDocument = new Lesson({
       unit: lesson.unit,
