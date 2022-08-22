@@ -15,8 +15,8 @@ import { validateRequestBody } from "../validators";
 const authRouter = Router();
 
 authRouter
-  .post("/login", validateRequestBody(LoginPayloadValidator), login) 
-  .post("/signup", validateRequestBody(SignupPayloadValidator), register, login) 
+  .post("/login", validateRequestBody(LoginPayloadValidator), login)
+  .post("/signup", validateRequestBody(SignupPayloadValidator), register, login)
   .post("/logout", isAuthenticated, logout)
   .get("/check", checkIsLoggedIn);
 
