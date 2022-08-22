@@ -8,25 +8,42 @@ import {
 import { getUserId } from "../../helpers/user";
 import moment from "moment";
 import User from "../../models/user.model";
-import Course from "../../models/course.model";
+import Course, { CourseDocument } from "../../models/course.model";
 
 export const getWeeklySchedule = async (req: Request, res: Response) => {
   const id = getUserId(req);
   const { firstday, lastday } = getFirstAndLastDayOfTheWeek();
 
   // const newCourse = new Course({
-  //   name: 'Mathematics',
-  //   color: 'grey',
+  //   name: 'Algebra 101',
+  //   color: 'pink',
   //   start_date: 20220823,
+  //   end_date: 20220824,
   //   weekly_schedule: {
-  //     monday: {
+  //     monday: [{
   //       start_time: '1000',
   //       end_time: '1230'
+  //     }],
+  //     tuesday: [{
+  //       start_time: '1230',
+  //       end_time: '1300'
   //     },
-  //     wednesday: {
+  //     {
+  //       start_time: '1330',
+  //       end_time: '1500'
+  //     }],
+  //     wednesday: [{
   //       start_time: '1300',
   //       end_time: '1600'
-  //     }
+  //     }],
+  //     thursday: [{
+  //       start_time: '1100',
+  //       end_time: '1230'
+  //     }],
+  //     friday: [{
+  //       start_time: '1300',
+  //       end_time: '1600'
+  //     }],
   //   }
   // })
   // await newCourse.save();
@@ -35,18 +52,13 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
     const user = await User.findById(id);
     const coursesIds = user?.courses;
 
-    if (!coursesIds || coursesIds.length <= 0) {
-      return res.status(200).send({
-        success: true,
-        data: [],
+    let courses: CourseDocument[] = [];
+    if (coursesIds && coursesIds.length > 0) {
+      courses = await Course.find({
+        _id: { $in: coursesIds },
+        start_date: { $lte: lastday },
       });
     }
-
-    const courses = await Course.find({
-      _id: { $in: coursesIds },
-      start_date: { $lte: lastday },
-      $or: [{ end_date: { $lte: lastday } }, { end_date: undefined }],
-    });
 
     const filteredActiveWeekLessons = filterActiveWeekLessons(courses);
     const structuredWeekLessons = massageWeeklyScheduleData(
@@ -64,9 +76,9 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
-    res.send({
-      success: true,
-      data: [],
+    res.status(500).send({
+      success: false,
+      message: "Unable to get the weekly schedule",
     });
   }
 };

@@ -30,12 +30,15 @@ export const getFirstAndLastDayOfTheWeek = (currentDate = new Date()) => {
 };
 
 export const filterActiveWeekLessons = (courses: CourseDocument[]) => {
-  const { firstday } = getFirstAndLastDayOfTheWeek();
+  const { firstday, lastday } = getFirstAndLastDayOfTheWeek();
 
   let activeCourses = [];
   for (let course of courses) {
     let earlyInactiveDays = course.start_date - firstday;
-    let endInactiveDays = course.end_date ? course.end_date - firstday : 0;
+    let endInactiveDays =
+      course.end_date && lastday >= course.end_date
+        ? lastday - course.end_date
+        : 0;
 
     activeCourses.push({
       _id: course._id,
