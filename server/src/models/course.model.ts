@@ -1,15 +1,20 @@
 import { Document, InferSchemaType, model, Schema } from "mongoose";
 
-const scheduleSchema = new Schema({
-  start_time: {
-    type: String,
-    required: true,
+const scheduleSchema = new Schema(
+  {
+    start_time: {
+      type: String,
+      required: true,
+    },
+    end_time: {
+      type: String,
+      required: true,
+    },
   },
-  end_time: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    _id: true,
+  }
+);
 
 const courseSchema = new Schema({
   name: {
@@ -21,6 +26,10 @@ const courseSchema = new Schema({
     required: true,
   },
   end_date: Number,
+  color: {
+    type: String,
+    required: true,
+  },
   weekly_schedule: {
     type: {
       monday: [scheduleSchema],

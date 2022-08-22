@@ -1,6 +1,13 @@
 import { CourseDocument, ScheduleModel } from "../models/course.model";
 import moment from "moment";
 
+export type WeekDays =
+  | "monday"
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday";
+
 export const formatDate = (date = new Date()) => {
   const padTo2Digits = (num: number) => {
     return num.toString().padStart(2, "0");
@@ -18,45 +25,49 @@ export const getFirstAndLastDayOfTheWeek = (currentDate = new Date()) => {
 
   const firstday = formatDate(new Date(currentDate.setDate(first)));
   const lastday = formatDate(new Date(currentDate.setDate(last)));
-  console.log(firstday, lastday);
+
   return { firstday: Number(firstday), lastday: Number(lastday) };
 };
 
-export const filterActiveCourses = (courses: CourseDocument[]) => {
+export const filterActiveWeekLessons = (courses: CourseDocument[]) => {
   const { firstday } = getFirstAndLastDayOfTheWeek();
 
   let activeCourses = [];
   for (let course of courses) {
     let earlyInactiveDays = course.start_date - firstday;
     let endInactiveDays = course.end_date ? course.end_date - firstday : 0;
+
     activeCourses.push({
-      ...course,
+      _id: course._id,
+      name: course.name,
+      start_date: course.start_date,
+      end_date: course.end_date,
+      color: course.color,
       weekly_schedule: {
         monday:
-          earlyInactiveDays > 0 || endInactiveDays < 0
+          earlyInactiveDays > 0 || endInactiveDays > 4
             ? []
             : course.weekly_schedule.monday,
         tuesday:
-          earlyInactiveDays > 1 || endInactiveDays < 1
+          earlyInactiveDays > 1 || endInactiveDays > 3
             ? []
             : course.weekly_schedule.tuesday,
         wednesday:
-          earlyInactiveDays > 2 || endInactiveDays < 2
+          earlyInactiveDays > 2 || endInactiveDays > 2
             ? []
             : course.weekly_schedule.wednesday,
         thursday:
-          earlyInactiveDays > 3 || endInactiveDays < 3
+          earlyInactiveDays > 3 || endInactiveDays > 1
             ? []
             : course.weekly_schedule.thursday,
         friday:
-          earlyInactiveDays > 4 || endInactiveDays < 4
+          earlyInactiveDays > 4 || endInactiveDays > 0
             ? []
             : course.weekly_schedule.friday,
       },
     });
   }
-
-  return activeCourses;
+  return activeCourses as CourseDocument[];
 };
 
 export type LessonCard = ScheduleModel & { name: string };
@@ -67,9 +78,7 @@ export const massageWeeklyScheduleData = (courses: CourseDocument[]) => {
       (a, b) => Number(moment(a.start_time)) - Number(moment(b.start_time))
     );
 
-  const lessonMapper = (
-    day: "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
-  ) => {
+  const lessonMapper = (day: WeekDays) => {
     let lessons: LessonCard[] = [];
     courses.forEach(
       (course) =>
@@ -77,7 +86,9 @@ export const massageWeeklyScheduleData = (courses: CourseDocument[]) => {
           ...lessons,
           ...course.weekly_schedule[day].map((schedule) => ({
             name: course.name,
-            ...schedule,
+            color: course.color,
+            start_time: schedule.start_time,
+            end_time: schedule.end_time,
           })),
         ])
     );
