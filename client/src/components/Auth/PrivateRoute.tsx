@@ -1,9 +1,15 @@
 import { useLocation, Navigate } from "react-router-dom"
+import styled from "styled-components";
+import SideBar from "../../components/Sidebar"
 
 interface IProps {
     isAuthed: boolean,
     children: JSX.Element
 }
+
+const ContainerStyles = styled.div`
+    display: flex;
+`
 
 function PrivateRoute({ isAuthed, children }: IProps) {
     let location = useLocation();
@@ -16,7 +22,12 @@ function PrivateRoute({ isAuthed, children }: IProps) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  return children;
+  return (
+    <ContainerStyles>
+      <SideBar></SideBar>
+      { children }
+    </ContainerStyles>
+  );
 }
 
 export default PrivateRoute

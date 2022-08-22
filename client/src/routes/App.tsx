@@ -1,11 +1,10 @@
 import CalendarView from "components/CalendarView";
 import HelmetWrapper from "components/Helmet";
-import RenderComponentWithSideBar from "components/WithSideBar";
 
 function App() {
   return (
     <HelmetWrapper title="Notum">
-      <RenderComponentWithSideBar Component={<CalendarView />} />
+      <CalendarView />
     </HelmetWrapper>
   );
 }
