@@ -1,4 +1,4 @@
-import HelmetWrapper from "components/Helmet/HelmetWrapper";
+import HelmetWrapper from "components/Helmet";
 
 function Login () {
   return (

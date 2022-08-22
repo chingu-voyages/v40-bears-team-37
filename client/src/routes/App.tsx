@@ -1,6 +1,6 @@
 import CalendarView from "components/CalendarView";
-import HelmetWrapper from "components/Helmet/HelmetWrapper";
-import RenderComponentWithSideBar from "components/WithSideBar/WithSideBar";
+import HelmetWrapper from "components/Helmet";
+import RenderComponentWithSideBar from "components/WithSideBar";
 
 function App() {
   return (
