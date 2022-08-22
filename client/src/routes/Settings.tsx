@@ -1,5 +1,4 @@
 import HelmetWrapper from "components/Helmet";
-import RenderComponentWithSideBar from "components/WithSideBar";
 
 function SettingsComponent() {
   return <p>Create your courses on Notum</p>
@@ -7,7 +6,7 @@ function SettingsComponent() {
 function Settings () {
   return (
     <HelmetWrapper title="Notum Settings">
-      <RenderComponentWithSideBar Component={<SettingsComponent />} />
+      <SettingsComponent />
     </HelmetWrapper>
   );
 }
