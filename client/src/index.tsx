@@ -6,13 +6,16 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import HelmetWrapper from "./components/Helmet"
 
 import App from "./routes/App";
 import Login from "./routes/Login";
 import Signup from "routes/Signup";
-import PrivateRoute from "components/Auth/PrivateRoute";
 import Search from "routes/Search";
 import Settings from "routes/Settings";
+
+import PrivateRoute from "components/Auth/PrivateRoute";
+import PublicRoute from "components/Auth/PublicRoute";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -26,15 +29,17 @@ const isAuthed = true
 
 root.render(
   <React.StrictMode>
-    <GlobalStyles />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<PrivateRoute isAuthed={isAuthed}><App/></PrivateRoute>} />
-        <Route path="/search" element={<PrivateRoute isAuthed={isAuthed}><Search/></PrivateRoute>} />
-        <Route path="/settings" element={ <PrivateRoute isAuthed={isAuthed}><Settings /></PrivateRoute>} />
-        <Route path="/login" element={ <Login /> } />
-        <Route path="/signup" element={ <Signup /> } />
-      </Routes>
-    </BrowserRouter>
+    <HelmetWrapper>
+      <GlobalStyles />
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<PrivateRoute isAuthed={isAuthed}><App/></PrivateRoute>} />
+            <Route path="/search" element={<PrivateRoute isAuthed={isAuthed}><Search/></PrivateRoute>} />
+            <Route path="/settings" element={ <PrivateRoute isAuthed={isAuthed}><Settings /></PrivateRoute>} />
+            <Route path="/login" element={ <PublicRoute isAuthed={isAuthed}><Login /></PublicRoute>} />
+            <Route path="/signup" element={ <PublicRoute isAuthed={isAuthed}><Signup /></PublicRoute>} />
+          </Routes>
+      </BrowserRouter>
+    </HelmetWrapper>
   </React.StrictMode>
 );
