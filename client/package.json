@@ -46,6 +46,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "eslint": "^8.22.0",
     "prettier": "^2.7.1",
