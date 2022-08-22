@@ -17,16 +17,25 @@ const courseSchema = new Schema({
     required: true,
   },
   start_date: {
-    type: String,
+    type: Number,
     required: true,
   },
-  end_date: String,
+  end_date: Number,
   weekly_schedule: {
-    monday: [scheduleSchema],
-    tuesday: [scheduleSchema],
-    wednesday: [scheduleSchema],
-    thursday: [scheduleSchema],
-    friday: [scheduleSchema],
+    type: {
+      monday: [scheduleSchema],
+      tuesday: [scheduleSchema],
+      wednesday: [scheduleSchema],
+      thursday: [scheduleSchema],
+      friday: [scheduleSchema],
+    },
+    default: {
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+    },
   },
 });
 

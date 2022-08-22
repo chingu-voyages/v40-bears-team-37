@@ -15,7 +15,11 @@ module.exports = async function (passport: PassportStatic) {
       async (
         email: string,
         password: string,
-        done: (arg1: any, arg2: any, arg3?: any) => void
+        done: (
+          arg1: null,
+          arg2?: false | UserDocument,
+          arg3?: { message: string }
+        ) => void
       ) => {
         const user = await User.findOne({ email });
         if (!user) {
@@ -37,10 +41,15 @@ module.exports = async function (passport: PassportStatic) {
 };
 
 passport.serializeUser<any, any>((_req, user, done) => {
-  done(null, user);
+  /**
+   * passport expecting 'user' is instanceof Express.User rather than UserDocument
+   * need to investigate further later on
+   */
+  // @ts-ignore-next-line
+  done(null, user._id);
 });
 
-passport.deserializeUser((id, cb) => {
+passport.deserializeUser((id: string, cb) => {
   User.findOne({ _id: id }, (err: NativeError, user: UserDocument) => {
     const userInformation = {
       id: user._id,

@@ -14,6 +14,7 @@ import compression from "compression";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import passport from "passport";
+import authRouter from "./routes/auth.route";
 import lessonRouter from "./routes/lesson.route";
 
 // instantiate express app
@@ -56,12 +57,28 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport.config")(passport);
 
+// Document API with Swagger if not in production
+// Docs available at /api/docs
+if (!IS_PROD) {
+  const YAML = require("yamljs");
+  const swaggerUI = require("swagger-ui-express");
+  const swaggerDocument = YAML.load("./src/docs.yaml");
+  app.use(
+    "/api/docs",
+    swaggerUI.serve,
+    swaggerUI.setup(swaggerDocument, {
+      swaggerOptions: { supportedSubmitMethods: [] },
+    })
+  );
+}
+
 // routes
 app.get("/", (_req: Request, res: Response) => {
-  res.send("Express and Typescript working! Welcome to Notum backend!");
+  res.send("Welcome to Notum backend!");
 });
+app.use("/api/auth", authRouter);
 
-app.use("/api/lessons", lessonRouter)
+app.use("/api/lessons", lessonRouter);
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {

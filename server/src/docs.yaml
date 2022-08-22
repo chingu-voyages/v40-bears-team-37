@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Notum Docs
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000
+tags:
+  - name: auth
+    description: Authentication / Authorization
+paths:
+  /api/auth/signup:
+    post:
+      tags:
+        - auth
+      description: Creates a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+                - name
+                - password
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        201:
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+  /api/auth/login:
+    post:
+      tags:
+        - auth
+      description: Logs a user in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+  /api/auth/logout:
+    post:
+      tags:
+        - auth
+      description: Logs a user out and removed the session cookie
+      responses:
+        200:
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+  /api/auth/check:
+    get:
+      tags:
+        - auth
+      description: For quick checking if the user is logged in or not
+      responses:
+        200:
+          description: Returns an object with isLogged and id (optional).
+          content:
+            application/json:
+              schema:
+                required:
+                  - isLoggedIn
+                properties:
+                  isLoggedIn:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string

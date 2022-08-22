@@ -2,22 +2,22 @@ import { Document, InferSchemaType, model, Schema } from "mongoose";
 
 const lessonSchema = new Schema({
   unit: String,
-  tags: [{
-    type: String
-  }],
+  tags: [String],
   note: String,
   date: {
-    type: Date,
-    required: true
+    type: Number,
+    required: true,
   },
-  attachments: [{
-    type: String
-  }],
+  attachments: [String],
   schedule_id: {
     type: Schema.Types.ObjectId,
-    ref: 'Course',
-    required: true
-  }
+    required: true,
+  },
+  course_id: {
+    type: Schema.Types.ObjectId,
+    ref: "Course",
+    required: true,
+  },
 });
 
 const Lesson = model("Lesson", lessonSchema);
