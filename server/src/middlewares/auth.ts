@@ -8,6 +8,9 @@ export const isAuthenticated = (
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.status(401).send("Not authorized");
+    res.status(401).send({
+      success: false,
+      message: "Not authorized",
+    });
   }
 };

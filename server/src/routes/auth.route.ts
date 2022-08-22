@@ -11,7 +11,7 @@ const authRouter = Router();
 
 authRouter
   .post("/login", login) // TODO: Pass Request Body Payload validator middleware
-  .post("/signup", register) // TODO: Pass Request Body Payload validator middleware
+  .post("/signup", register, login) // TODO: Pass Request Body Payload validator middleware
   .post("/logout", isAuthenticated, logout)
   .get("/check", checkIsLoggedIn);
 

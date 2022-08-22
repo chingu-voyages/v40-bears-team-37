@@ -75,7 +75,7 @@ if (!IS_PROD) {
 app.get("/", (_req: Request, res: Response) => {
   res.send("Welcome to Notum backend!");
 });
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {

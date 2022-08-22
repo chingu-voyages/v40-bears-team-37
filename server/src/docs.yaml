@@ -24,7 +24,7 @@ paths:
               properties:
                 email:
                   type: string
-                username:
+                name:
                   type: string
                 password:
                   type: string
@@ -32,6 +32,26 @@ paths:
       responses:
         201:
           description: User successfully created
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
   /api/auth/login:
     post:
       tags:
@@ -50,6 +70,26 @@ paths:
       responses:
         200:
           description: Login successful
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
   /api/auth/logout:
     post:
       tags:
@@ -58,6 +98,17 @@ paths:
       responses:
         200:
           description: Logout successful
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
   /api/auth/check:
     get:
       tags:
@@ -74,5 +125,12 @@ paths:
                 properties:
                   isLoggedIn:
                     type: boolean
-                  id:
-                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
