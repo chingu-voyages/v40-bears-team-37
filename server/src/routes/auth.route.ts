@@ -15,8 +15,8 @@ import { validateRequestBody } from "../validators";
 const authRouter = Router();
 
 authRouter
-  .post("/login", validateRequestBody(LoginPayloadValidator), login) // TODO: Pass Request Body Payload validator middleware
-  .post("/signup", validateRequestBody(SignupPayloadValidator), register, login) // TODO: Pass Request Body Payload validator middleware
+  .post("/login", validateRequestBody(LoginPayloadValidator), login) 
+  .post("/signup", validateRequestBody(SignupPayloadValidator), register, login) 
   .post("/logout", isAuthenticated, logout)
   .get("/check", checkIsLoggedIn);
 
