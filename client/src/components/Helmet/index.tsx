@@ -1,8 +1,11 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import CalendarView from "components/CalendarView";
 
-function App() {
-  return (
+interface IProps {
+    children: JSX.Element | JSX.Element[]
+}
+
+export default function HelmetWrapper ({ children }: IProps) {
+ return (
     <HelmetProvider>
       <Helmet>
         <title>Notum</title>
@@ -13,9 +16,6 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
-      <CalendarView />
-    </HelmetProvider>
-  );
+      {children}
+    </HelmetProvider>)
 }
-
-export default App;
