@@ -6,7 +6,7 @@ function SettingsComponent() {
 }
 function Settings () {
   return (
-    <HelmetWrapper>
+    <HelmetWrapper title="Notum Settings">
       <RenderComponentWithSideBar Component={<SettingsComponent />} />
     </HelmetWrapper>
   );
