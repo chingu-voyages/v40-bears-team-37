@@ -7,9 +7,9 @@ import { SignUpStyles, CarouselStyles, FormStyle, InputFormStyles, AuthNavigatio
 
 const signUpValidation = z
   .object({
-    userName: z.string({required_error: "Must provide username"}).trim().min(3, "Username should be longer than 3 characters.").max(30, "Your username is too long."),
+    username: z.string({required_error: "Must provide username."}).trim().min(3, "Username should be longer than 3 characters.").max(30, "Your username is too long."),
     email: z.string().trim().email("Must provide email.").max(50, "Your Email is too long."),
-    password: z.string({required_error: "Must provide password"}).trim().min(6, "Password should be longer than 10 characters").max(50, "Your password is too long."),
+    password: z.string({required_error: "Must provide password."}).trim().min(6, "Password should be longer than 10 characters.").max(50, "Your password is too long."),
     confirmPassword: z.string({required_error: "Must provide confirm password"}).trim().max(50, "Your confirm password is too long.")
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -31,7 +31,7 @@ function SignUp() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      userName: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: ""
@@ -47,9 +47,9 @@ function SignUp() {
   const inputs = [
     {
       id: "sign-up-name",
-      label: "User Name",
-      registerKey: "userName" as const,
-      errorCondition: errors.userName,
+      label: "Username",
+      registerKey: "username" as const,
+      errorCondition: errors.username,
       inputType: "text"
     },
     {
