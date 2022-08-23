@@ -1,86 +1,100 @@
-import { ChangeEvent, useState } from "react";
-import styled from "styled-components";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
 
-import TextInput from '../components/Form/TextInput';
+import { SignUpStyles, CarouselStyles, FormStyle, InputFormStyles, AuthNavigationStyles } from "../styles/AuthFormStyles";
 
-function SignUp () {
-  const SignUpStyles = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    min-height: 100vh;
-  `;
+const signUpValidation = z
+  .object({
+    userName: z.string().trim().min(3, "Username is required.").max(30, "Your username is too long."),
+    email: z.string().trim().email("Must be an email.").min(5, "Email is required").max(50, "Your Email is too long."),
+    password: z.string().trim().min(6, "Password is required.").max(50, "Your password is too long."),
+    confirmPassword: z.string().trim().min(6, "Confirm Password is required.").max(50, "Your confirm password is too long.")
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match.",
+    path: ["confirmPassword"],
+  });
 
-  const CarouselStyles = styled.div`
-    background-color: rgba(var(--primary-light-rgb), .2);
-  `;
+type SignUpFieldsType = z.infer<typeof signUpValidation>;
 
-  const FormStyle = styled.div`
-    padding: 10% 10%;
-    background-color: white;
+function SignUp() {
 
-    h1 {
-      margin-bottom: 53px;
-    }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      userName: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    },
+    resolver: zodResolver(signUpValidation),
+  });
 
-    button {
-      width: 100%;
-      box-shadow: 0px 4px 4px 0px #00000040;
-    }
-
-    form > * {
-      margin-bottom: 32px;
-    }
-  `;
-
-  const [userName, setUserName] = useState("");
-  const [userEmailAddress, setUserEmailAddress] = useState("");
-  const [userPassword, setuserPassword] = useState("");
-  const [editingInput, setEditingInput] = useState("");
-
-  const handleFormChange = (e: ChangeEvent<HTMLInputElement>, valueToChange: string) => {
-    const handleChangeMap = Object.create(null, {
-      "sign-up-name": { value: setUserName },
-      "sign-up-email-address": { value: setUserEmailAddress },
-      "sign-up-password": { value: setuserPassword }
-    });
-    
-    handleChangeMap[valueToChange](e.target.value);
-    setEditingInput(valueToChange);
+  const onSubmit = (values: SignUpFieldsType) => {
+    // TODO: API call to sign up an account
+    reset();
   }
+
+  const inputs = [
+    {
+      id: "sign-up-name",
+      label: "User Name",
+      registerKey: "userName" as const,
+      errorCondition: errors.userName,
+      inputType: "text"
+    },
+    {
+      id: "sign-up-email",
+      label: "Email Address",
+      registerKey: "email" as const,
+      errorCondition: errors.email,
+      inputType: "text"
+    },
+    {
+      id: "sign-up-password",
+      label: "Password",
+      registerKey: "password" as const,
+      errorCondition: errors.password,
+      inputType: "password"
+    },
+    {
+      id: "sign-up-confirm-password",
+      label: "Confirm Password",
+      registerKey: "confirmPassword" as const,
+      errorCondition: errors.confirmPassword,
+      inputType: "password"
+    },
+  ];
 
   return (
     <SignUpStyles>
       <CarouselStyles>Carousel View</CarouselStyles>
       <FormStyle>
-        <h1>Sing Up</h1>
-        <form>
-          <TextInput
-            inputId="sign-up-name"
-            label="User Name"
-            autoCompleteType="username"
-            inputValue={userName}
-            isEditing={ editingInput === "sign-up-name" ? true : false}
-            handleChangeEvent={handleFormChange}
-          />
-          <TextInput
-            inputId="sign-up-email-address"
-            label="Email Address"
-            autoCompleteType="email"
-            inputValue={userEmailAddress}
-            isEditing={ editingInput === "sign-up-email-address" ? true : false}
-            handleChangeEvent={handleFormChange}
-          />
-          <TextInput 
-            inputId="sign-up-password"
-            label="Password"
-            autoCompleteType="off"
-            inputValue={userPassword}
-            isEditing={ editingInput === "sign-up-password" ? true : false}
-            handleChangeEvent={handleFormChange}
-          />
+        <h1>Sign Up</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {inputs.map(({ id, label, registerKey, errorCondition, inputType }) => {
+            return (
+              <InputFormStyles key={id}>
+                <label htmlFor={id}>{label}</label>
+                <input id={id} type={inputType} {...register(registerKey)} className={errorCondition && 'invalid'}></input>
+                {errorCondition && <small className="error-message">{errorCondition.message}</small>}
+              </InputFormStyles>
+            )
+          })}
+          <button type="submit">Get My Notum</button>
         </form>
-        <button>Get My Notum</button>
+        <AuthNavigationStyles>
+          <p>Already have an account? <Link to="/login">Login Here</Link></p>
+        </AuthNavigationStyles>
       </FormStyle>
     </SignUpStyles>
   );
