@@ -30,7 +30,7 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
       });
     }
 
-    const filteredActiveWeekLessons = filterActiveWeekLessons(courses);
+    const filteredActiveWeekLessons = filterActiveWeekLessons(courses, weekId);
     const structuredWeekLessons = massageWeeklyScheduleData(
       filteredActiveWeekLessons
     );

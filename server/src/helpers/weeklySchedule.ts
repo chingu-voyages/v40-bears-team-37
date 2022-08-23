@@ -24,9 +24,9 @@ export const getWeekDates = (currentDate?: string) => {
 
 export const filterActiveWeekLessons = (
   courses: CourseDocument[],
-  dateId?: number
+  dateId?: string
 ) => {
-  const week = getWeekDates(dateId ? dateId.toString() : undefined);
+  const week = getWeekDates(dateId);
 
   let activeCourses = [];
   for (let course of courses) {
