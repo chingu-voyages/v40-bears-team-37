@@ -8,11 +8,11 @@ export type WeekDays =
   | "thursday"
   | "friday";
 
-export const getLastOrNextWeekId = (currentDate?: string) => {
-  const lastWeekId = moment(currentDate).add(-1, "week").format("yyyyMMDD");
+export const getPrevOrNextWeekId = (currentDate?: string) => {
+  const prevWeekId = moment(currentDate).add(-1, "week").format("yyyyMMDD");
   const nextWeekId = moment(currentDate).add(1, "week").format("yyyyMMDD");
 
-  return { lastWeekId, nextWeekId };
+  return { prevWeekId, nextWeekId };
 };
 
 export const getWeekDates = (currentDate?: string) => {

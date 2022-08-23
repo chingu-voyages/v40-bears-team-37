@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import {
   filterActiveWeekLessons,
-  getLastOrNextWeekId,
+  getPrevOrNextWeekId,
   getWeekDates,
   massageWeeklyScheduleData,
   WeekDays,
@@ -17,7 +17,7 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
 
   const { weekId } = req.query as WeeklyScheduleQueryType;
   const week = getWeekDates(weekId);
-  const { lastWeekId, nextWeekId } = getLastOrNextWeekId(weekId);
+  const { prevWeekId, nextWeekId } = getPrevOrNextWeekId(weekId);
 
   try {
     const user = await User.findById(id);
@@ -37,16 +37,16 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
     );
 
     const results = {
-      weekId: Number(week[1]),
+      week_id: Number(week[1]),
       month: moment(week[1]).format("MMMM"),
       year: moment(week[1]).format("YYYY"),
-      startDate: moment(week[0]).format("Do"),
-      endDate: moment(week[6]).format("Do"),
-      prevWeekId: Number(lastWeekId),
-      nextWeekId: Number(nextWeekId),
+      start_date: moment(week[0]).format("Do"),
+      end_date: moment(week[6]).format("Do"),
+      prev_week_id: Number(prevWeekId),
+      next_week_id: Number(nextWeekId),
       schedules: Object.keys(structuredWeekLessons).map((day, index) => ({
         day,
-        dateLabel: moment(week[index + 1]).format("MMMM Do"),
+        date_label: moment(week[index + 1]).format("MMMM Do"),
         date: Number(week[index + 1]),
         lessons: structuredWeekLessons[day as WeekDays],
       })),
