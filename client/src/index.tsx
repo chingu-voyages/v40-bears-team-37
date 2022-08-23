@@ -36,8 +36,8 @@ root.render(
             <Route path="/" element={<PrivateRoute isAuthed={isAuthed}><App/></PrivateRoute>} />
             <Route path="/search" element={<PrivateRoute isAuthed={isAuthed}><Search/></PrivateRoute>} />
             <Route path="/settings" element={ <PrivateRoute isAuthed={isAuthed}><Settings /></PrivateRoute>} />
-            <Route path="/login" element={ <PublicRoute isAuthed={isAuthed}><Login /></PublicRoute>} />
-            <Route path="/signup" element={ <PublicRoute isAuthed={isAuthed}><Signup /></PublicRoute>} />
+            <Route path="/login" element={ <PublicRoute isAuthed={!isAuthed}><Login /></PublicRoute>} />
+            <Route path="/signup" element={ <PublicRoute isAuthed={!isAuthed}><Signup /></PublicRoute>} />
           </Routes>
       </BrowserRouter>
     </HelmetWrapper>
