@@ -32,7 +32,6 @@ export const FormStyle = styled.div`
 export const InputFormStyles = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: "Raleway";
 
   label {
     margin-bottom: 14px;
@@ -64,8 +63,6 @@ export const InputFormStyles = styled.div`
 `;
 
 export const AuthNavigationStyles = styled.div`
-  font-family: "Raleway";
-
   p {
     margin: 0;
     text-align: right;
