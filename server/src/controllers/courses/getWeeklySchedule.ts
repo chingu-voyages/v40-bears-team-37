@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import {
   filterActiveWeekLessons,
-  getFirstAndLastDayOfTheWeek,
+  getLastOrNextWeekId,
+  getWeekDates,
   massageWeeklyScheduleData,
   WeekDays,
 } from "../../helpers/weeklySchedule";
@@ -9,44 +10,14 @@ import { getUserId } from "../../helpers/user";
 import moment from "moment";
 import User from "../../models/user.model";
 import Course, { CourseDocument } from "../../models/course.model";
+import { WeeklyScheduleQueryType } from "../../validators/courses";
 
 export const getWeeklySchedule = async (req: Request, res: Response) => {
   const id = getUserId(req);
-  const { firstday, lastday } = getFirstAndLastDayOfTheWeek();
 
-  // const newCourse = new Course({
-  //   name: 'Algebra 101',
-  //   color: 'pink',
-  //   start_date: 20220823,
-  //   end_date: 20220824,
-  //   weekly_schedule: {
-  //     monday: [{
-  //       start_time: '1000',
-  //       end_time: '1230'
-  //     }],
-  //     tuesday: [{
-  //       start_time: '1230',
-  //       end_time: '1300'
-  //     },
-  //     {
-  //       start_time: '1330',
-  //       end_time: '1500'
-  //     }],
-  //     wednesday: [{
-  //       start_time: '1300',
-  //       end_time: '1600'
-  //     }],
-  //     thursday: [{
-  //       start_time: '1100',
-  //       end_time: '1230'
-  //     }],
-  //     friday: [{
-  //       start_time: '1300',
-  //       end_time: '1600'
-  //     }],
-  //   }
-  // })
-  // await newCourse.save();
+  const { weekId } = req.query as WeeklyScheduleQueryType;
+  const week = getWeekDates(weekId);
+  const { lastWeekId, nextWeekId } = getLastOrNextWeekId(weekId);
 
   try {
     const user = await User.findById(id);
@@ -56,7 +27,7 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
     if (coursesIds && coursesIds.length > 0) {
       courses = await Course.find({
         _id: { $in: coursesIds },
-        start_date: { $lte: lastday },
+        start_date: { $lte: Number(week[6]) },
       });
     }
 
@@ -65,11 +36,21 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
       filteredActiveWeekLessons
     );
 
-    const results = Object.keys(structuredWeekLessons).map((day, index) => ({
-      day,
-      date: moment((firstday + index).toString()).format("MMM Do"),
-      lessons: structuredWeekLessons[day as WeekDays],
-    }));
+    const results = {
+      weekId: Number(week[1]),
+      month: moment(week[1]).format("MMMM"),
+      year: moment(week[1]).format("YYYY"),
+      startDate: moment(week[0]).format("Do"),
+      endDate: moment(week[6]).format("Do"),
+      prevWeekId: Number(lastWeekId),
+      nextWeekId: Number(nextWeekId),
+      schedules: Object.keys(structuredWeekLessons).map((day, index) => ({
+        day,
+        dateLabel: moment(week[index + 1]).format("MMMM Do"),
+        date: Number(week[index + 1]),
+        lessons: structuredWeekLessons[day as WeekDays],
+      })),
+    };
 
     return res.status(200).send({
       success: true,

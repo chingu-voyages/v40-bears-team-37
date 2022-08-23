@@ -8,37 +8,40 @@ export type WeekDays =
   | "thursday"
   | "friday";
 
-export const formatDate = (date = new Date()) => {
-  const padTo2Digits = (num: number) => {
-    return num.toString().padStart(2, "0");
-  };
-  return [
-    date.getFullYear(),
-    padTo2Digits(date.getMonth() + 1),
-    padTo2Digits(date.getDate()),
-  ].join("");
+export const getLastOrNextWeekId = (currentDate?: string) => {
+  const lastWeekId = moment(currentDate).add(-1, "week").format("yyyyMMDD");
+  const nextWeekId = moment(currentDate).add(1, "week").format("yyyyMMDD");
+
+  return { lastWeekId, nextWeekId };
 };
 
-export const getFirstAndLastDayOfTheWeek = (currentDate = new Date()) => {
-  const first = currentDate.getDate() - currentDate.getDay() + 1; // the day of the week - from monday
-  const last = first + 4; // last day is the first day + 4 (until friday only)
-
-  const firstday = formatDate(new Date(currentDate.setDate(first)));
-  const lastday = formatDate(new Date(currentDate.setDate(last)));
-
-  return { firstday: Number(firstday), lastday: Number(lastday) };
+export const getWeekDates = (currentDate?: string) => {
+  const firstWeekDay = moment(currentDate).startOf("week");
+  return [...Array(7)].map((_, idx) =>
+    firstWeekDay.clone().add(idx, "day").format("yyyyMMDD")
+  );
 };
 
-export const filterActiveWeekLessons = (courses: CourseDocument[]) => {
-  const { firstday, lastday } = getFirstAndLastDayOfTheWeek();
+export const filterActiveWeekLessons = (
+  courses: CourseDocument[],
+  dateId?: number
+) => {
+  const week = getWeekDates(dateId ? dateId.toString() : undefined);
 
   let activeCourses = [];
   for (let course of courses) {
-    let earlyInactiveDays = course.start_date - firstday;
-    let endInactiveDays =
-      course.end_date && lastday >= course.end_date
-        ? lastday - course.end_date
-        : 0;
+    let courseStartDate = moment(course.start_date.toString());
+    let courseEndDate = course.end_date
+      ? moment(course.end_date.toString())
+      : undefined;
+
+    const isActiveOnTheDay = (currentDate: string) => {
+      const current = moment(currentDate);
+      return (
+        current.isSameOrAfter(courseStartDate) &&
+        (courseEndDate ? current.isSameOrBefore(courseEndDate) : true)
+      );
+    };
 
     activeCourses.push({
       _id: course._id,
@@ -47,26 +50,17 @@ export const filterActiveWeekLessons = (courses: CourseDocument[]) => {
       end_date: course.end_date,
       color: course.color,
       weekly_schedule: {
-        monday:
-          earlyInactiveDays > 0 || endInactiveDays > 4
-            ? []
-            : course.weekly_schedule.monday,
-        tuesday:
-          earlyInactiveDays > 1 || endInactiveDays > 3
-            ? []
-            : course.weekly_schedule.tuesday,
-        wednesday:
-          earlyInactiveDays > 2 || endInactiveDays > 2
-            ? []
-            : course.weekly_schedule.wednesday,
-        thursday:
-          earlyInactiveDays > 3 || endInactiveDays > 1
-            ? []
-            : course.weekly_schedule.thursday,
-        friday:
-          earlyInactiveDays > 4 || endInactiveDays > 0
-            ? []
-            : course.weekly_schedule.friday,
+        monday: isActiveOnTheDay(week[1]) ? course.weekly_schedule.monday : [],
+        tuesday: isActiveOnTheDay(week[1])
+          ? course.weekly_schedule.tuesday
+          : [],
+        wednesday: isActiveOnTheDay(week[1])
+          ? course.weekly_schedule.wednesday
+          : [],
+        thursday: isActiveOnTheDay(week[1])
+          ? course.weekly_schedule.thursday
+          : [],
+        friday: isActiveOnTheDay(week[1]) ? course.weekly_schedule.friday : [],
       },
     });
   }
@@ -88,6 +82,7 @@ export const massageWeeklyScheduleData = (courses: CourseDocument[]) => {
         (lessons = [
           ...lessons,
           ...course.weekly_schedule[day].map((schedule) => ({
+            _id: course._id,
             name: course.name,
             color: course.color,
             start_time: schedule.start_time,
