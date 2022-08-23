@@ -51,16 +51,16 @@ export const filterActiveWeekLessons = (
       color: course.color,
       weekly_schedule: {
         monday: isActiveOnTheDay(week[1]) ? course.weekly_schedule.monday : [],
-        tuesday: isActiveOnTheDay(week[1])
+        tuesday: isActiveOnTheDay(week[2])
           ? course.weekly_schedule.tuesday
           : [],
-        wednesday: isActiveOnTheDay(week[1])
+        wednesday: isActiveOnTheDay(week[3])
           ? course.weekly_schedule.wednesday
           : [],
-        thursday: isActiveOnTheDay(week[1])
+        thursday: isActiveOnTheDay(week[4])
           ? course.weekly_schedule.thursday
           : [],
-        friday: isActiveOnTheDay(week[1]) ? course.weekly_schedule.friday : [],
+        friday: isActiveOnTheDay(week[5]) ? course.weekly_schedule.friday : [],
       },
     });
   }
@@ -82,7 +82,7 @@ export const massageWeeklyScheduleData = (courses: CourseDocument[]) => {
         (lessons = [
           ...lessons,
           ...course.weekly_schedule[day].map((schedule) => ({
-            _id: course._id,
+            _id: schedule._id,
             name: course.name,
             color: course.color,
             start_time: schedule.start_time,
