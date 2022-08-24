@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
     :root {
       --background-color: #C8CFD9;
       --primary-light: #ACCDEE;
+      --primary-light-rgb: 172, 205, 238;
       --primary-medium: #6C95B7;
       --primary-dark: #304B74;
       --primary-text: #223441;

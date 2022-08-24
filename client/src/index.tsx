@@ -56,7 +56,7 @@ root.render(
           <Route
             path="/login"
             element={
-              <PublicRoute isAuthed={isAuthed}>
+              <PublicRoute isAuthed={!isAuthed}>
                 <Login />
               </PublicRoute>
             }
@@ -64,7 +64,7 @@ root.render(
           <Route
             path="/signup"
             element={
-              <PublicRoute isAuthed={isAuthed}>
+              <PublicRoute isAuthed={!isAuthed}>
                 <Signup />
               </PublicRoute>
             }
