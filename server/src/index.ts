@@ -16,6 +16,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import authRouter from "./routes/auth.route";
 import lessonRouter from "./routes/lesson.route";
+import courseRouter from "./routes/courses.route";
 
 // instantiate express app
 const app = express();
@@ -77,8 +78,8 @@ app.get("/", (_req: Request, res: Response) => {
   res.send("Welcome to Notum backend!");
 });
 app.use("/api/auth", authRouter);
-
 app.use("/api/lessons", lessonRouter);
+app.use("/api/courses", courseRouter);
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {

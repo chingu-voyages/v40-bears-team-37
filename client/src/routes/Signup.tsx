@@ -2,11 +2,9 @@ import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Link} from "react-router-dom";
-
 import {SignUpStyles, CarouselStyles, FormStyle, InputFormStyles, AuthNavigationStyles} from "../styles/AuthFormStyles";
 import {signup as signupService} from 'services/auth';
 import {SignupResponseType} from 'types/auth';
-
 
 const signUpValidation = z
     .object({
@@ -24,7 +22,6 @@ const signUpValidation = z
 type SignUpFieldsType = z.infer<typeof signUpValidation>;
 
 function SignUp() {
-
     const {
         register,
         handleSubmit,
@@ -52,8 +49,6 @@ function SignUp() {
             // Successful Signup
             // TODO: Redirect to login page, either auto login or make the user login again.
         }
-
-
     }
 
     const inputs = [

@@ -1,7 +1,5 @@
-function Search () {
-  return (
-    <p>Search through your past lessons on Notum</p>
-  );
+function Search() {
+  return <p>Search through your past lessons on Notum</p>;
 }
 
 export default Search;

@@ -9,9 +9,15 @@ export const validateRequestBody =
       return next();
     } catch (e) {
       if (e instanceof ZodError) {
-        return res.status(400).json(e.issues);
+        return res.status(400).send({
+          success: false,
+          data: e.issues,
+        });
       }
-      return res.status(500).json(e);
+      return res.status(500).send({
+        success: false,
+        data: e,
+      });
     }
   };
 
@@ -23,8 +29,14 @@ export const validateRequestQuery =
       return next();
     } catch (e) {
       if (e instanceof ZodError) {
-        return res.status(400).json(e.issues);
+        return res.status(400).send({
+          success: false,
+          data: e.issues,
+        });
       }
-      return res.status(500).json(e);
+      return res.status(500).send({
+        success: false,
+        data: e,
+      });
     }
   };
