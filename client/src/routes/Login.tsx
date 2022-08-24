@@ -1,7 +1,5 @@
-function Login () {
-  return (
-    <p>Login to your Notum Account!</p>
-  );
+function Login() {
+  return <p>Login to your Notum Account!</p>;
 }
 
 export default Login;

@@ -1,11 +1,11 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 interface IProps {
-    children: JSX.Element | JSX.Element[]
+  children: JSX.Element | JSX.Element[];
 }
 
-export default function HelmetWrapper ({ children }: IProps) {
- return (
+export default function HelmetWrapper({ children }: IProps) {
+  return (
     <HelmetProvider>
       <Helmet>
         <title>Notum</title>
@@ -17,5 +17,6 @@ export default function HelmetWrapper ({ children }: IProps) {
         />
       </Helmet>
       {children}
-    </HelmetProvider>)
+    </HelmetProvider>
+  );
 }

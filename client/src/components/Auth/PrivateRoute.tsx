@@ -1,20 +1,20 @@
-import { useLocation, Navigate } from "react-router-dom"
+import { useLocation, Navigate } from "react-router-dom";
 import styled from "styled-components";
-import SideBar from "../../components/Sidebar"
+import SideBar from "../../components/Sidebar";
 
 interface IProps {
-    isAuthed: boolean,
-    children: JSX.Element
+  isAuthed: boolean;
+  children: JSX.Element;
 }
 
 const ContainerStyles = styled.div`
-    display: flex;
-`
+  display: flex;
+`;
 
 function PrivateRoute({ isAuthed, children }: IProps) {
-    let location = useLocation();
+  let location = useLocation();
 
-    if (!isAuthed) {
+  if (!isAuthed) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
@@ -25,9 +25,9 @@ function PrivateRoute({ isAuthed, children }: IProps) {
   return (
     <ContainerStyles>
       <SideBar></SideBar>
-      { children }
+      {children}
     </ContainerStyles>
   );
 }
 
-export default PrivateRoute
+export default PrivateRoute;
