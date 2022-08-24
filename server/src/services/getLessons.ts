@@ -10,7 +10,7 @@ export async function getLessonById(
   const lesson = await Lesson.findById(lessonId);
   if (!lesson) throw new Error("No lesson found");
 
-  const course = await Course.findOne({ _id: lesson.course_id });
+  const course = await Course.findById(lesson.course_id);
   if (!course) throw new Error("No course attached to the lesson found");
 
   const user = await User.find({

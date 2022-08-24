@@ -5,8 +5,14 @@ export default async function (req: Request, res: Response) {
   try {
     const body = req.body;
     const newLesson = await createLesson(body);
-    res.status(200).json(newLesson);
+    res.status(201).json({
+      success: false,
+      message: newLesson,
+    });
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
   }
 }

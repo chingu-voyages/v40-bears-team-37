@@ -11,8 +11,8 @@ export default async function (lesson: LessonRequestPayloadType) {
       schedule_id: lesson.schedule_id,
     });
 
-    await lessonDoc.save();
-    return lessonDoc;
+    const savedLesson = await lessonDoc.save();
+    return savedLesson;
   } catch (e) {
     throw new Error(e.message);
   }
