@@ -1,22 +1,19 @@
 import axios from 'axios';
 import {SignupDetailsType, SignupResponseType} from 'types/auth';
-
-const baseUrl = process.env.REACT_APP_BACKEND_URL
+import {baseUrl} from 'utils/config';
 
 export const signup = async (registerDetails: SignupDetailsType) => {
     try {
-        const response = await axios.post<SignupResponseType>(`${baseUrl}api/auth/signup`, registerDetails)
-        return response
+        return await axios.post<SignupResponseType>(`${baseUrl}api/auth/signup`, registerDetails)
     } catch (e: unknown) {
         if (axios.isAxiosError(e)) {
             console.error('Axios Error', e)
             return e.response?.data
         } else {
-            console.error('Other Errors')
+            console.error('Other Errors', e)
+            return {success: "false", errorMessage: "Unknown Error"}
         }
-
     }
-
 }
 
 /*

@@ -4,6 +4,7 @@
     "client-start": "yarn workspace client start",
     "server-start": "yarn workspace server start:dev",
     "start": "concurrently --kill-others-on-fail -n \"client,server\" -c \"yellow,green\" \"yarn client-start\"  \"yarn server-start\"",
+    "start:dev": "concurrently --kill-others-on-fail -n \"client,server\" -c \"yellow,green\" \"cross-env NODE_ENV='development' yarn client-start\"  \"yarn server-start\"",
     "husky:prepare": "husky install && npx husky add .husky/pre-commit \"yarn format\"",
     "client-format": "cd client && yarn format",
     "server-format": "cd server && yarn format",

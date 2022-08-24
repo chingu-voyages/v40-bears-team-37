@@ -47,12 +47,12 @@ function SignUp() {
             "email": values.email
         }) as SignupResponseType
         if (response.success === false) {
-            console.log(response.message)
             setError('signupError', {message: response.message})
         } else {
-            console.log('Signup successful')
+            // Successful Signup
+            // TODO: Redirect to login page, either auto login or make the user login again.
         }
-        // TODO: Redirect to login page, either auto login or make the user login again.
+
 
     }
 
@@ -93,24 +93,30 @@ function SignUp() {
             <FormStyle>
                 <h1>Sign Up</h1>
                 {!isSubmitSuccessful ? (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        {inputs.map(({id, label, registerKey, errorCondition, inputType}) => {
-                            return (
-                                <InputFormStyles key={id}>
-                                    <label htmlFor={id}>{label}</label>
-                                    <input id={id} type={inputType} {...register(registerKey)}
-                                           className={errorCondition && 'invalid'}></input>
-                                    {errorCondition &&
-                                        <small className="error-message">{errorCondition.message}</small>}
-                                </InputFormStyles>
-                            )
-                        })}
-                        {errors.signupError && <p>{errors.signupError.message}</p>}
-                        <button type="submit">Get My Notum</button>
-                    </form>
+                    <>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            {inputs.map(({id, label, registerKey, errorCondition, inputType}) => {
+                                return (
+                                    <InputFormStyles key={id}>
+                                        <label htmlFor={id}>{label}</label>
+                                        <input id={id} type={inputType} {...register(registerKey)}
+                                               className={errorCondition && 'invalid'}></input>
+                                        {errorCondition &&
+                                            <small className="error-message">{errorCondition.message}</small>}
+                                    </InputFormStyles>
+                                )
+                            })}
+                            {errors.signupError && <p>{errors.signupError.message}</p>}
+                            <button type="submit">Get My Notum</button>
+                        </form>
+                        <AuthNavigationStyles>
+                            <p>Already have an account? <Link to="/login">Login Here</Link></p>
+                        </AuthNavigationStyles>
+                    </>
                 ) : (<p>Thank you for signing up</p>)}
                 <AuthNavigationStyles>
-                    <p>Already have an account? <Link to="/login">Login Here</Link></p>
+                    {/*TODO: might need to change this*/}
+                    <p><Link to="/">Go to calendar</Link></p>
                 </AuthNavigationStyles>
             </FormStyle>
         </SignUpStyles>
