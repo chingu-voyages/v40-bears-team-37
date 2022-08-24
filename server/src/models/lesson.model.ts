@@ -11,12 +11,10 @@ const lessonSchema = new Schema({
   attachments: [String],
   schedule_id: {
     type: Schema.Types.ObjectId,
-    required: true,
   },
   course_id: {
     type: Schema.Types.ObjectId,
     ref: "Course",
-    required: true,
   },
 });
 
