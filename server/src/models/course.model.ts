@@ -1,4 +1,4 @@
-import { Document, InferSchemaType, model, Schema, Types } from "mongoose";
+import { Document, InferSchemaType, model, Schema } from "mongoose";
 
 const scheduleSchema = new Schema(
   {
