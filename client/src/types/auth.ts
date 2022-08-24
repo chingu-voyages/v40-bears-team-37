@@ -13,3 +13,9 @@ export type SignupResponseType = {
         email: string
     }
 }
+
+export type UserType = {
+    "id": string,
+    "name": string,
+    "email": string
+}
