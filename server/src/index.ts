@@ -1,12 +1,12 @@
-import express, { Request, Response } from "express";
+import express, {Request, Response} from "express";
 import cors from "cors";
 import {
-  COOKIE_SECRET,
-  FRONTEND_URL,
-  MONGO_URL,
-  PORT,
-  IS_PROD,
-  COOKIE_NAME,
+    COOKIE_SECRET,
+    FRONTEND_URL,
+    MONGO_URL,
+    PORT,
+    IS_PROD,
+    COOKIE_NAME,
 } from "./env";
 import mongoose from "mongoose";
 import helmet from "helmet";
@@ -23,36 +23,37 @@ const app = express();
 
 // middlewares
 app.use(
-  cors({
-    origin: IS_PROD ? FRONTEND_URL : "*",
-    credentials: true,
-  })
+    cors({
+        origin: IS_PROD ? FRONTEND_URL : "*",
+        credentials: true,
+    })
 );
 app.use(helmet());
 app.use(compression());
 app.use(express.json());
 app.use(
-  express.urlencoded({
-    extended: true,
-  })
+    express.urlencoded({
+        extended: true,
+    })
 );
 app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl: MONGO_URL,
-    }),
-    name: COOKIE_NAME,
-    secret: COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: IS_PROD, // SSL only in production
-      maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
-      httpOnly: true,
-      sameSite: "lax",
-      // domain: ''
-    },
-  })
+    session({
+        store: MongoStore.create({
+            mongoUrl: MONGO_URL,
+        }),
+        name: COOKIE_NAME,
+        secret: COOKIE_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        proxy: true,
+        cookie: {
+            secure: IS_PROD, // SSL only in production
+            maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
+            httpOnly: true,
+            sameSite: "none",
+            // domain: ''
+        },
+    })
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -61,21 +62,21 @@ require("./config/passport.config")(passport);
 // Document API with Swagger if not in production
 // Docs available at /api/docs
 if (!IS_PROD) {
-  const YAML = require("yamljs");
-  const swaggerUI = require("swagger-ui-express");
-  const swaggerDocument = YAML.load("./src/docs.yaml");
-  app.use(
-    "/api/docs",
-    swaggerUI.serve,
-    swaggerUI.setup(swaggerDocument, {
-      swaggerOptions: { supportedSubmitMethods: [] },
-    })
-  );
+    const YAML = require("yamljs");
+    const swaggerUI = require("swagger-ui-express");
+    const swaggerDocument = YAML.load("./src/docs.yaml");
+    app.use(
+        "/api/docs",
+        swaggerUI.serve,
+        swaggerUI.setup(swaggerDocument, {
+            swaggerOptions: {supportedSubmitMethods: []},
+        })
+    );
 }
 
 // routes
 app.get("/", (_req: Request, res: Response) => {
-  res.send("Welcome to Notum backend!");
+    res.send("Welcome to Notum backend!");
 });
 app.use("/api/auth", authRouter);
 app.use("/api/lessons", lessonRouter);
@@ -83,8 +84,8 @@ app.use("/api/courses", courseRouter);
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {
-  console.log("{ MongoDB is running }");
-  app.listen(PORT, () => {
-    console.log(`{ Server is running at http://localhost:${PORT} }`);
-  });
+    console.log("{ MongoDB is running }");
+    app.listen(PORT, () => {
+        console.log(`{ Server is running at http://localhost:${PORT} }`);
+    });
 });

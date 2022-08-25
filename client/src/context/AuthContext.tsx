@@ -1,12 +1,13 @@
-import {createContext, ReactNode, useContext, useState} from 'react';
-import {UserType} from 'types/auth';
+import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
+import {CheckLoginStatusType, LoginInputType, LoginResponseType, LogoutType, UserType} from 'types/auth';
+import {isLoggedIn as isLoggedInService, loginServer, logoutFromServer} from 'services/auth';
 
 
 interface IAuthContext {
     isAuthed: boolean;
     user: UserType | null;
 
-    login(user: UserType): void;
+    login(loginDetails: LoginInputType): void;
 
     logout(): void;
 }
@@ -23,19 +24,46 @@ export const authContextDefaults: IAuthContext = {
 export const AuthContext = createContext<IAuthContext>(authContextDefaults)
 
 const AuthProvider: React.FC<({ children: ReactNode })> = ({children}) => {
+    // initialize AuthContext on Load
+
+    useEffect(() => {
+        const checkLogin = async () => {
+            console.log("checking if i'm logged in (server)")
+            const userData = await isLoggedInService() as CheckLoginStatusType
+            console.log(userData)
+            if (userData && userData.isLoggedIn === true) {
+                console.log('check is logged in', userData)
+            } else {
+                console.log('not logged in')
+            }
+
+
+            //setUser(userData.user as UserType)
+
+        }
+        checkLogin()
+
+    })
+
     const [user, setUser] = useState<UserType | null>(null)
 
     const isAuthed = (user !== null)
 
+
     // TODO: maybe also add register here
 
-    const login = (user: UserType) => {
-        setUser(user)
-        // TODO: also actually login to the backend using the api
+    const login = async (loginDetail: LoginInputType) => {
+        const loginResponseData = await loginServer(loginDetail) as LoginResponseType
+        if (loginResponseData.success && loginResponseData.data) {
+            setUser(loginResponseData.data)
+        }
     }
-    const logout = () => {
-        setUser(null)
-        // TODO: also actually logout to the backend using the api
+    const logout = async () => {
+        const logoutResponseData = await logoutFromServer() as LogoutType
+        console.log(logoutResponseData)
+        if (logoutResponseData.success) {
+            setUser(null)
+        }
     }
 
     return <AuthContext.Provider value={{

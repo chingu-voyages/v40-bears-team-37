@@ -41,17 +41,18 @@ function SignUp() {
     });
 
     const onSubmit = async (values: SignUpFieldsType) => {
-        const response = await signupService({
+        const data = await signupService({
             "name": values.username,
             "password": values.password,
             "email": values.email
-        }) as AxiosResponse<SignupResponseType>
-        if (response.data.success === false) {
-            setError('signupError', {message: response.data.message})
+        }) as SignupResponseType
+        if (data.success === false) {
+            setError('signupError', {message: data.message})
         } else {
             // Successful Signup
-            console.log(response.data.data)
-            auth.login(response.data.data as UserType)
+            console.log(data.data)
+            // TODO: should not need to log in again. register starts a new session
+            //auth.login(data.data as UserType)
         }
     }
 
