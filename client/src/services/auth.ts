@@ -4,7 +4,7 @@ import {baseUrl} from 'utils/config';
 
 export const signup = async (registerDetails: SignupDetailsType) => {
     try {
-        return await axios.post<SignupResponseType>(`${baseUrl}api/auth/signup`, registerDetails)
+        return await axios.post<SignupResponseType>(`${baseUrl}/auth/signup`, registerDetails)
     } catch (e: unknown) {
         if (axios.isAxiosError(e)) {
             console.error('Axios Error', e)

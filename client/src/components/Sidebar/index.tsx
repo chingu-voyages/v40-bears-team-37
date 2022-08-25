@@ -20,8 +20,6 @@ const SidebarStyles = styled.div`
 `;
 
 const SideBar = () => {
-
-    const auth = useAuth()
     const activePage = "calendar"; // TODO: get current page from react router or similar
     return (
         <SidebarStyles>

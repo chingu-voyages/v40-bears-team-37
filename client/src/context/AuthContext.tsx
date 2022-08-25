@@ -23,16 +23,19 @@ export const authContextDefaults: IAuthContext = {
 export const AuthContext = createContext<IAuthContext>(authContextDefaults)
 
 const AuthProvider: React.FC<({ children: ReactNode })> = ({children}) => {
-    const [isAuthed, setIsAuthed] = useState<boolean>(false)
     const [user, setUser] = useState<UserType | null>(null)
+
+    const isAuthed = (user !== null)
+
+    // TODO: maybe also add register here
 
     const login = (user: UserType) => {
         setUser(user)
-        setIsAuthed(true)
+        // TODO: also actually login to the backend using the api
     }
     const logout = () => {
         setUser(null)
-        setIsAuthed(false)
+        // TODO: also actually logout to the backend using the api
     }
 
     return <AuthContext.Provider value={{

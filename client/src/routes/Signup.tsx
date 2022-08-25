@@ -4,7 +4,9 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Link} from "react-router-dom";
 import {SignUpStyles, CarouselStyles, FormStyle, InputFormStyles, AuthNavigationStyles} from "../styles/AuthFormStyles";
 import {signup as signupService} from 'services/auth';
-import {SignupResponseType} from 'types/auth';
+import {SignupResponseType, UserType} from 'types/auth';
+import {useAuth} from 'context/AuthContext';
+import {AxiosResponse} from 'axios';
 
 const signUpValidation = z
     .object({
@@ -22,6 +24,7 @@ const signUpValidation = z
 type SignUpFieldsType = z.infer<typeof signUpValidation>;
 
 function SignUp() {
+    const auth = useAuth()
     const {
         register,
         handleSubmit,
@@ -42,12 +45,13 @@ function SignUp() {
             "name": values.username,
             "password": values.password,
             "email": values.email
-        }) as SignupResponseType
-        if (response.success === false) {
-            setError('signupError', {message: response.message})
+        }) as AxiosResponse<SignupResponseType>
+        if (response.data.success === false) {
+            setError('signupError', {message: response.data.message})
         } else {
             // Successful Signup
-            // TODO: Redirect to login page, either auto login or make the user login again.
+            console.log(response.data.data)
+            auth.login(response.data.data as UserType)
         }
     }
 
