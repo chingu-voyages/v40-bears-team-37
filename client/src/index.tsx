@@ -32,7 +32,7 @@ root.render(
             <GlobalStyles/>
             <BrowserRouter>
                 <AuthProvider>
-                    {/*TODO: Remove the temporary Nav component below*/}
+                    {/*TODO: Remove the temporary Nav component below */}
                     <Nav/>
                     <Routes>
                         <Route
