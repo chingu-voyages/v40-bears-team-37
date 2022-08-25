@@ -26,7 +26,19 @@ const Nav = () => {
             </button>
             <button onClick={() => auth.logout()}>Logout</button>
             <button onClick={() => handleCheckLogin()}>Am I logged in?</button>
-            <a href='/signup'>go to signup</a>
+            
+            <a href='/'> calendar / </a>
+            <a href='/signup'>signup / </a>
+            <a href='/login'>login / </a>
+            {auth.isAuthed ?
+                <>
+                    <a href='/search'>search / </a>
+                    <a href='/settings'>settings </a>
+                </> :
+                <>
+                </>
+            }
+
         </>
     )
 }

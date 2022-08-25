@@ -4,15 +4,15 @@ import GlobalStyles from "styles/GlobalStyles";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import HelmetWrapper from "./components/Helmet";
 
-import App from "./routes/App";
-import Login from "./routes/Login";
+import App from "App";
+import Login from "routes/Login";
 import Signup from "routes/Signup";
 import Search from "routes/Search";
 import Settings from "routes/Settings";
 
 import PrivateRoute from "components/Auth/PrivateRoute";
 import PublicRoute from "components/Auth/PublicRoute";
-import AuthProvider, {AuthContext} from 'context/AuthContext';
+import AuthProvider from 'context/AuthContext';
 import Nav from 'components/Nav';
 
 const root = ReactDOM.createRoot(
@@ -24,8 +24,6 @@ const root = ReactDOM.createRoot(
   toggle isAuthed between true and false to access private/public routes
 */
 
-const isAuthed = true
-
 root.render(
     <React.StrictMode>
         <HelmetWrapper>
@@ -34,48 +32,7 @@ root.render(
                 <AuthProvider>
                     {/*TODO: Remove the temporary Nav component below */}
                     <Nav/>
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <PrivateRoute isAuthed={isAuthed}>
-                                    <App/>
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/search"
-                            element={
-                                <PrivateRoute isAuthed={isAuthed}>
-                                    <Search/>
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/settings"
-                            element={
-                                <PrivateRoute isAuthed={isAuthed}>
-                                    <Settings/>
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/login"
-                            element={
-                                <PublicRoute isAuthed={!isAuthed}>
-                                    <Login/>
-                                </PublicRoute>
-                            }
-                        />
-                        <Route
-                            path="/signup"
-                            element={
-                                <PublicRoute isAuthed={!isAuthed}>
-                                    <Signup/>
-                                </PublicRoute>
-                            }
-                        />
-                    </Routes>
+                    <App/>
                 </AuthProvider>
             </BrowserRouter>
         </HelmetWrapper>

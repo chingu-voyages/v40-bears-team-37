@@ -25,27 +25,23 @@ export const AuthContext = createContext<IAuthContext>(authContextDefaults)
 
 const AuthProvider: React.FC<({ children: ReactNode })> = ({children}) => {
     // initialize AuthContext on Load
-
+    const [user, setUser] = useState<UserType | null>(null)
     useEffect(() => {
         const checkLogin = async () => {
             console.log("checking if i'm logged in (server)")
-            const userData = await isLoggedInService() as CheckLoginStatusType
-            console.log(userData)
-            if (userData && userData.isLoggedIn === true) {
-                console.log('check is logged in', userData)
+            const userIsLoggedIn = await isLoggedInService()
+            console.log("is user logged in?", userIsLoggedIn)
+            if (userIsLoggedIn && userIsLoggedIn === true) {
+                console.log('check is logged in', userIsLoggedIn)
+                // TODO: setUser on successful login
+                //setUser(userData.user as UserType)
             } else {
                 console.log('not logged in')
             }
-
-
-            //setUser(userData.user as UserType)
-
         }
         checkLogin()
+    }, [])
 
-    })
-
-    const [user, setUser] = useState<UserType | null>(null)
 
     const isAuthed = (user !== null)
 
@@ -60,7 +56,7 @@ const AuthProvider: React.FC<({ children: ReactNode })> = ({children}) => {
     }
     const logout = async () => {
         const logoutResponseData = await logoutFromServer() as LogoutType
-        console.log(logoutResponseData)
+        console.log("logout response", logoutResponseData)
         if (logoutResponseData.success) {
             setUser(null)
         }
