@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import passport from "passport";
 import User, { UserDocument } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import { COOKIE_NAME } from "../env";
@@ -7,37 +6,21 @@ import { SignupPayloadType } from "../validators/auth";
 import { Types } from "mongoose";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
-  passport.authenticate(
-    "login",
-    (err: any, user: UserDocument, info: { message: string }) => {
-      if (err) {
-        return res.status(500).send({
-          success: false,
-          message: "Unable to create account",
-        });
-      }
-      if (!user) {
-        return res.status(401).send({
-          success: false,
-          message: info.message,
-        });
-      }
-      req.logIn(user, (err) => {
-        if (err) return next(err);
-        return res.status(200).send({
-          success: true,
-          message: req.body.register
-            ? "User successfully registered"
-            : "User successfully login",
-          data: {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-          },
-        });
-      });
-    }
-  )(req, res, next);
+  const userData = req.user as UserDocument;
+  req.logIn(userData, (err: unknown) => {
+    if (err) return next(err);
+    return res.status(200).send({
+      success: true,
+      message: req.body.register
+        ? "User successfully registered"
+        : "User successfully login",
+      data: {
+        id: userData._id,
+        name: userData.name,
+        email: userData.email,
+      },
+    });
+  });
 };
 
 export const register = async (

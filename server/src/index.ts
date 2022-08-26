@@ -13,7 +13,7 @@ import helmet from "helmet";
 import compression from "compression";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import passport from "passport";
+import passport from "./config/passport.config";
 import authRouter from "./routes/auth.route";
 import lessonRouter from "./routes/lesson.route";
 import courseRouter from "./routes/courses.route";
@@ -24,7 +24,7 @@ const app = express();
 // middlewares
 app.use(
   cors({
-    origin: IS_PROD ? FRONTEND_URL : "*",
+    origin: IS_PROD ? FRONTEND_URL : "http://localhost:4000",
     credentials: true,
   })
 );
@@ -56,7 +56,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-require("./config/passport.config")(passport);
 
 // Document API with Swagger if not in production
 // Docs available at /api/docs
