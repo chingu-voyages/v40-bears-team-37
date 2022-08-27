@@ -24,7 +24,7 @@ const app = express();
 // middlewares
 app.use(
     cors({
-        origin: IS_PROD ? FRONTEND_URL : "http://localhost:4000",
+        origin: IS_PROD ? FRONTEND_URL : "http://localhost:3000",
         credentials: true,
     })
 );
