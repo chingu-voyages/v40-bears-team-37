@@ -7,23 +7,23 @@ const LocalStrategy = require("passport-local").Strategy;
 
 // called on login, saves the id to session req.session.passport.user = {id:'..'}
 passport.serializeUser((user, done) => {
-  console.log("serializeUser", user);
   /**
    * passport expecting 'user' is instanceof Express.User rather than UserDocument
    * need to investigate further later on
    */
   const { _id } = user as UserDocument;
-  done(null, { _id });
+  done(null, _id);
 });
 
 // user object attaches to the request as req.user
 passport.deserializeUser((id: Types.ObjectId, done) => {
-  User.findOne({ _id: id }, (_err: NativeError, user: UserDocument) => {
-    const userInformation = {
-      id: user._id,
-    };
-    console.log("deserializeUser", userInformation);
-    done(null, user);
+  User.findOne({ _id: id }, (err: NativeError, user: UserDocument) => {
+    if (err) {
+      done(err)
+    }
+    else {
+      done(null, user);
+    }
   });
 });
 
