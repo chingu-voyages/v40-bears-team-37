@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {sidebarTabs} from "utils/sidebar-tabs";
+import { sidebarTabs } from "utils/sidebar-tabs";
 import SidebarTab from "components/Sidebar/SidebarTab";
 import UserLogout from "components/Sidebar/UserLogout";
-import {useAuth} from 'context/AuthContext';
+import { useAuth } from "context/AuthContext";
 
 const SidebarStyles = styled.div`
   display: flex;
@@ -20,24 +20,24 @@ const SidebarStyles = styled.div`
 `;
 
 const SideBar = () => {
-    const activePage = "calendar"; // TODO: get current page from react router or similar
-    return (
-        <SidebarStyles>
-            <div>
-                <h1>Notum</h1>
-                {sidebarTabs.map((tab) => (
-                    <SidebarTab
-                        key={tab.title}
-                        title={tab.title}
-                        description={tab.description}
-                        icon={tab.icon}
-                        isActive={tab.page === activePage}
-                    />
-                ))}
-            </div>
-            <UserLogout/>
-        </SidebarStyles>
-    );
+  const activePage = "calendar"; // TODO: get current page from react router or similar
+  return (
+    <SidebarStyles>
+      <div>
+        <h1>Notum</h1>
+        {sidebarTabs.map((tab) => (
+          <SidebarTab
+            key={tab.title}
+            title={tab.title}
+            description={tab.description}
+            icon={tab.icon}
+            isActive={tab.page === activePage}
+          />
+        ))}
+      </div>
+      <UserLogout />
+    </SidebarStyles>
+  );
 };
 
 export default SideBar;

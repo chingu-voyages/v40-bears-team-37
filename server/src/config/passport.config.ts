@@ -19,9 +19,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id: Types.ObjectId, done) => {
   User.findOne({ _id: id }, (err: NativeError, user: UserDocument) => {
     if (err) {
-      done(err)
-    }
-    else {
+      done(err);
+    } else {
       done(null, user);
     }
   });
