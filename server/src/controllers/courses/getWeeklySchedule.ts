@@ -19,7 +19,7 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
   const { prevWeekId, nextWeekId } = getPrevOrNextWeekId(weekId);
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("courses");
     const coursesIds = user?.courses;
 
     let courses: CourseDocument[] = [];
@@ -37,17 +37,12 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
 
     const results = {
       week_id: Number(week[1]),
-      // month: moment(week[1]).format("MMMM"),
-      // year: moment(week[1]).format("YYYY"),
-      // start_date: moment(week[0]).format("Do"),
-      // end_date: moment(week[6]).format("Do"),
       start_date: Number(week[0]),
       end_date: Number(week[6]),
       prev_week_id: Number(prevWeekId),
       next_week_id: Number(nextWeekId),
       schedules: Object.keys(structuredWeekLessons).map((day, index) => ({
         day,
-        // date_label: moment(week[index + 1]).format("MMMM Do"),
         date: Number(week[index + 1]),
         lessons: structuredWeekLessons[day as WeekDays],
       })),
