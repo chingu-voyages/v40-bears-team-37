@@ -1,7 +1,7 @@
 import CalendarView from "components/CalendarView";
 
-function App() {
+function CalendarPage() {
   return <CalendarView />;
 }
 
-export default App;
+export default CalendarPage;

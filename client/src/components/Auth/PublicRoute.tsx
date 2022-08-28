@@ -1,8 +1,8 @@
 import { Navigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { useAuth } from "context/AuthContext";
 
 interface IProps {
-  isAuthed: boolean;
   children: JSX.Element;
 }
 
@@ -10,9 +10,10 @@ const ContainerStyles = styled.div`
   display: flex;
 `;
 
-function PublicRoute({ isAuthed, children }: IProps) {
+function PublicRoute({ children }: IProps) {
   const location = useLocation();
-  if (isAuthed) {
+  const auth = useAuth();
+  if (auth.isAuthed) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 

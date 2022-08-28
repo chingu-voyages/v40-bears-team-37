@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { sidebarTabs } from "utils/sidebar-tabs";
 import SidebarTab from "components/Sidebar/SidebarTab";
 import UserLogout from "components/Sidebar/UserLogout";
+import { useAuth } from "context/AuthContext";
 
 const SidebarStyles = styled.div`
   display: flex;
