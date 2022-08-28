@@ -5,15 +5,17 @@ info:
 servers:
   - url: http://localhost:4000
 tags:
-  - name: auth
+  - name: Auth
     description: Authentication / Authorization
-  - name: courses
+  - name: Courses
     description: Add, edit, delete courses in the database
+  - name: Lessons
+    description: Add, edit, delete lessons in the database
 paths:
   /api/auth/signup:
     post:
       tags:
-        - auth
+        - Auth
       description: Creates a new user
       requestBody:
         content:
@@ -57,7 +59,7 @@ paths:
   /api/auth/login:
     post:
       tags:
-        - auth
+        - Auth
       description: Logs a user in
       requestBody:
         content:
@@ -95,7 +97,7 @@ paths:
   /api/auth/logout:
     post:
       tags:
-        - auth
+        - Auth
       description: Logs a user out and removed the session cookie
       responses:
         200:
@@ -114,7 +116,7 @@ paths:
   /api/auth/check:
     get:
       tags:
-        - auth
+        - Auth
       description: For quick checking if the user is logged in or not
       responses:
         200:
@@ -139,7 +141,7 @@ paths:
   /api/courses:
     post:
       tags:
-        - courses
+        - Courses
       description: Add a course to the database.
       requestBody:
         content:
@@ -270,3 +272,317 @@ paths:
                                   type: string
                                 end_date:
                                   type: string
+  /api/courses/weekly-schedule:
+    get:
+      tags:
+        - Courses
+      description: Get weekly-schedule.
+      parameters:
+        - in: query
+          name: weekId
+          schema:
+            type: integer
+          description: (optional) weekId to get the weekly-schedule of the specific week
+      responses:
+        200:
+          description: Returns the weekly schedule.
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    properties:
+                      week_id:
+                        type: number
+                      start_date:
+                        type: number
+                      end_date:
+                        type: number
+                      prev_week_id:
+                        type: number
+                      next_week_id:
+                        type: number
+                      schedules:
+                        type: array
+                        items:
+                          properties:
+                            day:
+                              type: string
+                            date:
+                              type: number
+                            lessons:
+                              type: array
+                              items:
+                                properties:
+                                  _id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  color:
+                                    type: string
+                                  start_time:
+                                    type: string
+                                  end_time:
+                                    type: string
+  /api/lessons:
+    get:
+      tags:
+        - Lessons
+      description: Get all lessons of the user.
+      responses:
+        200:
+          description: Returns all the lessons of the user.
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        _id:
+                          type: string
+                        course_id:
+                          type: string
+                        schedule_id:
+                          type: string
+                        course_name:
+                          type: string
+                        start_time:
+                          type: string
+                        end_time:
+                          type: string
+                        color:
+                          type: string
+                        unit:
+                          type: string
+                        tags:
+                          type: array
+                          item:
+                            type: string
+                        note:
+                          type: string
+                        date:
+                          type: number
+                        attachments:
+                          type: array
+                          items:
+                            type: string
+    post:
+      tags:
+        - Lessons
+      description: POST lesson.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - date
+                - schedule_id
+                - course_id
+              properties:
+                unit:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+                note:
+                  type: string
+                date:
+                  type: number
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                schedule_id:
+                  type: string
+                course_id:
+                  type: string
+        required: true
+      responses:
+        200:
+          description: Returns the new lesson created.
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    properties:
+                      _id:
+                        type: string
+                      unit:
+                        type: string
+                      tags:
+                        type: array
+                        items:
+                          type: string
+                      note:
+                        type: string
+                      date:
+                        type: number
+                      attachments:
+                        type: array
+                        items:
+                          type: string
+                      schedule_id:
+                        type: string
+                      course_id:
+                        type: string
+  /api/lessons/{lessonId}:
+    get:
+      tags:
+        - Lessons
+      description: Get lesson by id.
+      parameters:
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: lessonId
+      responses:
+        200:
+          description: Returns the lesson.
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    properties:
+                      _id:
+                        type: string
+                      course_id:
+                        type: string
+                      schedule_id:
+                        type: string
+                      course_name:
+                        type: string
+                      start_time:
+                        type: string
+                      end_time:
+                        type: string
+                      color:
+                        type: string
+                      unit:
+                        type: string
+                      tags:
+                        type: array
+                        item:
+                          type: string
+                      note:
+                        type: string
+                      date:
+                        type: number
+                      attachments:
+                        type: array
+                        items:
+                          type: string
+    put:
+      tags:
+        - Lessons
+      description: Update lesson.
+      parameters:
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: lessonId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                unit:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+                note:
+                  type: string
+                attachments:
+                  type: array
+                  items:
+                    type: string
+        required: true
+      responses:
+        201:
+          description: Returns the updated lesson.
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    properties:
+                      _id:
+                        type: string
+                      unit:
+                        type: string
+                      tags:
+                        type: array
+                        items:
+                          type: string
+                      note:
+                        type: string
+                      date:
+                        type: number
+                      attachments:
+                        type: array
+                        items:
+                          type: string
+                      schedule_id:
+                        type: string
+                      course_id:
+                        type: string
+    delete:
+      tags:
+        - Lessons
+      description: Delete lesson.
+      parameters:
+        - in: path
+          name: lessonId
+          schema:
+            type: string
+          required: true
+          description: lessonId
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - message
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                

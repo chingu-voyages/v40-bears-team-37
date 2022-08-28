@@ -7,7 +7,7 @@ export default async function (req: Request, res: Response) {
     const newLesson = await createLesson(body);
     res.status(201).json({
       success: true,
-      message: newLesson,
+      data: newLesson,
     });
   } catch (e) {
     res.status(500).json({
