@@ -7,6 +7,8 @@ servers:
 tags:
   - name: auth
     description: Authentication / Authorization
+  - name: courses
+    description: Add, edit, delete courses in the database
 paths:
   /api/auth/signup:
     post:
@@ -134,3 +136,137 @@ paths:
                         type: string
                       email:
                         type: string
+  /api/courses:
+    post:
+      tags:
+        - courses
+      description: Add a course to the database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - start_date
+                - color
+              properties:
+                name:
+                  type: string
+                start_date:
+                  type: number
+                end_date:
+                  type: number
+                color:
+                  type: string
+                weekly_schedule:
+                  properties:
+                    monday:
+                      type: array
+                      items:
+                        properties:
+                          start_date:
+                            type: string
+                          end_date:
+                            type: string
+                    tuesday:
+                      type: array
+                      items:
+                        properties:
+                          start_date:
+                            type: string
+                          end_date:
+                            type: string
+                    wednesday:
+                      type: array
+                      items:
+                        properties:
+                          start_date:
+                            type: string
+                          end_dat:
+                            type: string
+                    thursday:
+                      type: array
+                      items:
+                        properties:
+                          start_date:
+                            type: string
+                          end_date:
+                            type: string
+                    friday:
+                      type: array
+                      items:
+                        properties:
+                          start_date:
+                            type: string
+                          end_date:
+                            type: string
+        required: true
+
+      responses:
+        201:
+          description: Returns the new course once successfully created.
+          content:
+            application/json:
+              schema:
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    properties:
+                      _id:
+                        type: string
+                      __v:
+                        type: string
+                      name:
+                        type: string
+                      start_date:
+                        type: number
+                      end_date:
+                        type: number
+                      color:
+                        type: string
+                      weekly_schedule:
+                        properties:
+                          monday:
+                            type: array
+                            items:
+                              properties:
+                                start_date:
+                                  type: string
+                                end_date:
+                                  type: string
+                          tuesday:
+                            type: array
+                            items:
+                              properties:
+                                start_date:
+                                  type: string
+                                end_date:
+                                  type: string
+                          wednesday:
+                            type: array
+                            items:
+                              properties:
+                                start_date:
+                                  type: string
+                                end_dat:
+                                  type: string
+                          thursday:
+                            type: array
+                            items:
+                              properties:
+                                start_date:
+                                  type: string
+                                end_date:
+                                  type: string
+                          friday:
+                            type: array
+                            items:
+                              properties:
+                                start_date:
+                                  type: string
+                                end_date:
+                                  type: string
