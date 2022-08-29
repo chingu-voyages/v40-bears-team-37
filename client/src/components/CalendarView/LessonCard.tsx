@@ -1,9 +1,10 @@
 import { LessonCardStyles } from "styles/LessonCardStyles";
-import { Lesson } from "types/Lesson";
 import { getBgColorBySubject } from "utils/getColorBySubject";
 
+import { LessonCardType } from "types/courses";
+
 interface LessonCardProps {
-  lesson: Lesson;
+  lesson: LessonCardType;
 }
 
 const LessonCard = ({ lesson }: LessonCardProps) => {
