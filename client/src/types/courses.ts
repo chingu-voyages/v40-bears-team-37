@@ -3,18 +3,11 @@ export type WeeklyScheduleParamsType = {
 }
 
 export type LessonCardType = {
-<<<<<<< HEAD
     _id: string,
     color: string,
     end_time: string,
     start_time: string,
     name: string
-=======
-    id: string,
-    subject: string,
-    class: string,
-    time: string
->>>>>>> e33ceee50d8a92279ec0fecc6bfbd7bdd3baa4c5
 }
 
 export type scheduleType = {

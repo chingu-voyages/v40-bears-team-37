@@ -5,6 +5,8 @@ import { CalendarWeekStyles } from "styles/CalendarWeekStyles";
 import leftArrowIcon from "images/calendar/leftArrow.svg";
 import rightArrowIcon from "images/calendar/rightArrow.svg";
 
+import { concatDateRange, extractMonth } from "utils/timeFormaters";
+
 interface CalendarWeekProps {
   week: WeeklyScheduleResultsType;
 }

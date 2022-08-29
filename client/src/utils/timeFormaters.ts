@@ -57,7 +57,7 @@ export const concatMonthAndDate = (dateNum: number) => {
 
 export const formatTime = (timeString: string) => {
     const hour = timeString.slice(0, 2);
-    const minute = timeString.slice(3);
+    const minute = timeString.slice(2);
     const hourPlusMinute = minute === "00" ? `${hour}` : `${hour}:${minute}`
     const meridiemUnit = parseInt(hour) >= 12 ? "PM" : "AM";
 
