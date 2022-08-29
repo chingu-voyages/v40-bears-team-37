@@ -1,8 +1,14 @@
 import { LessonCardStyles } from "styles/LessonCardStyles";
+<<<<<<< HEAD
 
 import { LessonCardType } from "types/courses";
 
 import { formatTime } from "utils/timeFormaters";
+=======
+import { getBgColorBySubject } from "utils/getColorBySubject";
+>>>>>>> e33ceee50d8a92279ec0fecc6bfbd7bdd3baa4c5
+
+import { LessonCardType } from "types/courses";
 
 interface LessonCardProps {
   lesson: LessonCardType;

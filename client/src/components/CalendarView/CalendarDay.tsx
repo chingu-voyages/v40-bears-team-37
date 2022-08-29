@@ -1,9 +1,6 @@
 import LessonCard from "components/CalendarView/LessonCard";
 import styled from "styled-components";
 
-import { scheduleType } from "types/courses";
-import { concatMonthAndDate, dayMap } from "utils/timeFormaters";
-
 const CalendarDayStyles = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,9 +27,9 @@ const CalendarDay = ({ schedule }: CalendarDayProps) => {
         <small>{concatMonthAndDate(schedule.date)}</small>
       </div>
 
-      {schedule.lessons &&
-        schedule.lessons.map((lesson) => (
-          <LessonCard key={lesson._id} lesson={lesson} />
+      {day &&
+        day.lessons.map((lesson) => (
+          <LessonCard key={lesson.id} lesson={lesson} />
         ))}
     </CalendarDayStyles>
   );
