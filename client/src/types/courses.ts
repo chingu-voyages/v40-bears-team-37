@@ -1,5 +1,5 @@
 export type WeeklyScheduleParamsType = {
-    weekId: string | undefined
+    weekId: number | undefined
 }
 
 export type LessonCardType = {

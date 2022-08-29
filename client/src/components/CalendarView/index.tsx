@@ -13,15 +13,16 @@ const CalendarViewStyles = styled.div`
 const CalendarView = () => {
   const [weeklySchedule, setWeeklySchedule] = useState<WeeklyScheduleResultsType>();
 
+  const getWeeklySchedule = async (weekId: number | undefined = undefined) => {
+    const weeklyScheduleData = await getWeeklyScheduleService({
+      weekId
+    }) as WeeklyScheduleResponseType;
+    if (weeklyScheduleData.success) {
+      setWeeklySchedule(weeklyScheduleData.data);
+    }
+  };
+
   useEffect(() => {
-    const getWeeklySchedule = async () => {
-      const weeklyScheduleData = await getWeeklyScheduleService({
-        weekId: undefined
-      }) as WeeklyScheduleResponseType;
-      if (weeklyScheduleData.success) {
-        setWeeklySchedule(weeklyScheduleData.data);
-      }
-    };
     getWeeklySchedule();
   }, []);
   
@@ -29,7 +30,7 @@ const CalendarView = () => {
     <>
       { weeklySchedule && 
         <CalendarViewStyles>
-          <CalendarWeek week={weeklySchedule} />
+          <CalendarWeek week={weeklySchedule} getWeeklySchedule={getWeeklySchedule} />
         </CalendarViewStyles>
       }
     </>

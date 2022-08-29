@@ -6,14 +6,21 @@ import leftArrowIcon from "images/calendar/leftArrow.svg";
 import rightArrowIcon from "images/calendar/rightArrow.svg";
 
 import { concatDateRange, extractMonth } from "utils/timeFormaters";
+import { MouseEvent } from "react";
 
 interface CalendarWeekProps {
   week: WeeklyScheduleResultsType;
+  getWeeklySchedule: (weekId?: number | undefined) => Promise<void>;
 }
 
-const CalendarWeek = ({ week }: CalendarWeekProps) => {
+const CalendarWeek = ({ week, getWeeklySchedule }: CalendarWeekProps) => {
   const month = extractMonth(week.start_date);
   const dateRange = concatDateRange(week.start_date, week.end_date);
+
+  const handleRefetchWeeklySchedule = (e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>, prevOrNext: string) => {
+    e.preventDefault();
+    prevOrNext === "prev" ? getWeeklySchedule(week.prev_week_id) : getWeeklySchedule(week.next_week_id)
+  }
 
   return (
     <CalendarWeekStyles>
@@ -21,8 +28,8 @@ const CalendarWeek = ({ week }: CalendarWeekProps) => {
         <div>
           <div className="calendar-header-month">
             <h1>{month}</h1>
-            <img src={leftArrowIcon} alt={`back-arrow`} />
-            <img src={rightArrowIcon} alt={`forward-arrow`} />
+            <img onClick={(e) => handleRefetchWeeklySchedule(e, "prev")} src={leftArrowIcon} alt={`back-arrow`} />
+            <img onClick={(e) => handleRefetchWeeklySchedule(e, "next")} src={rightArrowIcon} alt={`forward-arrow`} />
           </div>
           <div>Week {dateRange}</div>
         </div>
