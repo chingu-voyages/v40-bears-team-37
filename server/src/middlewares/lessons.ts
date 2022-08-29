@@ -28,7 +28,7 @@ export const isLessonAuthorized = async (
 
   const isAuthorized = await User.findOne({
     _id: userId,
-    courses: lesson._id,
+    courses: lesson.course_id,
   });
 
   if (!isAuthorized) {
