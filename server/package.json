@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project ./",
-    "start:dev": "nodemon src/index.ts",
-    "start": "node dist/index.js",
+    "start:dev": "NODE_ENV=development nodemon src/index.ts",
+    "start": "NODE_ENV=production node dist/index.js",
     "format": "prettier --write \"src/**/*.{js,ts,tsx,css,md}\"",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\""
   },

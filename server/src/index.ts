@@ -5,7 +5,6 @@ import {
   FRONTEND_URL,
   MONGO_URL,
   PORT,
-  IS_PROD,
   COOKIE_NAME,
 } from "./env";
 import mongoose from "mongoose";
@@ -21,12 +20,20 @@ import courseRouter from "./routes/courses.route";
 // instantiate express app
 const app = express();
 
+// mongodb connection
+mongoose.connect(MONGO_URL).then(() => {
+  console.log("MongoDB is running");
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+});
+
 // middlewares
 app.use(
   cors({
-    origin: IS_PROD ? FRONTEND_URL : "http://localhost:3000",
+    origin: FRONTEND_URL,
     credentials: true,
-  })
+  }),
 );
 app.use(helmet());
 app.use(compression());
@@ -34,7 +41,7 @@ app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
-  })
+  }),
 );
 app.use(
   session({
@@ -47,20 +54,20 @@ app.use(
     saveUninitialized: false,
     proxy: true,
     cookie: {
-      secure: IS_PROD, // SSL only in production
+      secure: process.env.NODE_ENV === "production", // SSL only in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
       sameSite: "none",
       // domain: ''
     },
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Document API with Swagger if not in production
 // Docs available at /api/docs
-if (!IS_PROD) {
+if (process.env.NODE_ENV !== "production") {
   const YAML = require("yamljs");
   const swaggerUI = require("swagger-ui-express");
   const swaggerDocument = YAML.load("./src/docs.yaml");
@@ -69,7 +76,7 @@ if (!IS_PROD) {
     swaggerUI.serve,
     swaggerUI.setup(swaggerDocument, {
       swaggerOptions: { supportedSubmitMethods: [] },
-    })
+    }),
   );
 }
 
@@ -80,11 +87,3 @@ app.get("/", (_req: Request, res: Response) => {
 app.use("/api/auth", authRouter);
 app.use("/api/lessons", lessonRouter);
 app.use("/api/courses", courseRouter);
-
-// mongodb connection
-mongoose.connect(MONGO_URL).then(() => {
-  console.log("{ MongoDB is running }");
-  app.listen(PORT, () => {
-    console.log(`{ Server is running at http://localhost:${PORT} }`);
-  });
-});

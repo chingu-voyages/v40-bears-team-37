@@ -12,11 +12,13 @@ const getEnvSafely = (envKey: string) => {
 
 // from .env file
 export const BACKEND_URL = getEnvSafely("BACKEND_URL");
-export const FRONTEND_URL = getEnvSafely("FRONTEND_URL");
+export const FRONTEND_URL =
+  process.env.NODE_ENV === "production"
+    ? getEnvSafely("FRONTEND_URL")
+    : "http://localhost:3000";
 export const MONGO_URL = getEnvSafely("MONGO_URL");
 export const COOKIE_NAME = getEnvSafely("COOKIE_NAME");
 export const COOKIE_SECRET = getEnvSafely("COOKIE_SECRET");
 
 // default env stuffs
-export const IS_PROD = process.env.NODE_ENV === "production";
-export const PORT = process.env.PORT || 4000;
+export const PORT = process.env.PORT;

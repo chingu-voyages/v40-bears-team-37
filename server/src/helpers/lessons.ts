@@ -20,7 +20,7 @@ interface LessonNote {
 
 export const massageSingleLessonNote = (
   lesson: LessonDocument,
-  course: CourseDocument
+  course: CourseDocument,
 ): LessonNote | undefined => {
   let schedule = (
     Object.keys(course.weekly_schedule)
@@ -48,7 +48,7 @@ export const massageSingleLessonNote = (
 
 export const massageLessonNotes = (
   lessons: LessonDocument[],
-  courses: CourseDocument[]
+  courses: CourseDocument[],
 ) => {
   let structuredLessonNotes: LessonNote[] = [];
 

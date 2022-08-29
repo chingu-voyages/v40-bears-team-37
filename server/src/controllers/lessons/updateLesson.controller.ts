@@ -13,7 +13,7 @@ export default async function (req: Request, res: Response) {
   try {
     const { lesson } = await getLessonById(
       new Types.ObjectId(lessonId),
-      userId
+      userId,
     );
     const result = await updateLesson(lesson, payload);
     return res.status(201).send({
