@@ -21,7 +21,6 @@ const CalendarView = () => {
       if (weeklyScheduleData.success) {
         setWeeklySchedule(weeklyScheduleData.data);
       }
-      console.log("weeklyScheduleData", weeklyScheduleData)
     };
     getWeeklySchedule();
   }, []);
