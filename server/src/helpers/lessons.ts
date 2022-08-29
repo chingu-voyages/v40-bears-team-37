@@ -1,7 +1,6 @@
 import { Types } from "mongoose";
-import { CourseDocument, ScheduleDocument } from "../models/course.model";
+import { CourseDocument } from "../models/course.model";
 import { LessonDocument } from "../models/lesson.model";
-import { WeekDays } from "./weeklySchedule";
 
 interface LessonNote {
   _id: Types.ObjectId;
@@ -22,11 +21,18 @@ export const massageSingleLessonNote = (
   lesson: LessonDocument,
   course: CourseDocument
 ): LessonNote | undefined => {
-  let schedule = (
-    Object.keys(course.weekly_schedule)
-      .map((key) => course?.weekly_schedule[key as WeekDays])
-      .flat() as ScheduleDocument[]
-  ).find((sched) => lesson.schedule_id! === sched._id);
+  const { weekly_schedule } = course;
+  const schedulesArr = [
+    ...weekly_schedule.monday,
+    ...weekly_schedule.tuesday,
+    ...weekly_schedule.wednesday,
+    ...weekly_schedule.thursday,
+    ...weekly_schedule.friday,
+  ];
+
+  const schedule = schedulesArr.find(
+    (sched) => sched._id?.toString() === lesson.schedule_id?.toString()
+  );
 
   if (schedule) {
     return {
@@ -53,7 +59,9 @@ export const massageLessonNotes = (
   let structuredLessonNotes: LessonNote[] = [];
 
   lessons.forEach((lesson) => {
-    let course = courses.find((course) => lesson.course_id === course._id);
+    let course = courses.find(
+      (course) => course._id?.toString() === lesson.course_id?.toString()
+    );
     if (course) {
       let massagedNote = massageSingleLessonNote(lesson, course);
 
