@@ -7,6 +7,7 @@ const CalendarDayStyles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 20%;
 
   .day-header {
     display: flex;

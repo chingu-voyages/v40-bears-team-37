@@ -15,6 +15,7 @@ interface CalendarWeekProps {
 
 const CalendarWeek = ({ week, getWeeklySchedule }: CalendarWeekProps) => {
   const month = extractMonth(week.start_date);
+  const year = week.start_date.toString().slice(0, 4)
   const dateRange = concatDateRange(week.start_date, week.end_date);
 
   const handleRefetchWeeklySchedule = (e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>, prevOrNext: string) => {
@@ -27,7 +28,7 @@ const CalendarWeek = ({ week, getWeeklySchedule }: CalendarWeekProps) => {
       <div className="calendar-header">
         <div>
           <div className="calendar-header-month">
-            <h1>{month}</h1>
+            <h1>{month} {year}</h1>
             <img onClick={(e) => handleRefetchWeeklySchedule(e, "prev")} src={leftArrowIcon} alt={`back-arrow`} />
             <img onClick={(e) => handleRefetchWeeklySchedule(e, "next")} src={rightArrowIcon} alt={`forward-arrow`} />
           </div>
