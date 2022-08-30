@@ -28,10 +28,17 @@ const extractDate = (date: number) => {
     switch(sliceDate) {
         case "01":
             return `${sliceDate.slice(1)}st`;
+        case "21":
+        case "31":
+            return `${sliceDate}st`;
         case "02":
             return `${sliceDate.slice(1)}nd`;
+        case "22":
+            return `${sliceDate}nd`;
         case "03":
             return `${sliceDate.slice(1)}rd`;
+        case "23":
+            return `${sliceDate}rd`;
         case "04":
         case "05":
         case "06":
