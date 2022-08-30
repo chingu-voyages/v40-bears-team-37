@@ -20,7 +20,7 @@ lessonRouter
     "/",
     isAuthenticated,
     validateRequestBody(LessonRequestPayloadValidator),
-    createLessonController
+    createLessonController,
   )
   .get("/:lessonId", isAuthenticated, isLessonAuthorized, getLessonById)
   .put(
@@ -28,13 +28,13 @@ lessonRouter
     isAuthenticated,
     validateRequestBody(UpdateLessonRequestPayloadValidator),
     isLessonAuthorized,
-    updateLessonController
+    updateLessonController,
   )
   .delete(
     "/:lessonId",
     isAuthenticated,
     isLessonAuthorized,
-    deleteLessonController
+    deleteLessonController,
   );
 
 export default lessonRouter;

@@ -7,7 +7,7 @@ import AuthProvider from "context/AuthContext";
 import App from "App";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 root.render(
@@ -20,5 +20,5 @@ root.render(
         </AuthProvider>
       </BrowserRouter>
     </HelmetWrapper>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

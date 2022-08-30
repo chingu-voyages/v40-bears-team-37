@@ -20,14 +20,14 @@ authRouter
     "/login",
     validateRequestBody(LoginPayloadValidator),
     passport.authenticate("local"),
-    login
+    login,
   )
   .post(
     "/signup",
     validateRequestBody(SignupPayloadValidator),
     register,
     passport.authenticate("local"),
-    login
+    login,
   )
   .post("/logout", isAuthenticated, logout)
   .get("/check", checkIsLoggedIn);

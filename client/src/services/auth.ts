@@ -12,7 +12,7 @@ export const signup = async (registerDetails: SignupDetailsType) => {
   try {
     const response = await axios.post<SignupResponseType>(
       `${baseUrl}/auth/signup`,
-      registerDetails
+      registerDetails,
     );
     return response.data;
   } catch (e: unknown) {
@@ -30,7 +30,7 @@ export const isLoggedIn = async () => {
   try {
     axios.defaults.withCredentials = true;
     const response = await axios.get<CheckLoginStatusType>(
-      `${baseUrl}/auth/check`
+      `${baseUrl}/auth/check`,
     );
     return response.data;
   } catch (e: unknown) {
@@ -66,7 +66,7 @@ export const loginServer = async (loginDetails: LoginInputType) => {
   try {
     const response = await axios.post<SignupResponseType>(
       `${baseUrl}/auth/login`,
-      loginDetails
+      loginDetails,
     );
     return response.data;
   } catch (e: unknown) {

@@ -3,7 +3,7 @@ import { UpdateLessonRequestPayloadType } from "../validators/lessons";
 
 export default async function (
   prevLessonData: LessonDocument,
-  newlessonData: UpdateLessonRequestPayloadType
+  newlessonData: UpdateLessonRequestPayloadType,
 ) {
   const { _id, date, schedule_id, course_id } = prevLessonData;
   const { attachments, note, tags, unit } = newlessonData;
@@ -22,7 +22,7 @@ export default async function (
       },
       {
         new: true,
-      }
+      },
     );
     return updatedLesson;
   } catch (error) {

@@ -42,7 +42,7 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
     const filteredActiveWeekLessons = filterActiveWeekLessons(courses, weekId);
     const structuredWeekLessons = massageWeeklyScheduleData(
       filteredActiveWeekLessons,
-      lessons
+      lessons,
     );
 
     const results = {
