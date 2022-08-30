@@ -9,6 +9,8 @@ interface LessonCardProps {
 }
 
 const LessonCard = ({ lesson }: LessonCardProps) => {
+  function toggleModal() {}
+
   return (
     <LessonCardStyles color={lesson.color}>
       <div className="card-header">
@@ -21,9 +23,9 @@ const LessonCard = ({ lesson }: LessonCardProps) => {
           {formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}
         </div>
         {/*TODO: direct to lesson detail*/}
-        <a className="card-link" href={`/lessons/${lesson._id}`}>
+        <div className="card-link" onClick={toggleModal}>
           See Full
-        </a>
+        </div>
       </div>
     </LessonCardStyles>
   );
