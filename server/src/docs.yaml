@@ -411,7 +411,7 @@ paths:
                   type: string
         required: true
       responses:
-        200:
+        201:
           description: Returns the new lesson created.
           content:
             application/json:
@@ -573,7 +573,7 @@ paths:
           required: true
           description: lessonId
       responses:
-        201:
+        200:
           content:
             application/json:
               schema:
@@ -585,4 +585,3 @@ paths:
                     type: boolean
                   message:
                     type: string
-                
