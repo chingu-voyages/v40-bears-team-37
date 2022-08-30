@@ -1,14 +1,20 @@
 export const sidebarTabs = [
-  {
-    title: "Lesson Plans",
-    page: "calendar",
-    description: "some simple description",
-    icon: "lesson-plans.svg",
-  },
-  {
-    title: "settings",
-    page: "settings",
-    description: "some simple description",
-    icon: "settings.svg",
-  },
+    {
+        title: "Calendar",
+        path: "/",
+        description: "weekly lesson view",
+        icon: "lesson-plans.svg",
+    },
+    {
+        title: "Search",
+        path: "/search",
+        description: "search for a lesson",
+        icon: "settings.svg",
+    },
+    {
+        title: "Settings",
+        path: "/settings",
+        description: "change your settings",
+        icon: "settings.svg",
+    },
 ];
