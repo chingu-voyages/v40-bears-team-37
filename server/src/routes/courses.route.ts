@@ -7,6 +7,8 @@ import {
   weeklyScheduleQueryValidator,
 } from "../validators/courses";
 import createCourse from "../controllers/courses/createCourse";
+import updateCourse from "../controllers/courses/updateCourse";
+import isAuthorizedToModifyCourse from "../middlewares/courses";
 
 const courseRouter = Router();
 
@@ -23,5 +25,13 @@ courseRouter.post(
   validateRequestBody(CoursePayloadValidator),
   createCourse
 );
+
+courseRouter.put(
+  "/:courseId",
+  isAuthenticated,
+  validateRequestBody(CourseUpdatePayloadValidator),
+  isAuthorizedToModifyCourse,
+  updateCourse
+)
 
 export default courseRouter;
