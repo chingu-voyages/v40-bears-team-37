@@ -7,7 +7,7 @@
     "build": "tsc --project ./",
     "start:dev": "nodemon src/index.ts",
     "start": "node dist/index.js",
-    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,md}\"",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,md}\" --config ./.prettierrc",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\""
   },
   "dependencies": {

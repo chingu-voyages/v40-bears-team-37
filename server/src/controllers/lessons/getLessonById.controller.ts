@@ -11,7 +11,7 @@ export default async function (req: Request, res: Response) {
   try {
     const { lesson, course } = await getLessonById(
       new Types.ObjectId(lessonId),
-      userId
+      userId,
     );
     const structuredLessonNote = massageSingleLessonNote(lesson, course);
 

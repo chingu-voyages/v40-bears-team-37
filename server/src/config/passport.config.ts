@@ -37,8 +37,8 @@ const strategy = new LocalStrategy(
     done: (
       arg1: null,
       arg2?: false | UserDocument,
-      arg3?: { message: string }
-    ) => void
+      arg3?: { message: string },
+    ) => void,
   ) {
     const user = await User.findOne({ email });
     if (!user) {
@@ -54,7 +54,7 @@ const strategy = new LocalStrategy(
       });
     }
     return done(null, user);
-  }
+  },
 );
 
 passport.use(strategy);

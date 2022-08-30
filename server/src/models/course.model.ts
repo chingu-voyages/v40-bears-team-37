@@ -13,7 +13,7 @@ const scheduleSchema = new Schema(
   },
   {
     _id: true,
-  }
+  },
 );
 
 const courseSchema = new Schema({

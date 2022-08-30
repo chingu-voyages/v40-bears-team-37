@@ -19,7 +19,7 @@ interface LessonNote {
 
 export const massageSingleLessonNote = (
   lesson: LessonDocument,
-  course: CourseDocument
+  course: CourseDocument,
 ): LessonNote | undefined => {
   const { weekly_schedule } = course;
   const schedulesArr = [
@@ -31,7 +31,7 @@ export const massageSingleLessonNote = (
   ];
 
   const schedule = schedulesArr.find(
-    (sched) => sched._id?.toString() === lesson.schedule_id?.toString()
+    (sched) => sched._id?.toString() === lesson.schedule_id?.toString(),
   );
 
   if (schedule) {
@@ -54,13 +54,13 @@ export const massageSingleLessonNote = (
 
 export const massageLessonNotes = (
   lessons: LessonDocument[],
-  courses: CourseDocument[]
+  courses: CourseDocument[],
 ) => {
   let structuredLessonNotes: LessonNote[] = [];
 
   lessons.forEach((lesson) => {
     let course = courses.find(
-      (course) => course._id?.toString() === lesson.course_id?.toString()
+      (course) => course._id?.toString() === lesson.course_id?.toString(),
     );
     if (course) {
       let massagedNote = massageSingleLessonNote(lesson, course);
