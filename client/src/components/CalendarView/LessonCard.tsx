@@ -1,3 +1,4 @@
+import { useModal } from "../../context/LessonModalContext";
 import { LessonCardStyles } from "styles/LessonCardStyles";
 
 import { LessonCardType } from "types/courses";
@@ -9,8 +10,7 @@ interface LessonCardProps {
 }
 
 const LessonCard = ({ lesson }: LessonCardProps) => {
-  function toggleModal() {}
-
+  const { setIsModalOpen } = useModal()
   return (
     <LessonCardStyles color={lesson.color}>
       <div className="card-header">
@@ -23,7 +23,7 @@ const LessonCard = ({ lesson }: LessonCardProps) => {
           {formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}
         </div>
         {/*TODO: direct to lesson detail*/}
-        <div className="card-link" onClick={toggleModal}>
+        <div className="card-link" onClick={() => setIsModalOpen(true)}>
           See Full
         </div>
       </div>

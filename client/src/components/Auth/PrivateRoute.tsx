@@ -4,7 +4,7 @@ import SideBar from "../../components/Sidebar";
 import { useAuth } from "context/AuthContext";
 
 interface IProps {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 const ContainerStyles = styled.div`
