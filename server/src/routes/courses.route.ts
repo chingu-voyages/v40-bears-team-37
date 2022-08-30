@@ -4,6 +4,7 @@ import { getWeeklySchedule } from "../controllers/courses/getWeeklySchedule";
 import { isAuthenticated } from "../middlewares/auth";
 import {
   CoursePayloadValidator,
+  CourseUpdatePayloadValidator,
   weeklyScheduleQueryValidator,
 } from "../validators/courses";
 import createCourse from "../controllers/courses/createCourse";
