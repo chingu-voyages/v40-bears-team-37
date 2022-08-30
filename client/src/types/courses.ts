@@ -2,6 +2,7 @@ export type WeeklyScheduleParamsType = {
     weekId: number | undefined
 }
 
+// TODO: change the type if needed according to the feting data from DB
 export type LessonCardType = {
     _id: string,
     color: string,

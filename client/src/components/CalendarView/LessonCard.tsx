@@ -12,6 +12,7 @@ const LessonCard = ({ lesson }: LessonCardProps) => {
   return (
     <LessonCardStyles color={lesson.color}>
       <div className="card-header">
+        {/*TODO: render the lessons' and course's name*/}
         <h1>{lesson.name}</h1>
         <div>Lesson: {lesson.name}</div>
       </div>
