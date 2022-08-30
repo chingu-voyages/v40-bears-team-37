@@ -17,14 +17,14 @@ courseRouter.get(
   "/weekly-schedule",
   isAuthenticated,
   validateRequestQuery(weeklyScheduleQueryValidator),
-  getWeeklySchedule
+  getWeeklySchedule,
 );
 
 courseRouter.post(
   "/",
   isAuthenticated,
   validateRequestBody(CoursePayloadValidator),
-  createCourse
+  createCourse,
 );
 
 courseRouter.put(
@@ -32,7 +32,7 @@ courseRouter.put(
   isAuthenticated,
   validateRequestBody(CourseUpdatePayloadValidator),
   isAuthorizedToModifyCourse,
-  updateCourse
-)
+  updateCourse,
+);
 
 export default courseRouter;

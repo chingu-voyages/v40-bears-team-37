@@ -5,7 +5,7 @@ import { Types } from "mongoose";
 
 export default async function createCourseInDB(
   payload: CoursePayloadType,
-  userId: Types.ObjectId
+  userId: Types.ObjectId,
 ) {
   const { name, start_date, end_date, color, weekly_schedule } = payload;
 
@@ -13,7 +13,7 @@ export default async function createCourseInDB(
     const user: UserDocument | null = await User.findOne({ _id: userId });
     if (!user)
       throw new Error(
-        "Cannot find user in database. Cannot create course for this user."
+        "Cannot find user in database. Cannot create course for this user.",
       );
 
     const newCourse = new Course({

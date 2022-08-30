@@ -7,7 +7,7 @@ import { Types } from "mongoose";
 export const isLessonAuthorized = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { lessonId } = req.params;
   const userId = getUserId(req);
@@ -19,7 +19,7 @@ export const isLessonAuthorized = async (
   }
 
   const lesson = await Lesson.findById(new Types.ObjectId(lessonId)).select(
-    "course_id"
+    "course_id",
   );
 
   if (!lesson) {
