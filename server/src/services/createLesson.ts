@@ -1,14 +1,17 @@
 import { LessonRequestPayloadType } from "../validators/lessons";
 import Lesson, { LessonDocument } from "../models/lesson.model";
+import { Types } from "mongoose";
 
 export default async function (lesson: LessonRequestPayloadType) {
+  const { unit, note, date, attachments, schedule_id, course_id } = lesson;
   try {
     const lessonDoc: LessonDocument = new Lesson({
-      unit: lesson.unit,
-      note: lesson.note,
-      date: lesson.date ?? Date.now(),
-      attachments: lesson.attachments,
-      schedule_id: lesson.schedule_id,
+      unit,
+      note,
+      date,
+      attachments,
+      schedule_id: new Types.ObjectId(schedule_id),
+      course_id: new Types.ObjectId(course_id),
     });
 
     const savedLesson = await lessonDoc.save();

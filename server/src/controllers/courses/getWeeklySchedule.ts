@@ -10,6 +10,7 @@ import { getUserId } from "../../helpers/user";
 import User from "../../models/user.model";
 import Course, { CourseDocument } from "../../models/course.model";
 import { WeeklyScheduleQueryType } from "../../validators/courses";
+import Lesson, { LessonDocument } from "../../models/lesson.model";
 
 export const getWeeklySchedule = async (req: Request, res: Response) => {
   const id = getUserId(req);
@@ -23,16 +24,25 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
     const coursesIds = user?.courses;
 
     let courses: CourseDocument[] = [];
+    let lessons: LessonDocument[] = [];
     if (coursesIds && coursesIds.length > 0) {
       courses = await Course.find({
         _id: { $in: coursesIds },
         start_date: { $lte: Number(week[6]) },
       });
+      lessons = await Lesson.find({
+        course_id: { $in: coursesIds },
+        $and: [
+          { date: { $lte: Number(week[6]) } },
+          { date: { $gte: Number(week[0]) } },
+        ],
+      });
     }
 
     const filteredActiveWeekLessons = filterActiveWeekLessons(courses, weekId);
     const structuredWeekLessons = massageWeeklyScheduleData(
-      filteredActiveWeekLessons
+      filteredActiveWeekLessons,
+      lessons
     );
 
     const results = {

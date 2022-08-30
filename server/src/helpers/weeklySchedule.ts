@@ -1,5 +1,6 @@
 import { CourseDocument, ScheduleModel } from "../models/course.model";
 import moment from "moment";
+import { LessonDocument } from "../models/lesson.model";
 
 export type WeekDays =
   | "monday"
@@ -69,7 +70,10 @@ export const filterActiveWeekLessons = (
 
 export type LessonCard = ScheduleModel & { name: string };
 
-export const massageWeeklyScheduleData = (courses: CourseDocument[]) => {
+export const massageWeeklyScheduleData = (
+  courses: CourseDocument[],
+  lessonsData: LessonDocument[]
+) => {
   const sortByTime = (daySchedules: LessonCard[]) =>
     daySchedules.sort(
       (a, b) => Number(moment(a.start_time)) - Number(moment(b.start_time))
@@ -87,6 +91,14 @@ export const massageWeeklyScheduleData = (courses: CourseDocument[]) => {
             color: course.color,
             start_time: schedule.start_time,
             end_time: schedule.end_time,
+            lesson_id: lessonsData.find(
+              (data) =>
+                data.schedule_id?.toString() === schedule._id?.toString()
+            )?._id,
+            unit: lessonsData.find(
+              (data) =>
+                data.schedule_id?.toString() === schedule._id?.toString()
+            )?.unit,
           })),
         ])
     );
