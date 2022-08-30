@@ -9,7 +9,7 @@ export const sidebarTabs = [
         title: "Search",
         path: "/search",
         description: "search for a lesson",
-        icon: "settings.svg",
+        icon: "search.svg",
     },
     {
         title: "Settings",
