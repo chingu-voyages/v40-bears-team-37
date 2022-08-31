@@ -11,7 +11,9 @@ export const getWeeklySchedule = async (weekId: WeeklyScheduleParamsType) => {
     axios.defaults.withCredentials = true;
     const response = await axios.get<WeeklyScheduleResponseType>(
       `${baseUrl}/courses/weekly-schedule`,
-      { params: weekId },
+      {
+        params: weekId,
+      },
     );
 
     return response.data;
