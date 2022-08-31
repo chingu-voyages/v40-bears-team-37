@@ -14,6 +14,7 @@ function PublicRoute({ children }: IProps) {
   const location = useLocation();
   const auth = useAuth();
   if (auth.isAuthed) {
+    // TODO: Does not seem to work, always redirect to / no matter what url is typed into the address bar
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 interface SidebarStylesProps {
   isActive: boolean;
@@ -34,6 +35,7 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
 
 interface SidebarTabProps {
   title: string;
+  path: string;
   description: string;
   icon: string;
   isActive: boolean;
@@ -41,12 +43,18 @@ interface SidebarTabProps {
 
 const SidebarTab = ({
   title,
+  path,
   description,
   icon,
   isActive,
 }: SidebarTabProps) => {
+  let navigate = useNavigate();
+  const gotoPage = (path: string) => {
+    navigate(path);
+  };
+
   return (
-    <SidebarTabStyles isActive={isActive}>
+    <SidebarTabStyles isActive={isActive} onClick={() => gotoPage(path)}>
       <div className="img-container">
         <img src={require(`images/sidebar/${icon}`)} alt={`${title}-icon`} />
       </div>

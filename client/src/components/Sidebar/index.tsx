@@ -3,6 +3,7 @@ import { sidebarTabs } from "utils/sidebar-tabs";
 import SidebarTab from "components/Sidebar/SidebarTab";
 import UserLogout from "components/Sidebar/UserLogout";
 import { useAuth } from "context/AuthContext";
+import { useLocation } from "react-router-dom";
 
 const SidebarStyles = styled.div`
   display: flex;
@@ -20,7 +21,8 @@ const SidebarStyles = styled.div`
 `;
 
 const SideBar = () => {
-  const activePage = "calendar"; // TODO: get current page from react router or similar
+  const location = useLocation();
+  const activePage = location.pathname;
   return (
     <SidebarStyles>
       <div>
@@ -29,9 +31,10 @@ const SideBar = () => {
           <SidebarTab
             key={tab.title}
             title={tab.title}
+            path={tab.path}
             description={tab.description}
             icon={tab.icon}
-            isActive={tab.page === activePage}
+            isActive={tab.path === activePage}
           />
         ))}
       </div>
