@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 interface SidebarStylesProps {
-    isActive: boolean;
+  isActive: boolean;
 }
 
 const SidebarTabStyles = styled.div<SidebarStylesProps>`
@@ -16,7 +16,7 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
   border-width: 1px;
   cursor: pointer;
   border-color: ${(p) =>
-          p.isActive ? "var(--primary-medium)" : "var(--primary-dark)"};
+    p.isActive ? "var(--primary-medium)" : "var(--primary-dark)"};
   border-width: ${(p) => (p.isActive ? "1px 10px 1px 1px" : "1px")};
 
   .img-container {
@@ -34,35 +34,34 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
 `;
 
 interface SidebarTabProps {
-    title: string;
-    path: string;
-    description: string;
-    icon: string;
-    isActive: boolean;
+  title: string;
+  path: string;
+  description: string;
+  icon: string;
+  isActive: boolean;
 }
 
 const SidebarTab = ({
-                        title,
-                        path,
-                        description,
-                        icon,
-                        isActive,
-                    }: SidebarTabProps) => {
+  title,
+  path,
+  description,
+  icon,
+  isActive,
+}: SidebarTabProps) => {
+  let navigate = useNavigate();
+  const gotoPage = (path: string) => {
+    navigate(path);
+  };
 
-    let navigate = useNavigate()
-    const gotoPage = (path: string) => {
-        navigate(path)
-    }
-
-    return (
-        <SidebarTabStyles isActive={isActive} onClick={() => gotoPage(path)}>
-            <div className="img-container">
-                <img src={require(`images/sidebar/${icon}`)} alt={`${title}-icon`}/>
-            </div>
-            <h4>{title}</h4>
-            <small>{description}</small>
-        </SidebarTabStyles>
-    );
+  return (
+    <SidebarTabStyles isActive={isActive} onClick={() => gotoPage(path)}>
+      <div className="img-container">
+        <img src={require(`images/sidebar/${icon}`)} alt={`${title}-icon`} />
+      </div>
+      <h4>{title}</h4>
+      <small>{description}</small>
+    </SidebarTabStyles>
+  );
 };
 
 export default SidebarTab;
