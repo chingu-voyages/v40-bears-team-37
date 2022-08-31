@@ -35,7 +35,7 @@ export const register = async (
   if (isEmailExist) {
     return res.status(400).send({
       success: false,
-      message: "Email already exist",
+      message: "The Email already exists.",
     });
   }
 

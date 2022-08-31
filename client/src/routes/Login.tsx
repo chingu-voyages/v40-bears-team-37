@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAuth } from "context/AuthContext";
 import { Link } from "react-router-dom";
-import { AuthNavigationStyles, CarouselStyles, FormStyle, InputFormStyles, SignUpStyles } from "styles/AuthFormStyles";
+import { AuthNavigationStyles, CarouselStyles, FormStyle, InputFormStyles, InvalidMessageStyles, SignUpStyles } from "styles/AuthFormStyles";
 
 import { loginServer as loginService } from "services/auth";
 import { LoginResponseType } from "types/auth";
@@ -41,8 +41,9 @@ function Login() {
       password: values.password,
       email: values.email,
     })) as LoginResponseType;
-    if (data.success === false) {
-      setError("loginError", { message: data.message });
+    if (!data.success) {
+      const replaceWord = /"/gi;
+      setError("loginError", { message: JSON.stringify(data).replace(replaceWord, '') });
     } else {
       auth.setUser(data.data!!);
     }
@@ -71,7 +72,7 @@ function Login() {
       <FormStyle>
         <h1>Login to your Notum account!</h1>
         {!isSubmitSuccessful
-          ? (
+          && (
             <form onSubmit={handleSubmit(onSubmit)}>
               { inputs.map(({id, label, registerKey, errorCondition, inputType}) => {
                 return (
@@ -91,18 +92,9 @@ function Login() {
                   </InputFormStyles>
                 );
               }) }
+              {errors.loginError && <InvalidMessageStyles>{errors.loginError.message}</InvalidMessageStyles>}
               <button type="submit">Login</button>
             </form>
-          )
-          : (
-            <>
-              <p>Thank you for login.</p>
-              <AuthNavigationStyles>
-                <p>
-                  <Link to="/">Go to calendar</Link>
-                </p>
-              </AuthNavigationStyles>
-            </>
           )}
         <AuthNavigationStyles>
           <p>
