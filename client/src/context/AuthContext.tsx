@@ -27,6 +27,7 @@ interface IAuthContext {
   login(loginDetails: LoginInputType): void;
 
   logout(): void;
+  isCheckingAuth: boolean;
 }
 
 export const authContextDefaults: IAuthContext = {
@@ -35,6 +36,7 @@ export const authContextDefaults: IAuthContext = {
   setUser: () => {},
   login: () => {},
   logout: () => {},
+  isCheckingAuth: true,
 };
 
 export const AuthContext = createContext<IAuthContext>(authContextDefaults);
@@ -42,13 +44,17 @@ export const AuthContext = createContext<IAuthContext>(authContextDefaults);
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // initialize AuthContext on Load
   const [user, setUser] = useState<UserType | null>(null);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
   useEffect(() => {
     const checkLogin = async () => {
+      setIsCheckingAuth(true);
       const userIsLoggedIn =
         (await isLoggedInService()) as CheckLoginStatusType;
       if (userIsLoggedIn?.isLoggedIn === true) {
         setUser(userIsLoggedIn.user!!);
       }
+      setIsCheckingAuth(false);
     };
     checkLogin();
   }, []);
@@ -80,6 +86,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         login,
         logout,
         setUser,
+        isCheckingAuth,
       }}
     >
       {children}

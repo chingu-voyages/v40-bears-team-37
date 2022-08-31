@@ -7,8 +7,14 @@ import Login from "routes/Login";
 import Signup from "routes/Signup";
 import React from "react";
 import CalendarPage from "routes/Calender";
+import { useAuth } from "context/AuthContext";
+import Loader from "components/Loader/Loader";
 
 function App() {
+  const { isCheckingAuth } = useAuth();
+
+  if (isCheckingAuth) return <Loader />;
+
   return (
     <Routes>
       <Route
