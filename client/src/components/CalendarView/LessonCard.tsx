@@ -17,7 +17,9 @@ const LessonCard = ({ lesson }: LessonCardProps) => {
         <div>Lesson: {lesson.name}</div>
       </div>
       <div className="card-content">
-        <div>{formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}</div>
+        <div>
+          {formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}
+        </div>
         {/*TODO: direct to lesson detail*/}
         <a className="card-link" href={`/lessons/${lesson._id}`}>
           See Full
