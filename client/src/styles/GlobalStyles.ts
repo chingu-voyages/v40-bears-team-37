@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
       --primary-medium: #6C95B7;
       --primary-dark: #304B74;
       --primary-text: #223441;
+      --light-gray: #E8ECEF;
       --gray: #8B8C89;
       --white: #FFFFFF;
       --black: #000000;
