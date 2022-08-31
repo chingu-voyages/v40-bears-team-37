@@ -15,11 +15,11 @@ export default async function (req: Request, res: Response) {
   try {
     const { lesson, course } = await getLessonById(
       new Types.ObjectId(lessonId),
-      userId
+      userId,
     );
     const updatedLesson = (await updateLesson(
       lesson,
-      payload
+      payload,
     )) as LessonDocument;
     const structuredLessonNote = massageSingleLessonNote(updatedLesson, course);
     return res.status(201).send({

@@ -26,7 +26,7 @@ app.use(
   cors({
     origin: IS_PROD ? FRONTEND_URL : "http://localhost:3000",
     credentials: true,
-  })
+  }),
 );
 app.use(helmet());
 app.use(compression());
@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
-  })
+  }),
 );
 app.use(
   session({
@@ -53,7 +53,7 @@ app.use(
       sameSite: "none",
       // domain: ''
     },
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,7 +69,7 @@ if (!IS_PROD) {
     swaggerUI.serve,
     swaggerUI.setup(swaggerDocument, {
       swaggerOptions: { supportedSubmitMethods: [] },
-    })
+    }),
   );
 }
 

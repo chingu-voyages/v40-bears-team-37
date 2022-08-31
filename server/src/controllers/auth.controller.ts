@@ -26,7 +26,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
 export const register = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { email, name, password }: SignupPayloadType = req.body;
 

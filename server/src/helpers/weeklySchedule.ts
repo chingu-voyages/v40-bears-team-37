@@ -19,13 +19,13 @@ export const getPrevOrNextWeekId = (currentDate?: string) => {
 export const getWeekDates = (currentDate?: string) => {
   const firstWeekDay = moment(currentDate).startOf("week");
   return [...Array(7)].map((_, idx) =>
-    firstWeekDay.clone().add(idx, "day").format("yyyyMMDD")
+    firstWeekDay.clone().add(idx, "day").format("yyyyMMDD"),
   );
 };
 
 export const filterActiveWeekLessons = (
   courses: CourseDocument[],
-  dateId?: string
+  dateId?: string,
 ) => {
   const week = getWeekDates(dateId);
 
@@ -72,11 +72,11 @@ export type LessonCard = ScheduleModel & { name: string };
 
 export const massageWeeklyScheduleData = (
   courses: CourseDocument[],
-  lessonsData: LessonDocument[]
+  lessonsData: LessonDocument[],
 ) => {
   const sortByTime = (daySchedules: LessonCard[]) =>
     daySchedules.sort(
-      (a, b) => Number(moment(a.start_time)) - Number(moment(b.start_time))
+      (a, b) => Number(moment(a.start_time)) - Number(moment(b.start_time)),
     );
 
   const lessonMapper = (day: WeekDays) => {
@@ -93,14 +93,14 @@ export const massageWeeklyScheduleData = (
             end_time: schedule.end_time,
             lesson_id: lessonsData.find(
               (data) =>
-                data.schedule_id?.toString() === schedule._id?.toString()
+                data.schedule_id?.toString() === schedule._id?.toString(),
             )?._id,
             unit: lessonsData.find(
               (data) =>
-                data.schedule_id?.toString() === schedule._id?.toString()
+                data.schedule_id?.toString() === schedule._id?.toString(),
             )?.unit,
           })),
-        ])
+        ]),
     );
     return lessons;
   };

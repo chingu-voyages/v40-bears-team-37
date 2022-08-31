@@ -130,7 +130,7 @@ function SignUp() {
                       )}
                     </InputFormStyles>
                   );
-                }
+                },
               )}
               {errors.signupError && <p>{errors.signupError.message}</p>}
               <button type="submit">Get My Notum</button>
