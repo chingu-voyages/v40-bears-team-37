@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   CheckLoginStatusType,
   LoginInputType,
+  LoginResponseType,
   LogoutType,
   SignupDetailsType,
   SignupResponseType,
@@ -64,7 +65,7 @@ export const logoutFromServer = async () => {
 
 export const loginServer = async (loginDetails: LoginInputType) => {
   try {
-    const response = await axios.post<SignupResponseType>(
+    const response = await axios.post<LoginResponseType>(
       `${baseUrl}/auth/login`,
       loginDetails,
     );
