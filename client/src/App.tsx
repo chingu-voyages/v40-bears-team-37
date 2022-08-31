@@ -9,6 +9,7 @@ import React from "react";
 import CalendarPage from "routes/Calender";
 import { useAuth } from "context/AuthContext";
 import Loader from "components/Loader/Loader";
+import PageNotFound from "routes/404";
 
 function App() {
   const { isCheckingAuth } = useAuth();
@@ -57,6 +58,7 @@ function App() {
           </PublicRoute>
         }
       />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
