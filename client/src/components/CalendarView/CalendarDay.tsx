@@ -30,10 +30,7 @@ const CalendarDay = ({ schedule }: CalendarDayProps) => {
         <small>{concatMonthAndDate(schedule.date)}</small>
       </div>
 
-      {schedule &&
-        schedule.lessons.map((lesson) => (
-          <LessonCard key={lesson._id} lesson={lesson} />
-        ))}
+      {schedule && schedule.lessons.map((lesson) => <LessonCard key={lesson._id} lesson={lesson} />)}
     </CalendarDayStyles>
   );
 };

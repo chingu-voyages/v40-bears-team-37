@@ -3,10 +3,7 @@ import User from "../models/user.model";
 import Lesson from "../models/lesson.model";
 import Course from "../models/course.model";
 
-export async function getLessonById(
-  lessonId: Types.ObjectId,
-  userId: Types.ObjectId,
-) {
+export async function getLessonById(lessonId: Types.ObjectId, userId: Types.ObjectId) {
   const lesson = await Lesson.findById(lessonId);
   if (!lesson) throw new Error("No lesson found");
 

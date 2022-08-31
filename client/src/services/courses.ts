@@ -1,18 +1,14 @@
 import axios from "axios";
 
-import {
-  WeeklyScheduleParamsType,
-  WeeklyScheduleResponseType,
-} from "../types/courses";
+import { WeeklyScheduleParamsType, WeeklyScheduleResponseType } from "../types/courses";
 import { baseUrl } from "utils/config";
 
 export const getWeeklySchedule = async (weekId: WeeklyScheduleParamsType) => {
   try {
     axios.defaults.withCredentials = true;
-    const response = await axios.get<WeeklyScheduleResponseType>(
-      `${baseUrl}/courses/weekly-schedule`,
-      { params: weekId },
-    );
+    const response = await axios.get<WeeklyScheduleResponseType>(`${baseUrl}/courses/weekly-schedule`, {
+      params: weekId,
+    });
 
     return response.data;
   } catch (e: unknown) {

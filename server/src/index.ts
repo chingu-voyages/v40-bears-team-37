@@ -1,13 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import {
-  COOKIE_SECRET,
-  FRONTEND_URL,
-  MONGO_URL,
-  PORT,
-  IS_PROD,
-  COOKIE_NAME,
-} from "./env";
+import { COOKIE_SECRET, FRONTEND_URL, MONGO_URL, PORT, IS_PROD, COOKIE_NAME } from "./env";
 import mongoose from "mongoose";
 import helmet from "helmet";
 import compression from "compression";

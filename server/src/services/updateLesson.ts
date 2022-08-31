@@ -1,10 +1,7 @@
 import Lesson, { LessonDocument } from "../models/lesson.model";
 import { UpdateLessonRequestPayloadType } from "../validators/lessons";
 
-export default async function (
-  prevLessonData: LessonDocument,
-  newlessonData: UpdateLessonRequestPayloadType,
-) {
+export default async function (prevLessonData: LessonDocument, newlessonData: UpdateLessonRequestPayloadType) {
   const { _id, date, schedule_id, course_id } = prevLessonData;
   const { attachments, note, tags, unit } = newlessonData;
 

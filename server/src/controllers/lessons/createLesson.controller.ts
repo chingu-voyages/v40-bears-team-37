@@ -25,9 +25,7 @@ export default async function (req: Request, res: Response) {
   try {
     const body = req.body;
     const newLesson = (await createLesson(body)) as LessonDocument;
-    const course = (await Course.findById(
-      newLesson.course_id,
-    )) as CourseDocument;
+    const course = (await Course.findById(newLesson.course_id)) as CourseDocument;
     const structuredLessonNote = massageSingleLessonNote(newLesson, course);
     res.status(201).json({
       success: true,

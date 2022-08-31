@@ -13,14 +13,8 @@ export default async function (req: Request, res: Response) {
   const payload = req.body as UpdateLessonRequestPayloadType;
 
   try {
-    const { lesson, course } = await getLessonById(
-      new Types.ObjectId(lessonId),
-      userId,
-    );
-    const updatedLesson = (await updateLesson(
-      lesson,
-      payload,
-    )) as LessonDocument;
+    const { lesson, course } = await getLessonById(new Types.ObjectId(lessonId), userId);
+    const updatedLesson = (await updateLesson(lesson, payload)) as LessonDocument;
     const structuredLessonNote = massageSingleLessonNote(updatedLesson, course);
     return res.status(201).send({
       success: true,

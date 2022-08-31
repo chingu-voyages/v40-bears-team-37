@@ -33,9 +33,7 @@ export const LessonRequestPayloadValidator = z.object({
   }),
 });
 
-export type LessonRequestPayloadType = z.infer<
-  typeof LessonRequestPayloadValidator
->;
+export type LessonRequestPayloadType = z.infer<typeof LessonRequestPayloadValidator>;
 
 export const UpdateLessonRequestPayloadValidator = z.object({
   unit: z
@@ -55,6 +53,4 @@ export const UpdateLessonRequestPayloadValidator = z.object({
   attachments: z.string().array().optional(),
 });
 
-export type UpdateLessonRequestPayloadType = z.infer<
-  typeof UpdateLessonRequestPayloadValidator
->;
+export type UpdateLessonRequestPayloadType = z.infer<typeof UpdateLessonRequestPayloadValidator>;

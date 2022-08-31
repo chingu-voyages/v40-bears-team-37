@@ -5,8 +5,6 @@ export async function deleteLesson(lessonId: Types.ObjectId) {
   try {
     await Lesson.findOneAndDelete({ _id: lessonId });
   } catch (error) {
-    throw new Error(
-      "There's an error occured when trying to delete the lesson",
-    );
+    throw new Error("There's an error occured when trying to delete the lesson");
   }
 }

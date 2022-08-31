@@ -3,10 +3,7 @@ import styled from "styled-components";
 import CalendarWeek from "components/CalendarView/CalendarWeek";
 
 import { getWeeklySchedule as getWeeklyScheduleService } from "../../services/courses";
-import {
-  WeeklyScheduleResponseType,
-  WeeklyScheduleResultsType,
-} from "types/courses";
+import { WeeklyScheduleResponseType, WeeklyScheduleResultsType } from "types/courses";
 
 const CalendarViewStyles = styled.div`
   display: flex;
@@ -14,8 +11,7 @@ const CalendarViewStyles = styled.div`
 `;
 
 const CalendarView = () => {
-  const [weeklySchedule, setWeeklySchedule] =
-    useState<WeeklyScheduleResultsType>();
+  const [weeklySchedule, setWeeklySchedule] = useState<WeeklyScheduleResultsType>();
 
   const getWeeklySchedule = async (weekId: number | undefined = undefined) => {
     const weeklyScheduleData = (await getWeeklyScheduleService({
@@ -34,10 +30,7 @@ const CalendarView = () => {
     <>
       {weeklySchedule && (
         <CalendarViewStyles>
-          <CalendarWeek
-            week={weeklySchedule}
-            getWeeklySchedule={getWeeklySchedule}
-          />
+          <CalendarWeek week={weeklySchedule} getWeeklySchedule={getWeeklySchedule} />
         </CalendarViewStyles>
       )}
     </>

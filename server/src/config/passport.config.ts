@@ -34,11 +34,7 @@ const strategy = new LocalStrategy(
   async function (
     email: string,
     password: string,
-    done: (
-      arg1: null,
-      arg2?: false | UserDocument,
-      arg3?: { message: string },
-    ) => void,
+    done: (arg1: null, arg2?: false | UserDocument, arg3?: { message: string }) => void,
   ) {
     const user = await User.findOne({ email });
     if (!user) {

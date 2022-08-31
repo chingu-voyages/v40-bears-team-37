@@ -1,19 +1,10 @@
 import axios from "axios";
-import {
-  CheckLoginStatusType,
-  LoginInputType,
-  LogoutType,
-  SignupDetailsType,
-  SignupResponseType,
-} from "types/auth";
+import { CheckLoginStatusType, LoginInputType, LogoutType, SignupDetailsType, SignupResponseType } from "types/auth";
 import { baseUrl } from "utils/config";
 
 export const signup = async (registerDetails: SignupDetailsType) => {
   try {
-    const response = await axios.post<SignupResponseType>(
-      `${baseUrl}/auth/signup`,
-      registerDetails,
-    );
+    const response = await axios.post<SignupResponseType>(`${baseUrl}/auth/signup`, registerDetails);
     return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
@@ -29,9 +20,7 @@ export const signup = async (registerDetails: SignupDetailsType) => {
 export const isLoggedIn = async () => {
   try {
     axios.defaults.withCredentials = true;
-    const response = await axios.get<CheckLoginStatusType>(
-      `${baseUrl}/auth/check`,
-    );
+    const response = await axios.get<CheckLoginStatusType>(`${baseUrl}/auth/check`);
     return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
@@ -64,10 +53,7 @@ export const logoutFromServer = async () => {
 
 export const loginServer = async (loginDetails: LoginInputType) => {
   try {
-    const response = await axios.post<SignupResponseType>(
-      `${baseUrl}/auth/login`,
-      loginDetails,
-    );
+    const response = await axios.post<SignupResponseType>(`${baseUrl}/auth/login`, loginDetails);
     return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {

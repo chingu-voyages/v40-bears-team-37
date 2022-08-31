@@ -4,11 +4,7 @@ import getCourse from "../services/getCourse";
 import { getUserId } from "../helpers/user";
 import User from "../models/user.model";
 
-export default async function isAuthorizedToModifyCourse(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export default async function isAuthorizedToModifyCourse(req: Request, res: Response, next: NextFunction) {
   const courseId = req.params.courseId;
 
   try {
@@ -28,8 +24,7 @@ export default async function isAuthorizedToModifyCourse(
     if (userWhoOwnsCourse === null) {
       return res.status(401).json({
         success: false,
-        message:
-          "Either user does not exist or user does not have permission to modify this course.",
+        message: "Either user does not exist or user does not have permission to modify this course.",
       });
     }
     next();

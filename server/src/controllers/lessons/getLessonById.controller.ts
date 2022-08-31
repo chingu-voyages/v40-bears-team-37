@@ -9,10 +9,7 @@ export default async function (req: Request, res: Response) {
   const { lessonId } = req.params;
 
   try {
-    const { lesson, course } = await getLessonById(
-      new Types.ObjectId(lessonId),
-      userId,
-    );
+    const { lesson, course } = await getLessonById(new Types.ObjectId(lessonId), userId);
     const structuredLessonNote = massageSingleLessonNote(lesson, course);
 
     if (!structuredLessonNote) {

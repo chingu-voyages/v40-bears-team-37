@@ -15,8 +15,7 @@ const SidebarTabStyles = styled.div<SidebarStylesProps>`
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
-  border-color: ${(p) =>
-    p.isActive ? "var(--primary-medium)" : "var(--primary-dark)"};
+  border-color: ${(p) => (p.isActive ? "var(--primary-medium)" : "var(--primary-dark)")};
   border-width: ${(p) => (p.isActive ? "1px 10px 1px 1px" : "1px")};
 
   .img-container {
@@ -41,13 +40,7 @@ interface SidebarTabProps {
   isActive: boolean;
 }
 
-const SidebarTab = ({
-  title,
-  path,
-  description,
-  icon,
-  isActive,
-}: SidebarTabProps) => {
+const SidebarTab = ({ title, path, description, icon, isActive }: SidebarTabProps) => {
   let navigate = useNavigate();
   const gotoPage = (path: string) => {
     navigate(path);

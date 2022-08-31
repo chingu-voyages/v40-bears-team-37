@@ -11,9 +11,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
     if (err) return next(err);
     return res.status(200).send({
       success: true,
-      message: req.body.register
-        ? "User successfully registered"
-        : "User successfully login",
+      message: req.body.register ? "User successfully registered" : "User successfully login",
       data: {
         id: userData._id,
         name: userData.name,
@@ -23,11 +21,7 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export const register = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const register = async (req: Request, res: Response, next: NextFunction) => {
   const { email, name, password }: SignupPayloadType = req.body;
 
   const isEmailExist = await User.findOne({ email });

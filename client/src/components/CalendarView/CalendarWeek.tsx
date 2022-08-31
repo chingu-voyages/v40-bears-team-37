@@ -18,14 +18,9 @@ const CalendarWeek = ({ week, getWeeklySchedule }: CalendarWeekProps) => {
   const year = week.start_date.toString().slice(0, 4);
   const dateRange = concatDateRange(week.start_date, week.end_date);
 
-  const handleRefetchWeeklySchedule = (
-    e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>,
-    prevOrNext: string,
-  ) => {
+  const handleRefetchWeeklySchedule = (e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>, prevOrNext: string) => {
     e.preventDefault();
-    prevOrNext === "prev"
-      ? getWeeklySchedule(week.prev_week_id)
-      : getWeeklySchedule(week.next_week_id);
+    prevOrNext === "prev" ? getWeeklySchedule(week.prev_week_id) : getWeeklySchedule(week.next_week_id);
   };
 
   return (
@@ -36,16 +31,8 @@ const CalendarWeek = ({ week, getWeeklySchedule }: CalendarWeekProps) => {
             <h1>
               {month} {year}
             </h1>
-            <img
-              onClick={(e) => handleRefetchWeeklySchedule(e, "prev")}
-              src={leftArrowIcon}
-              alt={`back-arrow`}
-            />
-            <img
-              onClick={(e) => handleRefetchWeeklySchedule(e, "next")}
-              src={rightArrowIcon}
-              alt={`forward-arrow`}
-            />
+            <img onClick={(e) => handleRefetchWeeklySchedule(e, "prev")} src={leftArrowIcon} alt={`back-arrow`} />
+            <img onClick={(e) => handleRefetchWeeklySchedule(e, "next")} src={rightArrowIcon} alt={`forward-arrow`} />
           </div>
           <div>Week {dateRange}</div>
         </div>
@@ -54,10 +41,7 @@ const CalendarWeek = ({ week, getWeeklySchedule }: CalendarWeekProps) => {
         </div>
       </div>
       <div className="lesson-grid">
-        {week &&
-          week.schedules.map((schedule) => (
-            <CalendarDay key={schedule.date} schedule={schedule} />
-          ))}
+        {week && week.schedules.map((schedule) => <CalendarDay key={schedule.date} schedule={schedule} />)}
       </div>
     </CalendarWeekStyles>
   );
