@@ -1,6 +1,22 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { CheckLoginStatusType, LoginInputType, LoginResponseType, LogoutType, UserType } from "types/auth";
-import { isLoggedIn as isLoggedInService, loginServer, logoutFromServer } from "services/auth";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import {
+  CheckLoginStatusType,
+  LoginInputType,
+  LoginResponseType,
+  LogoutType,
+  UserType,
+} from "types/auth";
+import {
+  isLoggedIn as isLoggedInService,
+  loginServer,
+  logoutFromServer,
+} from "services/auth";
 
 interface IAuthContext {
   isAuthed: boolean;
@@ -33,7 +49,8 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const checkLogin = async () => {
       setIsCheckingAuth(true);
-      const userIsLoggedIn = (await isLoggedInService()) as CheckLoginStatusType;
+      const userIsLoggedIn =
+        (await isLoggedInService()) as CheckLoginStatusType;
       if (userIsLoggedIn?.isLoggedIn === true) {
         setUser(userIsLoggedIn.user!!);
       }
@@ -47,7 +64,9 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // TODO: maybe also add register here
 
   const login = async (loginDetail: LoginInputType) => {
-    const loginResponseData = (await loginServer(loginDetail)) as LoginResponseType;
+    const loginResponseData = (await loginServer(
+      loginDetail,
+    )) as LoginResponseType;
     if (loginResponseData.success && loginResponseData.data) {
       setUser(loginResponseData.data);
     }

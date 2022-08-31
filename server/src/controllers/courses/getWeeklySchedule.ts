@@ -32,12 +32,18 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
       });
       lessons = await Lesson.find({
         course_id: { $in: coursesIds },
-        $and: [{ date: { $lte: Number(week[6]) } }, { date: { $gte: Number(week[0]) } }],
+        $and: [
+          { date: { $lte: Number(week[6]) } },
+          { date: { $gte: Number(week[0]) } },
+        ],
       });
     }
 
     const filteredActiveWeekLessons = filterActiveWeekLessons(courses, weekId);
-    const structuredWeekLessons = massageWeeklyScheduleData(filteredActiveWeekLessons, lessons);
+    const structuredWeekLessons = massageWeeklyScheduleData(
+      filteredActiveWeekLessons,
+      lessons,
+    );
 
     const results = {
       week_id: Number(week[1]),

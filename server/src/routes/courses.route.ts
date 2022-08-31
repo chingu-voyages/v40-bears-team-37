@@ -20,7 +20,12 @@ courseRouter.get(
   getWeeklySchedule,
 );
 
-courseRouter.post("/", isAuthenticated, validateRequestBody(CoursePayloadValidator), createCourse);
+courseRouter.post(
+  "/",
+  isAuthenticated,
+  validateRequestBody(CoursePayloadValidator),
+  createCourse,
+);
 
 courseRouter.put(
   "/:courseId",

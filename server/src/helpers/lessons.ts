@@ -17,7 +17,10 @@ interface LessonNote {
   attachments?: string[];
 }
 
-export const massageSingleLessonNote = (lesson: LessonDocument, course: CourseDocument): LessonNote | undefined => {
+export const massageSingleLessonNote = (
+  lesson: LessonDocument,
+  course: CourseDocument,
+): LessonNote | undefined => {
   const { weekly_schedule } = course;
   const schedulesArr = [
     ...weekly_schedule.monday,
@@ -27,7 +30,9 @@ export const massageSingleLessonNote = (lesson: LessonDocument, course: CourseDo
     ...weekly_schedule.friday,
   ];
 
-  const schedule = schedulesArr.find((sched) => sched._id?.toString() === lesson.schedule_id?.toString());
+  const schedule = schedulesArr.find(
+    (sched) => sched._id?.toString() === lesson.schedule_id?.toString(),
+  );
 
   if (schedule) {
     return {
@@ -47,11 +52,16 @@ export const massageSingleLessonNote = (lesson: LessonDocument, course: CourseDo
   }
 };
 
-export const massageLessonNotes = (lessons: LessonDocument[], courses: CourseDocument[]) => {
+export const massageLessonNotes = (
+  lessons: LessonDocument[],
+  courses: CourseDocument[],
+) => {
   let structuredLessonNotes: LessonNote[] = [];
 
   lessons.forEach((lesson) => {
-    let course = courses.find((course) => course._id?.toString() === lesson.course_id?.toString());
+    let course = courses.find(
+      (course) => course._id?.toString() === lesson.course_id?.toString(),
+    );
     if (course) {
       let massagedNote = massageSingleLessonNote(lesson, course);
 

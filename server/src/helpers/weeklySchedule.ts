@@ -2,7 +2,12 @@ import { CourseDocument, ScheduleModel } from "../models/course.model";
 import moment from "moment";
 import { LessonDocument } from "../models/lesson.model";
 
-export type WeekDays = "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
+export type WeekDays =
+  | "monday"
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday";
 
 export const getPrevOrNextWeekId = (currentDate?: string) => {
   const prevWeekId = moment(currentDate).add(-1, "week").format("yyyyMMDD");
@@ -13,20 +18,30 @@ export const getPrevOrNextWeekId = (currentDate?: string) => {
 
 export const getWeekDates = (currentDate?: string) => {
   const firstWeekDay = moment(currentDate).startOf("week");
-  return [...Array(7)].map((_, idx) => firstWeekDay.clone().add(idx, "day").format("yyyyMMDD"));
+  return [...Array(7)].map((_, idx) =>
+    firstWeekDay.clone().add(idx, "day").format("yyyyMMDD"),
+  );
 };
 
-export const filterActiveWeekLessons = (courses: CourseDocument[], dateId?: string) => {
+export const filterActiveWeekLessons = (
+  courses: CourseDocument[],
+  dateId?: string,
+) => {
   const week = getWeekDates(dateId);
 
   let activeCourses = [];
   for (let course of courses) {
     let courseStartDate = moment(course.start_date.toString());
-    let courseEndDate = course.end_date ? moment(course.end_date.toString()) : undefined;
+    let courseEndDate = course.end_date
+      ? moment(course.end_date.toString())
+      : undefined;
 
     const isActiveOnTheDay = (currentDate: string) => {
       const current = moment(currentDate);
-      return current.isSameOrAfter(courseStartDate) && (courseEndDate ? current.isSameOrBefore(courseEndDate) : true);
+      return (
+        current.isSameOrAfter(courseStartDate) &&
+        (courseEndDate ? current.isSameOrBefore(courseEndDate) : true)
+      );
     };
 
     activeCourses.push({
@@ -37,9 +52,15 @@ export const filterActiveWeekLessons = (courses: CourseDocument[], dateId?: stri
       color: course.color,
       weekly_schedule: {
         monday: isActiveOnTheDay(week[1]) ? course.weekly_schedule.monday : [],
-        tuesday: isActiveOnTheDay(week[2]) ? course.weekly_schedule.tuesday : [],
-        wednesday: isActiveOnTheDay(week[3]) ? course.weekly_schedule.wednesday : [],
-        thursday: isActiveOnTheDay(week[4]) ? course.weekly_schedule.thursday : [],
+        tuesday: isActiveOnTheDay(week[2])
+          ? course.weekly_schedule.tuesday
+          : [],
+        wednesday: isActiveOnTheDay(week[3])
+          ? course.weekly_schedule.wednesday
+          : [],
+        thursday: isActiveOnTheDay(week[4])
+          ? course.weekly_schedule.thursday
+          : [],
         friday: isActiveOnTheDay(week[5]) ? course.weekly_schedule.friday : [],
       },
     });
@@ -49,9 +70,14 @@ export const filterActiveWeekLessons = (courses: CourseDocument[], dateId?: stri
 
 export type LessonCard = ScheduleModel & { name: string };
 
-export const massageWeeklyScheduleData = (courses: CourseDocument[], lessonsData: LessonDocument[]) => {
+export const massageWeeklyScheduleData = (
+  courses: CourseDocument[],
+  lessonsData: LessonDocument[],
+) => {
   const sortByTime = (daySchedules: LessonCard[]) =>
-    daySchedules.sort((a, b) => Number(moment(a.start_time)) - Number(moment(b.start_time)));
+    daySchedules.sort(
+      (a, b) => Number(moment(a.start_time)) - Number(moment(b.start_time)),
+    );
 
   const lessonMapper = (day: WeekDays) => {
     let lessons: LessonCard[] = [];
@@ -65,8 +91,14 @@ export const massageWeeklyScheduleData = (courses: CourseDocument[], lessonsData
             color: course.color,
             start_time: schedule.start_time,
             end_time: schedule.end_time,
-            lesson_id: lessonsData.find((data) => data.schedule_id?.toString() === schedule._id?.toString())?._id,
-            unit: lessonsData.find((data) => data.schedule_id?.toString() === schedule._id?.toString())?.unit,
+            lesson_id: lessonsData.find(
+              (data) =>
+                data.schedule_id?.toString() === schedule._id?.toString(),
+            )?._id,
+            unit: lessonsData.find(
+              (data) =>
+                data.schedule_id?.toString() === schedule._id?.toString(),
+            )?.unit,
           })),
         ]),
     );

@@ -20,7 +20,11 @@ const signUpValidation = z
       .trim()
       .min(3, "Username should be longer than 3 characters.")
       .max(30, "Your username is too long."),
-    email: z.string().trim().email("Must provide email.").max(50, "Your Email is too long."),
+    email: z
+      .string()
+      .trim()
+      .email("Must provide email.")
+      .max(50, "Your Email is too long."),
     password: z
       .string({ required_error: "Must provide password" })
       .trim()
@@ -108,20 +112,26 @@ function SignUp() {
         {!isSubmitSuccessful ? (
           <>
             <form onSubmit={handleSubmit(onSubmit)}>
-              {inputs.map(({ id, label, registerKey, errorCondition, inputType }) => {
-                return (
-                  <InputFormStyles key={id}>
-                    <label htmlFor={id}>{label}</label>
-                    <input
-                      id={id}
-                      type={inputType}
-                      {...register(registerKey)}
-                      className={errorCondition && "invalid"}
-                    ></input>
-                    {errorCondition && <small className="error-message">{errorCondition.message}</small>}
-                  </InputFormStyles>
-                );
-              })}
+              {inputs.map(
+                ({ id, label, registerKey, errorCondition, inputType }) => {
+                  return (
+                    <InputFormStyles key={id}>
+                      <label htmlFor={id}>{label}</label>
+                      <input
+                        id={id}
+                        type={inputType}
+                        {...register(registerKey)}
+                        className={errorCondition && "invalid"}
+                      ></input>
+                      {errorCondition && (
+                        <small className="error-message">
+                          {errorCondition.message}
+                        </small>
+                      )}
+                    </InputFormStyles>
+                  );
+                },
+              )}
               {errors.signupError && <p>{errors.signupError.message}</p>}
               <button type="submit">Get My Notum</button>
             </form>

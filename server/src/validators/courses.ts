@@ -4,7 +4,9 @@ export const weeklyScheduleQueryValidator = z.object({
   weekId: z.string({ invalid_type_error: "Must be a string" }).optional(),
 });
 
-export type WeeklyScheduleQueryType = z.infer<typeof weeklyScheduleQueryValidator>;
+export type WeeklyScheduleQueryType = z.infer<
+  typeof weeklyScheduleQueryValidator
+>;
 
 export const CoursePayloadValidator = z.object({
   name: z.string({
@@ -117,4 +119,6 @@ export const CourseUpdatePayloadValidator = z.object({
     .optional(),
 });
 
-export type CourseUpdatePayloadType = z.infer<typeof CourseUpdatePayloadValidator>;
+export type CourseUpdatePayloadType = z.infer<
+  typeof CourseUpdatePayloadValidator
+>;
