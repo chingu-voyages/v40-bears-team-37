@@ -1,21 +1,25 @@
 import { LessonCardStyles } from "styles/LessonCardStyles";
-import { Lesson } from "types/Lesson";
-import { getBgColorBySubject } from "utils/getColorBySubject";
+
+import { LessonCardType } from "types/courses";
+
+import { formatTime } from "utils/timeFormaters";
 
 interface LessonCardProps {
-  lesson: Lesson;
+  lesson: LessonCardType;
 }
 
 const LessonCard = ({ lesson }: LessonCardProps) => {
   return (
-    <LessonCardStyles color={getBgColorBySubject(lesson.subject)}>
+    <LessonCardStyles color={lesson.color}>
       <div className="card-header">
-        <h1>{lesson.subject}</h1>
-        <div>Lesson: {lesson.class}</div>
+        {/*TODO: render the lessons' and course's name*/}
+        <h1>{lesson.name}</h1>
+        <div>Lesson: {lesson.name}</div>
       </div>
       <div className="card-content">
-        <div>{lesson.time}</div>
-        <a className="card-link" href={`/lessons/${lesson.id}`}>
+        <div>{formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}</div>
+        {/*TODO: direct to lesson detail*/}
+        <a className="card-link" href={`/lessons/${lesson._id}`}>
           See Full
         </a>
       </div>

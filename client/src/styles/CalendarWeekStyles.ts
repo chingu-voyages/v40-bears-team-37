@@ -5,6 +5,7 @@ export const CalendarWeekStyles = styled.div`
   flex-direction: column;
   margin: 20px auto;
   padding: 0 10px;
+  min-width: 992px;
 
   .calendar-header {
     display: flex;

@@ -1,11 +1,13 @@
 import LessonCard from "components/CalendarView/LessonCard";
-import { Day } from "types/Day";
 import styled from "styled-components";
+import { scheduleType } from "types/courses";
+import { concatMonthAndDate, dayMap } from "utils/timeFormaters";
 
 const CalendarDayStyles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 20%;
 
   .day-header {
     display: flex;
@@ -17,20 +19,20 @@ const CalendarDayStyles = styled.div`
 `;
 
 interface CalendarDayProps {
-  day: Day;
+  schedule: scheduleType;
 }
 
-const CalendarDay = ({ day }: CalendarDayProps) => {
+const CalendarDay = ({ schedule }: CalendarDayProps) => {
   return (
     <CalendarDayStyles>
       <div className="day-header">
-        <h3>{day.day}</h3>
-        <small>{day.date}</small>
+        <h3>{dayMap[schedule.day]}</h3>
+        <small>{concatMonthAndDate(schedule.date)}</small>
       </div>
 
-      {day &&
-        day.lessons.map((lesson) => (
-          <LessonCard key={lesson.id} lesson={lesson} />
+      {schedule &&
+        schedule.lessons.map((lesson) => (
+          <LessonCard key={lesson._id} lesson={lesson} />
         ))}
     </CalendarDayStyles>
   );

@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CalendarWeek from "components/CalendarView/CalendarWeek";
-import data from "api/dummy-data.json";
+
+import { getWeeklySchedule as getWeeklyScheduleService } from "../../services/courses";
+import { WeeklyScheduleResponseType, WeeklyScheduleResultsType } from "types/courses";
 
 const CalendarViewStyles = styled.div`
   display: flex;
@@ -8,11 +11,29 @@ const CalendarViewStyles = styled.div`
 `;
 
 const CalendarView = () => {
-  const { week } = data;
+  const [weeklySchedule, setWeeklySchedule] = useState<WeeklyScheduleResultsType>();
+
+  const getWeeklySchedule = async (weekId: number | undefined = undefined) => {
+    const weeklyScheduleData = await getWeeklyScheduleService({
+      weekId
+    }) as WeeklyScheduleResponseType;
+    if (weeklyScheduleData.success) {
+      setWeeklySchedule(weeklyScheduleData.data);
+    }
+  };
+
+  useEffect(() => {
+    getWeeklySchedule();
+  }, []);
+  
   return (
-    <CalendarViewStyles>
-      <CalendarWeek week={week} />
-    </CalendarViewStyles>
+    <>
+      { weeklySchedule && 
+        <CalendarViewStyles>
+          <CalendarWeek week={weeklySchedule} getWeeklySchedule={getWeeklySchedule} />
+        </CalendarViewStyles>
+      }
+    </>
   );
 };
 
