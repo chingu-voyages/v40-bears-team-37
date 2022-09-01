@@ -8,8 +8,7 @@
     "start:dev": "nodemon src/index.ts",
     "start": "node dist/index.js",
     "format": "prettier --write \"src/**/*.{js,ts,tsx,css,md}\" --config ./.prettierrc",
-    "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
-    "fill-courses": "yarn ts-node ./src/scripts/fill-courses.ts"
+    "fill-courses": "ts-node ./src/scripts/fill-courses.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

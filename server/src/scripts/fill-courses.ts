@@ -3,40 +3,51 @@ import { MONGO_URL } from "../env";
 import Course from "../models/course.model";
 import User from "../models/user.model";
 import { coursesData } from "./data";
+import * as readline from "readline";
+import * as process from "process";
 
-/**
- * Please fill-up the user's email before running the script
- * This script should be run once (per account)
- */
-const email = "YOUR_EMAIL_HERE";
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-const fillCourses = async () => {
-  mongoose.connect(MONGO_URL).then(async () => {
-    console.log("MongoDB is connected ------------------");
-    console.log("Initiating script -------------------");
+const fillCourses = async (email: string) => {
+  console.log("Initiating script -------------------");
 
-    for (let courseData of coursesData) {
-      try {
-        const user = await User.findOne({ email });
-        if (!user) throw new Error("No user found");
+  for (let i = 0; i < coursesData.length; i++) {
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("No user found");
 
-        console.log(`Creating courses for user:: ${user._id}`);
+    console.log(`Creating courses for user:: ${user._id}`);
 
-        const course = new Course(courseData);
+    const savedCourse = await Course.create(coursesData[i]);
+    if (!savedCourse) throw new Error("Unable to save the course");
 
-        const savedCourse = await course.save();
-        if (!savedCourse) throw new Error("Unable to save the course");
+    user.courses.push(savedCourse.id);
+    const savedCourseIdInAccount = await user.save();
+    if (!savedCourseIdInAccount)
+      throw new Error("Unable to save the course id in user account");
 
-        user.courses.push(savedCourse.id);
-
-        console.log(`Courses created:: ${savedCourse}`);
-
-        await user.save();
-      } catch (error) {
-        throw new Error(error);
-      }
-    }
-  });
+    console.log(`Courses created:: ${savedCourse}`);
+  }
 };
 
-fillCourses(); // SOME_EMAIL ==> should pass the account's email
+(async () => {
+  rl.question(
+    "Please insert the account's email that the courses should belong to \nemail:",
+    async function (email: string) {
+      try {
+        await mongoose.connect(MONGO_URL);
+        console.log("MongoDB is connected ---------------------");
+
+        await fillCourses(email);
+        console.log("Creating courses done ---------------------");
+
+        process.exit();
+      } catch (error) {
+        console.error(error);
+        process.exit(1);
+      }
+    },
+  );
+})();
