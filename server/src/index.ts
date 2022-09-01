@@ -17,6 +17,7 @@ import passport from "./config/passport.config";
 import authRouter from "./routes/auth.route";
 import lessonRouter from "./routes/lesson.route";
 import courseRouter from "./routes/courses.route";
+import { logger } from "./config/logger.config";
 
 // instantiate express app
 const app = express();
@@ -83,8 +84,8 @@ app.use("/api/courses", courseRouter);
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {
-  console.log("{ MongoDB is running }");
+  logger.info("MongoDB is running");
   app.listen(PORT, () => {
-    console.log(`{ Server is running at http://localhost:${PORT} }`);
+    logger.info(`Server is listening on PORT ${PORT}`);
   });
 });

@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { CourseUpdatePayloadType } from "../validators/courses";
 import Course from "../models/course.model";
+import { logger } from "../config/logger.config";
 
 export default async function updateCourseInDB(
   payload: CourseUpdatePayloadType,
@@ -20,6 +21,7 @@ export default async function updateCourseInDB(
     );
     return newCourse;
   } catch (e) {
+    logger.error(JSON.stringify(e));
     throw new Error(e.message);
   }
 }
