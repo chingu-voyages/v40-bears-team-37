@@ -5,6 +5,7 @@ import User from "../models/user.model";
 import { coursesData } from "./data";
 import * as readline from "readline";
 import * as process from "process";
+import { z } from "zod";
 
 var rl = readline.createInterface({
   input: process.stdin,
@@ -37,6 +38,9 @@ const fillCourses = async (email: string) => {
     "Please insert the account's email that the courses should belong to \nemail:",
     async function (email: string) {
       try {
+        const emailValidator = z.string().email();
+        emailValidator.parse(email);
+
         await mongoose.connect(MONGO_URL);
         console.log("MongoDB is connected ---------------------");
 
