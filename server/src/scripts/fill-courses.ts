@@ -7,7 +7,7 @@ import * as readline from "readline";
 import * as process from "process";
 import { z } from "zod";
 
-var rl = readline.createInterface({
+const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
