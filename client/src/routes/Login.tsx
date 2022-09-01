@@ -42,8 +42,7 @@ function Login() {
       email: values.email,
     })) as LoginResponseType;
     if (!data.success) {
-      const replaceWord = /"/gi;
-      setError("loginError", { message: JSON.stringify(data).replace(replaceWord, '') });
+      setError("loginError", { message: data.message });
     } else {
       auth.setUser(data.data!!);
     }

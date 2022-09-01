@@ -67,7 +67,6 @@ function SignUp() {
       password: values.password,
       email: values.email,
     })) as SignupResponseType;
-    console.log(data)
     if (data.success === false) {
       setError("signupError", { message: data.message });
     } else {
