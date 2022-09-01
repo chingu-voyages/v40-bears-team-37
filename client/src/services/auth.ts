@@ -73,7 +73,10 @@ export const loginServer = async (loginDetails: LoginInputType) => {
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
       console.error("Axios Error", e);
-      return e.response?.data;
+      return {
+        success: false,
+        message: "Email or password is invalid."
+      };
     } else {
       console.error("Other Signup Errors", e);
       return { success: "false", errorMessage: "Unknown Login Error" };

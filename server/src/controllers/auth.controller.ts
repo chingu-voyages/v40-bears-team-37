@@ -8,10 +8,7 @@ import { Types } from "mongoose";
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const userData = req.user as UserDocument;
   req.logIn(userData, (err: unknown) => {
-    if (err) return res.status(400).send({
-      success: false,
-      message: "Email or password is incorrect."
-    });
+    if (err) return next(err);
     return res.status(200).send({
       success: true,
       message: req.body.register
