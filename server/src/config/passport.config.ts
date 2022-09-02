@@ -2,6 +2,7 @@ import passport from "passport";
 import bcrypt from "bcryptjs";
 import User, { UserDocument } from "../models/user.model";
 import { Types } from "mongoose";
+import { NextFunction, Request, Response } from "express";
 
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -56,6 +57,27 @@ const strategy = new LocalStrategy(
     return done(null, user);
   },
 );
+
+export const passportAuthenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return res.status(500).send({
+        success: false,
+        message: "Error occured",
+      });
+    }
+    if (!user) {
+      return res.status(401).send({
+        success: false,
+        message: info.message,
+      });
+    }
+  })(req, res, next);
+};
 
 passport.use(strategy);
 

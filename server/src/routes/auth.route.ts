@@ -11,7 +11,7 @@ import {
 } from "../controllers/auth.controller";
 import { isAuthenticated } from "../middlewares/auth";
 import { validateRequestBody } from "../validators";
-import passport from "../config/passport.config";
+import { passportAuthenticate } from "../config/passport.config";
 
 const authRouter = Router();
 
@@ -19,14 +19,14 @@ authRouter
   .post(
     "/login",
     validateRequestBody(LoginPayloadValidator),
-    passport.authenticate("local"),
+    passportAuthenticate,
     login,
   )
   .post(
     "/signup",
     validateRequestBody(SignupPayloadValidator),
     register,
-    passport.authenticate("local"),
+    passportAuthenticate,
     login,
   )
   .post("/logout", isAuthenticated, logout)
