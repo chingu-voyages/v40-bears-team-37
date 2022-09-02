@@ -92,12 +92,10 @@ export const massageWeeklyScheduleData = (
             start_time: schedule.start_time,
             end_time: schedule.end_time,
             lesson_id: lessonsData.find(
-              (data) =>
-                data.schedule_id?.toString() === schedule._id?.toString(),
+              (data) => data.schedule_id?.toString() === schedule.id,
             )?._id,
             unit: lessonsData.find(
-              (data) =>
-                data.schedule_id?.toString() === schedule._id?.toString(),
+              (data) => data.schedule_id?.toString() === schedule.id,
             )?.unit,
           })),
         ]),

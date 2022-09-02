@@ -31,7 +31,7 @@ export const massageSingleLessonNote = (
   ];
 
   const schedule = schedulesArr.find(
-    (sched) => sched._id?.toString() === lesson.schedule_id?.toString(),
+    (sched) => sched.id === lesson.schedule_id?.toString(),
   );
 
   if (schedule) {
@@ -60,7 +60,7 @@ export const massageLessonNotes = (
 
   lessons.forEach((lesson) => {
     let course = courses.find(
-      (course) => course._id?.toString() === lesson.course_id?.toString(),
+      (course) => course.id === lesson.course_id?.toString(),
     );
     if (course) {
       let massagedNote = massageSingleLessonNote(lesson, course);

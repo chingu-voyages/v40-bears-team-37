@@ -45,7 +45,6 @@ app.use(
     secret: COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
-    proxy: true,
     cookie: {
       secure: IS_PROD, // SSL only in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week

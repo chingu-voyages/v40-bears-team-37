@@ -7,7 +7,8 @@
     "husky:prepare": "husky install && npx husky add .husky/pre-commit \"yarn format\"",
     "client-format": "cd client && yarn format",
     "server-format": "cd server && yarn format",
-    "format": "yarn client-format && yarn server-format && git add ."
+    "format": "yarn client-format && yarn server-format && git add .",
+    "fill-courses": "cd server && yarn fill-courses"
   },
   "workspaces": [
     "client",
