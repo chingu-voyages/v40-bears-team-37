@@ -76,6 +76,7 @@ export const passportAuthenticate = (
         message: info.message,
       });
     }
+    next();
   })(req, res, next);
 };
 
