@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import {devices} from 'styles/Sizes';
 
 interface LessonStyleProps {
-  color: string;
+    color: string;
 }
 
 export const LessonCardStyles = styled.div<LessonStyleProps>`
@@ -10,6 +11,7 @@ export const LessonCardStyles = styled.div<LessonStyleProps>`
   background-color: ${(p) => p.color};
   font-size: 0.8rem;
   max-width: 200px;
+  min-width: 120px;
   padding: 10px 15px;
 
   .card-header {
@@ -35,5 +37,9 @@ export const LessonCardStyles = styled.div<LessonStyleProps>`
 
   .card-link:hover {
     text-decoration: none;
+  }
+
+  @media ${devices.tablet} {
+    width: 200px;
   }
 `;

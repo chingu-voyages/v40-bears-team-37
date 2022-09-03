@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import {devices} from 'styles/Sizes';
 
 export const CalendarWeekStyles = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px auto;
   padding: 0 10px;
-  min-width: 992px;
 
   .calendar-header {
     display: flex;
@@ -36,5 +36,18 @@ export const CalendarWeekStyles = styled.div`
     display: flex;
     flex-direction: row;
     gap: 20px;
+  }
+
+  @media ${devices.tablet} {
+    .lesson-grid {
+      border: 2px solid red;
+      flex-direction: column;
+    }
+  }
+
+  @media ${devices.mobile} {
+    .lesson-grid {
+      border: 2px solid blue;
+    }
   }
 `;

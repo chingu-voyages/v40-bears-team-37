@@ -1,16 +1,18 @@
 export const fontSize = {
-  primary: "16px",
-  small: "12px",
-  h1: "36px",
-  h3: "24px",
-  h4: "16px",
+    primary: "16px",
+    small: "12px",
+    h1: "36px",
+    h3: "24px",
+    h4: "16px",
 };
 
-// transition point from mobile to desktop layout
+// default desktop - anything > 768px
 const SCREEN_SIZES = {
-  desktop: "800px",
+    mobile: "480px",
+    tablet: "768px",
 };
 
 export const devices = {
-  desktop: `(min-width:${SCREEN_SIZES.desktop})`,
+    tablet: `(max-width:${SCREEN_SIZES.tablet})`,
+    mobile: `(max-width:${SCREEN_SIZES.mobile})`
 };
