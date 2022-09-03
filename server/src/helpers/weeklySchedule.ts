@@ -1,6 +1,7 @@
-import { CourseDocument, ScheduleModel } from "../models/course.model";
+import { CourseDocument } from "../models/course.model";
 import moment from "moment";
 import { LessonDocument } from "../models/lesson.model";
+import { Types } from "mongoose";
 
 export type WeekDays =
   | "monday"
@@ -68,7 +69,16 @@ export const filterActiveWeekLessons = (
   return activeCourses as CourseDocument[];
 };
 
-export type LessonCard = ScheduleModel & { name: string };
+export type LessonCard = {
+  _id: Types.ObjectId;
+  name: string;
+  course_id: Types.ObjectId;
+  color: string;
+  start_time: string;
+  end_time: string;
+  lesson_id?: Types.ObjectId;
+  unit?: string;
+};
 
 export const massageWeeklyScheduleData = (
   courses: CourseDocument[],
@@ -86,11 +96,12 @@ export const massageWeeklyScheduleData = (
         (lessons = [
           ...lessons,
           ...course.weekly_schedule[day].map((schedule) => ({
-            _id: schedule._id,
-            name: course.name,
-            color: course.color,
-            start_time: schedule.start_time,
-            end_time: schedule.end_time,
+            _id: schedule._id!,
+            name: course.name!,
+            course_id: course._id!,
+            color: course.color!,
+            start_time: schedule.start_time!,
+            end_time: schedule.end_time!,
             lesson_id: lessonsData.find(
               (data) => data.schedule_id?.toString() === schedule.id,
             )?._id,
