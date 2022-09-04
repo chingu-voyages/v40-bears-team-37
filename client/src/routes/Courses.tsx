@@ -1,12 +1,10 @@
-// @ts-nocheck
-
 import { useForm, useFieldArray } from "react-hook-form";
 import { addCourse } from "../services/courses";
 import { CourseStyles } from "styles/CourseStyles";
 import { CourseType, ScheduleType } from "types/courses";
 
 const transformWeeklySchedule = (scheduleData: CourseType) => {
-  const transformedWeeklySchedule = {};
+  const transformedWeeklySchedule = {} as any;
   scheduleData.weekly_schedule.forEach(
     (schedule: ScheduleType) =>
       (transformedWeeklySchedule[schedule.day_of_week] = [
@@ -19,7 +17,7 @@ const transformWeeklySchedule = (scheduleData: CourseType) => {
 const Courses = () => {
   const { register, control, handleSubmit } = useForm<CourseType>();
   const { fields, append, remove } = useFieldArray({
-    name: "weekly_schedule",
+    name: "weekly_schedule" as any,
     control,
   });
   const onSubmit = async (data: CourseType) => {
