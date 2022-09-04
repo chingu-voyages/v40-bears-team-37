@@ -12,9 +12,9 @@ export const sidebarTabs = [
     icon: "search.svg",
   },
   {
-    title: "Settings",
-    path: "/settings",
-    description: "change your settings",
-    icon: "settings.svg",
+    title: "Courses",
+    path: "/courses",
+    description: "add or view courses",
+    icon: "courses.svg",
   },
 ];

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "components/Auth/PrivateRoute";
 import Search from "routes/Search";
-import Settings from "routes/Settings";
+import Courses from "routes/Courses";
 import PublicRoute from "components/Auth/PublicRoute";
 import Login from "routes/Login";
 import Signup from "routes/Signup";
@@ -35,10 +35,10 @@ function App() {
         }
       />
       <Route
-        path="/settings"
+        path="/courses"
         element={
           <PrivateRoute>
-            <Settings />
+            <Courses />
           </PrivateRoute>
         }
       />

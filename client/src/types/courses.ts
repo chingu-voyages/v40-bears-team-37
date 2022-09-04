@@ -31,3 +31,22 @@ export type WeeklyScheduleResponseType = {
   message?: string;
   data?: WeeklyScheduleResultsType;
 };
+
+export interface CourseHoursType {
+  start_time: string;
+  end_time: string;
+}
+
+export interface CourseType {
+  name: string;
+  color: string;
+  start_date: string;
+  end_date: string;
+  weekly_schedule: {
+    monday: [CourseHoursType];
+    tuesday: [CourseHoursType];
+    wednesday: [CourseHoursType];
+    thursday: [CourseHoursType];
+    friday: [CourseHoursType];
+  };
+}
