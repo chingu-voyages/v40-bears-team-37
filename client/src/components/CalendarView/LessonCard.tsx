@@ -2,15 +2,18 @@ import { useModal } from "../../context/LessonModalContext";
 import { LessonCardStyles } from "styles/LessonCardStyles";
 import { formatTime } from "utils/timeFormaters";
 
-import { LessonCardType } from "types/courses";
+import { LessonCardType, scheduleType } from "types/courses";
 
 interface LessonCardProps {
   lesson: LessonCardType;
+  schedule: scheduleType;
 }
 
-const LessonCard = ({ lesson }: LessonCardProps) => {
-  const { setIsModalOpen, setLessonId } = useModal()
+const LessonCard = ({ lesson, schedule }: LessonCardProps) => {
+  const { setIsModalOpen, setLessonId, setSchedule, setLessonCard } = useModal()
   function openModal() {
+    setLessonCard(lesson)
+    setSchedule(schedule)
     setLessonId(lesson._id)
     setIsModalOpen(true)
   }

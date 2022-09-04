@@ -4,7 +4,7 @@ export type Lesson = {
   _id: string | null;
   course_id: string;
   schedule_id: string;
-  course_name: string;
+  name: string;
   start_time: string;
   end_time: string;
   color: string;

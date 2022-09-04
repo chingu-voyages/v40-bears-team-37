@@ -12,7 +12,7 @@ export const LessonModalStyles = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  min-height: 70%;
+  min-height: 80%;
   min-width: 60%;
   
   .lesson-header {
@@ -35,12 +35,49 @@ export const LessonModalStyles = styled.div`
     font-weight: 400;
   }
 
-  .lesson-unit, .lesson-tags {
+  .lesson-unit {
     display: flex; 
     align-items: center;
     flex-wrap: wrap;
     min-height: 30px;
     gap: 20px;
+  }
+
+  .lesson-tags {
+    display: flex; 
+    align-items: center;
+    min-height: 30px;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .lesson-new-tag-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .lesson-new-tag-input {
+    width: 100px;
+    height: 30px;
+    border: 1px solid var(--light-gray);
+    margin: 0 10px;
+    border-radius: 5px;
+  }
+
+  .lesson-new-tag-input:focus {
+    outline: none;
+    border: 1px solid #6FA9B1;
+  }
+
+  .lesson-new-tag-button {
+    line-height: 10px;
+    width: 40px;
+    background: var(--primary-dark);
+    filter: brightness(150%);
+  }
+
+  .lesson-new-tag-button:hover {
+    filter: brightness(100%);
   }
 
   .lesson-tag-1 {
@@ -60,6 +97,7 @@ export const LessonModalStyles = styled.div`
     text-align: center;
     padding: 5px;
     border-radius: 8%;
+    margin: 0 10px;
   }
 
   .lesson-text-area {
@@ -106,4 +144,5 @@ export const LessonModalStyles = styled.div`
   .lesson-button-save:hover {
     filter: brightness(90%);
   }
+}
 `;

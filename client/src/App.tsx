@@ -6,14 +6,11 @@ import PublicRoute from "components/Auth/PublicRoute";
 import Login from "routes/Login";
 import Signup from "routes/Signup";
 import CalendarPage from "routes/Calender";
-<<<<<<< HEAD
 import { useAuth } from "context/AuthContext";
 import Loader from "components/Loader/Loader";
 import PageNotFound from "routes/404";
-=======
 import LessonModal from "components/LessonModal"
 import LessonModalProvider from "context/LessonModalContext";
->>>>>>> 1820c39 (Modal can now open and close)
 
 function App() {
   const { isCheckingAuth } = useAuth();

@@ -8,40 +8,44 @@ import {
     useEffect
 } from "react";
 import { getLessonById } from "services/lessons";
-import { Lesson } from "types/Lesson";
+import { LessonCardType, scheduleType } from "types/courses";
 import { GetLessonResponseType } from "../services/lessons"
 
 interface ILessonModalContext {
     isModalOpen: boolean;
     lessonId: string | null;
-    lesson: Lesson;
+    lessonCard: LessonCardType;
+    schedule: scheduleType;
     setIsModalOpen: Dispatch<SetStateAction<boolean>>;
     setLessonId: Dispatch<SetStateAction<string>>;
-    setLesson: Dispatch<SetStateAction<Lesson>>;
+    setLessonCard: Dispatch<SetStateAction<LessonCardType>>;
+    setSchedule: Dispatch<SetStateAction<scheduleType>>;
 }
 
-export const EMPTY_LESSON = {
-    _id: null,
+export const EMPTY_LESSON_CARD: LessonCardType = {
+    _id: "",
+    name: "",
     course_id: "",
-    schedule_id: "",
-    course_name: "",
+    color: "",
     start_time: "",
     end_time: "",
-    color: "",
-    unit: "",
-    tags: [],
-    note: '',
+}
+
+const EMPTY_SCHEDULE = {
+    day: "",
     date: 0,
-    attachments: [] 
+    lessons: []
 }
 
 export const defaultContextValues: ILessonModalContext = {
     isModalOpen: false,
     lessonId: null,
-    lesson: EMPTY_LESSON,
+    lessonCard: EMPTY_LESSON_CARD,
+    schedule: EMPTY_SCHEDULE,
     setLessonId: () => {},
     setIsModalOpen: () => {},
-    setLesson: () => {},
+    setLessonCard: () => {},
+    setSchedule: () => {}
 };
 
 const LessonModalContext = createContext<ILessonModalContext>(defaultContextValues);
@@ -49,7 +53,8 @@ const LessonModalContext = createContext<ILessonModalContext>(defaultContextValu
 const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [ isModalOpen, setIsModalOpen ] = useState(false)
     const [ lessonId, setLessonId ] = useState('')
-    const [ lesson, setLesson ] = useState<Lesson>(EMPTY_LESSON)
+    const [ lessonCard, setLessonCard ] = useState<LessonCardType>(EMPTY_LESSON_CARD)
+    const [ schedule, setSchedule ] = useState<scheduleType>(EMPTY_SCHEDULE)
 
     // grab lesson whenever use clicks on a different lesson card
     useEffect(() => {
@@ -57,10 +62,8 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
             const response: GetLessonResponseType = await getLessonById(lessonId)
             if (response.success) {
                 console.log("found a lesson!", response.data)
-                setLesson(response.data)
             } else {
                 console.log(response.message)
-                setLesson(EMPTY_LESSON)
             }
         }
         getLesson()
@@ -72,10 +75,12 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
             value={{
                 isModalOpen,
                 lessonId,
-                lesson,
+                lessonCard,
+                schedule,
                 setIsModalOpen,
                 setLessonId,
-                setLesson,
+                setLessonCard,
+                setSchedule
             }}
         >
             {children}
