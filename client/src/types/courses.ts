@@ -37,16 +37,23 @@ export interface CourseHoursType {
   end_time: string;
 }
 
+export interface ScheduleType {
+  day_of_week: string;
+  start_time: string;
+  end_time: string;
+}
+
 export interface CourseType {
   name: string;
   color: string;
   start_date: string;
   end_date: string;
   weekly_schedule: {
-    monday: [CourseHoursType];
-    tuesday: [CourseHoursType];
-    wednesday: [CourseHoursType];
-    thursday: [CourseHoursType];
-    friday: [CourseHoursType];
+    [x: string]: any;
+    monday?: [CourseHoursType];
+    tuesday?: [CourseHoursType];
+    wednesday?: [CourseHoursType];
+    thursday?: [CourseHoursType];
+    friday?: [CourseHoursType];
   };
 }

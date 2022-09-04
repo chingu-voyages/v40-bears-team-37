@@ -7,8 +7,20 @@ export const CourseStyles = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  section {
+    margin: 10px 0;
+  }
   input,
   select {
-    display: block;
+    margin-right: 10px;
+    font-family: "Roboto", sans-serif;
+    padding: 3px;
+  }
+  .btn-schedule,
+  .btn-delete {
+    background-color: var(--white);
+    color: var(--primary-text);
+    font-size: 0.72rem;
+    padding: 6px 9px;
   }
 `;

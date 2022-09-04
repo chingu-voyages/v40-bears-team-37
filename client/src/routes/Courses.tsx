@@ -1,47 +1,50 @@
 // @ts-nocheck
+
 import { useForm, useFieldArray } from "react-hook-form";
 import { addCourse } from "../services/courses";
 import { CourseStyles } from "styles/CourseStyles";
+import { CourseType, ScheduleType } from "types/courses";
 
-const transformWeeklySchedule = (scheduleData: FormValues) => {
+const transformWeeklySchedule = (scheduleData: CourseType) => {
   const transformedWeeklySchedule = {};
   scheduleData.weekly_schedule.forEach(
-    (schedule) =>
+    (schedule: ScheduleType) =>
       (transformedWeeklySchedule[schedule.day_of_week] = [
         { start_time: schedule.start_time, end_time: schedule.end_time },
       ]),
   );
   return transformedWeeklySchedule;
 };
+
 const Courses = () => {
-  const { register, control, handleSubmit } = useForm<FormValues>();
+  const { register, control, handleSubmit } = useForm<CourseType>();
   const { fields, append, remove } = useFieldArray({
     name: "weekly_schedule",
     control,
   });
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: CourseType) => {
     const transformedWeeklySchedule = transformWeeklySchedule(data);
     const response = await addCourse({
       ...data,
       weekly_schedule: transformedWeeklySchedule,
     });
-    console.log(response);
+    console.log(response.data);
   };
 
   return (
     <CourseStyles>
       <form onSubmit={handleSubmit(onSubmit)}>
         <section>
-          <label htmlFor="name">Course Name</label>
+          <label htmlFor="name">Course Name: </label>
           <input type="text" id="name" {...register("name")} />
         </section>
         <section>
-          <label htmlFor="color">Course Color</label>
+          <label htmlFor="color">Course Color: </label>
           <input type="color" id="color" {...register("color")} />
         </section>
 
         <section>
-          <label htmlFor="start_date">Start Date</label>
+          <label htmlFor="start_date">Start Date: </label>
           <input
             type="date"
             id="start_date"
@@ -49,9 +52,8 @@ const Courses = () => {
               required: true,
             })}
           />
-        </section>
-        <section>
-          <label htmlFor="end_date">End Date</label>
+
+          <label htmlFor="end_date">End Date: </label>
           <input
             type="date"
             id="end_date"
@@ -63,7 +65,7 @@ const Courses = () => {
 
         {fields.map((field, index) => (
           <section key={field.id}>
-            <label htmlFor="day_of_week">Day of the week</label>
+            <label htmlFor="day_of_week">Day: </label>
             <select
               {...register(`weekly_schedule.${index}.day_of_week`, {
                 required: true,
@@ -77,7 +79,7 @@ const Courses = () => {
               <option value="friday">Friday</option>
             </select>
 
-            <label htmlFor="start_time">Start Time</label>
+            <label htmlFor="start_time">Start Time: </label>
             <input
               type="time"
               id="start_time"
@@ -86,7 +88,7 @@ const Courses = () => {
               })}
             />
 
-            <label htmlFor="end_time">End Time</label>
+            <label htmlFor="end_time">End Time: </label>
             <input
               type="time"
               id="end_time"
@@ -95,13 +97,18 @@ const Courses = () => {
               })}
             />
 
-            <button type="button" onClick={() => remove(index)}>
-              DELETE
+            <button
+              className="btn-delete"
+              type="button"
+              onClick={() => remove(index)}
+            >
+              Delete
             </button>
           </section>
         ))}
-        <div>
+        <section>
           <button
+            className="btn-schedule"
             type="button"
             onClick={() =>
               append({
@@ -111,12 +118,12 @@ const Courses = () => {
               })
             }
           >
-            Add weekly schedule
+            Add Daily Schedule
           </button>
-        </div>
-        <div>
+        </section>
+        <section>
           <button type="submit">Add Course</button>
-        </div>
+        </section>
       </form>
     </CourseStyles>
   );
