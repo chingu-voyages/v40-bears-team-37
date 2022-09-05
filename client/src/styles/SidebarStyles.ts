@@ -9,6 +9,8 @@ export const SidebarStyles = styled.div<SideBarStylesProps>`
 
   .hamburger-icon {
     height: 30px;
+    background: ${p => p.show ? 'var(--primary-light)' : 'var(--background-color)'};
+    border-radius: 2px;
     display: none;
     cursor: pointer;
   }
@@ -33,8 +35,8 @@ export const SidebarStyles = styled.div<SideBarStylesProps>`
     .hamburger-icon {
       display: flex;
       position: absolute;
-      left: 0;
-      top: 0;
+      left: 10px;
+      top: 25px;
     }
 
     .sidebar-content {
@@ -55,12 +57,9 @@ export const SidebarStyles = styled.div<SideBarStylesProps>`
   }
 
   @media ${devices.mobile} {
-    position: absolute;
     .hamburger-icon {
       display: flex;
       position: absolute;
-      left: 0;
-      top: 0;
     }
 
     .sidebar-content {

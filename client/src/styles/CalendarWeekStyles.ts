@@ -38,9 +38,16 @@ export const CalendarWeekStyles = styled.div`
     gap: 20px;
   }
 
+  @media ${devices.smallDesktop} {
+    h1 {
+      margin-left: 30px;
+    }
+  }
+
   @media ${devices.tablet} {
-    //TODO: add a new container to contain all pages and move margin to the container so it applies to all pages
-    margin-left: ${sidebar.width};
+    h1 {
+      margin-left: 0px;
+    }
 
     .calendar-header {
       flex-direction: column;
@@ -48,15 +55,13 @@ export const CalendarWeekStyles = styled.div`
     }
 
     .lesson-grid {
-      //border: 2px solid red;
       flex-direction: column;
     }
   }
 
   @media ${devices.mobile} {
-    margin-left: auto;
-    .lesson-grid {
-      //border: 2px solid blue;
+    h1 {
+      margin-left: 30px;
     }
   }
 `;
