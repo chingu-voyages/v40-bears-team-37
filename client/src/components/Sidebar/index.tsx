@@ -4,6 +4,7 @@ import UserLogout from "components/Sidebar/UserLogout";
 import {useLocation} from "react-router-dom";
 import {SidebarStyles} from 'styles/SidebarStyles';
 import {useState} from 'react';
+import menuIcon from 'images/sidebar/menu.svg'
 
 const SideBar = () => {
     const location = useLocation();
@@ -12,7 +13,7 @@ const SideBar = () => {
 
     return (
         <SidebarStyles show={show}>
-            <div className="hamburger-icon" onClick={() => setShow(prev => !prev)}>===</div>
+            <img src={menuIcon} className="hamburger-icon" onClick={() => setShow(prev => !prev)}/>
             <div className="sidebar-content">
                 <div>
                     <h1>Notum</h1>

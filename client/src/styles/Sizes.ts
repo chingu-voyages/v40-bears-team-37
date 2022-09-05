@@ -10,9 +10,15 @@ export const fontSize = {
 const SCREEN_SIZES = {
     mobile: "480px",
     tablet: "768px",
+    smallDesktop: "1100px"
 };
 
 export const devices = {
+    smallDesktop: `(max-width:${SCREEN_SIZES.smallDesktop})`,
     tablet: `(max-width:${SCREEN_SIZES.tablet})`,
     mobile: `(max-width:${SCREEN_SIZES.mobile})`
 };
+
+export const sidebar = {
+    width: '220px'
+}

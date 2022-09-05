@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {devices} from 'styles/Sizes';
+import {devices, sidebar} from 'styles/Sizes';
 
 export const CalendarWeekStyles = styled.div`
   display: flex;
@@ -39,15 +39,24 @@ export const CalendarWeekStyles = styled.div`
   }
 
   @media ${devices.tablet} {
+    //TODO: add a new container to contain all pages and move margin to the container so it applies to all pages
+    margin-left: ${sidebar.width};
+
+    .calendar-header {
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .lesson-grid {
-      border: 2px solid red;
+      //border: 2px solid red;
       flex-direction: column;
     }
   }
 
   @media ${devices.mobile} {
+    margin-left: auto;
     .lesson-grid {
-      border: 2px solid blue;
+      //border: 2px solid blue;
     }
   }
 `;
