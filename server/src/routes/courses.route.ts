@@ -10,7 +10,9 @@ import {
 import createCourse from "../controllers/courses/createCourse";
 import updateCourse from "../controllers/courses/updateCourse";
 import isCourseAuthorized from "../middlewares/courses";
-import getUserCourses from "../controllers/courses/getCourses";
+import getUserCourses, {
+  getCoursesById,
+} from "../controllers/courses/getCourses";
 import deleteCourseById from "../controllers/courses/deleteCourse";
 
 const courseRouter = Router();
@@ -29,6 +31,7 @@ courseRouter
     validateRequestQuery(weeklyScheduleQueryValidator),
     getWeeklySchedule,
   )
+  .get("/:courseId", isAuthenticated, isCourseAuthorized, getCoursesById)
   .put(
     "/:courseId",
     isAuthenticated,

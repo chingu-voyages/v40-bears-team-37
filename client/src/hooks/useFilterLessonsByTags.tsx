@@ -8,6 +8,7 @@ const useFilterLessonsByTags = (tag?: string) => {
   );
 
   const fetchLessonNotes = async (tag?: string) => {
+    console.log(tag);
     setIsLoading(true);
     try {
       const lessonApiRes = await getLessons(tag);

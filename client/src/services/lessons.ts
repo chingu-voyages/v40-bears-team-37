@@ -22,5 +22,5 @@ export interface LessonsResponse {
 
 export const getLessons = (tag?: string) =>
   api.get<LessonsResponse>("/lessons", {
-    params: tag,
+    params: { tag },
   });

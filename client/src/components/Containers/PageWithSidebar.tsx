@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, { ReactNode } from "react";
 import { devices, sidebar } from "styles/Sizes";
 
 const PageWithSidebarStyles = styled.div`
@@ -18,7 +18,7 @@ const PageWithSidebarStyles = styled.div`
 `;
 
 type Props = {
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 export const PageWithSidebar = ({ children }: Props) => {

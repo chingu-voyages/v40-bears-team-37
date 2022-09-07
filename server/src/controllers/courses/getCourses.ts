@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Course from "../../models/course.model";
 import { getUserId } from "../../helpers/user";
 import User from "../../models/user.model";
+import { Types } from "mongoose";
 
 export default async function getUserCourses(req: Request, res: Response) {
   const userId = getUserId(req);
@@ -27,7 +28,24 @@ export default async function getUserCourses(req: Request, res: Response) {
   });
 
   return res.status(200).send({
-    success: false,
+    success: true,
     data: courses,
   });
 }
+
+export const getCoursesById = async (req: Request, res: Response) => {
+  const { courseId } = req.params as { courseId: string };
+  const course = await Course.findById(new Types.ObjectId(courseId));
+
+  if (!course) {
+    return res.status(404).send({
+      success: false,
+      message: "Course not found",
+    });
+  }
+
+  return res.status(200).send({
+    success: true,
+    data: course,
+  });
+};
