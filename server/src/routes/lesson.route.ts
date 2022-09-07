@@ -1,8 +1,9 @@
 import express, { Router } from "express";
-import { validateRequestBody } from "../validators";
+import { validateRequestBody, validateRequestQuery } from "../validators";
 import getLessonController from "../controllers/lessons/getLessons.controller";
 import createLessonController from "../controllers/lessons/createLesson.controller";
 import {
+  LessonFilterQueryValidator,
   LessonRequestPayloadValidator,
   UpdateLessonRequestPayloadValidator,
 } from "../validators/lessons";
@@ -15,7 +16,12 @@ import { isLessonAuthorized } from "../middlewares/lessons";
 const lessonRouter: Router = express.Router();
 
 lessonRouter
-  .get("/", isAuthenticated, getLessonController)
+  .get(
+    "/",
+    isAuthenticated,
+    validateRequestQuery(LessonFilterQueryValidator),
+    getLessonController,
+  )
   .post(
     "/",
     isAuthenticated,
