@@ -1,12 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import updateCourseInDB from "../../services/updateCourse";
 import { Types } from "mongoose";
 
-export default async function updateCourse(
-  req: Request,
-  res: Response,
-  _next: NextFunction,
-) {
+export default async function updateCourse(req: Request, res: Response) {
   const courseId = req.params.courseId;
   const payload = req.body;
   try {
