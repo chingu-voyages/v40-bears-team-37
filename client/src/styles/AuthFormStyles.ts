@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
 export const SignUpStyles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  min-height: 100vh;
-`;
-
-export const CarouselStyles = styled.div`
-  background-color: rgba(var(--primary-light-rgb), 0.2);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const FormStyle = styled.div`
-  padding: 10% 10%;
+  margin: 0 auto;
+  padding: 4%;
+  max-width: 300px;
   background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   h1 {
     margin-bottom: 53px;

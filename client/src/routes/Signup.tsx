@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import {
   SignUpStyles,
-  CarouselStyles,
   FormStyle,
   InputFormStyles,
   AuthNavigationStyles,
@@ -107,7 +106,6 @@ function SignUp() {
 
   return (
     <SignUpStyles>
-      <CarouselStyles>Carousel View</CarouselStyles>
       <FormStyle>
         <h1>Sign Up</h1>
         {!isSubmitSuccessful ? (

@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useAuth } from "context/AuthContext";
 import { Link } from "react-router-dom";
-import { AuthNavigationStyles, CarouselStyles, FormStyle, InputFormStyles, InvalidMessageStyles, SignUpStyles } from "styles/AuthFormStyles";
+import { AuthNavigationStyles, FormStyle, InputFormStyles, InvalidMessageStyles, SignUpStyles } from "styles/AuthFormStyles";
 
 import { loginServer as loginService } from "services/auth";
 import { LoginResponseType } from "types/auth";
@@ -67,7 +67,6 @@ function Login() {
 
   return (
     <SignUpStyles>
-      <CarouselStyles>Carousel View</CarouselStyles>
       <FormStyle>
         <h1>Login to your Notum account!</h1>
         {!isSubmitSuccessful
