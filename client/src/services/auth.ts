@@ -7,12 +7,12 @@ import {
   SignupDetailsType,
   SignupResponseType,
 } from "types/auth";
-import { baseUrl } from "utils/config";
+import { api } from "./config";
 
 export const signup = async (registerDetails: SignupDetailsType) => {
   try {
-    const response = await axios.post<SignupResponseType>(
-      `${baseUrl}/auth/signup`,
+    const response = await api.post<SignupResponseType>(
+      `/auth/signup`,
       registerDetails,
     );
     return response.data;
@@ -29,10 +29,7 @@ export const signup = async (registerDetails: SignupDetailsType) => {
 
 export const isLoggedIn = async () => {
   try {
-    axios.defaults.withCredentials = true;
-    const response = await axios.get<CheckLoginStatusType>(
-      `${baseUrl}/auth/check`,
-    );
+    const response = await api.get<CheckLoginStatusType>(`/auth/check`);
     return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
@@ -50,7 +47,7 @@ export const isLoggedIn = async () => {
 
 export const logoutFromServer = async () => {
   try {
-    const response = await axios.post<LogoutType>(`${baseUrl}/auth/logout`);
+    const response = await api.post<LogoutType>(`/auth/logout`);
     return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
@@ -65,8 +62,8 @@ export const logoutFromServer = async () => {
 
 export const loginServer = async (loginDetails: LoginInputType) => {
   try {
-    const response = await axios.post<LoginResponseType>(
-      `${baseUrl}/auth/login`,
+    const response = await api.post<LoginResponseType>(
+      `/auth/login`,
       loginDetails,
     );
     return response.data;
