@@ -18,7 +18,7 @@ export default async function getUserCourses(req: Request, res: Response) {
 
   if (!user.courses || user?.courses.length === 0) {
     return res.status(200).send({
-      success: false,
+      success: true,
       data: [],
     });
   }
