@@ -133,7 +133,11 @@ function SignUp() {
                   );
                 },
               )}
-              {errors.signupError && <InvalidMessageStyles>{errors.signupError.message}</InvalidMessageStyles>}
+              {errors.signupError && (
+                <InvalidMessageStyles>
+                  {errors.signupError.message}
+                </InvalidMessageStyles>
+              )}
               <button type="submit">Get My Notum</button>
             </form>
             <AuthNavigationStyles>

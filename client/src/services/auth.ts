@@ -75,7 +75,7 @@ export const loginServer = async (loginDetails: LoginInputType) => {
       console.error("Axios Error", e);
       return {
         success: false,
-        message: "Email or password is invalid."
+        message: "Email or password is invalid.",
       };
     } else {
       console.error("Other Signup Errors", e);
