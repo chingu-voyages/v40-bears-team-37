@@ -1,3 +1,4 @@
+import { logger } from "../config/logger.config";
 import Lesson, { LessonDocument } from "../models/lesson.model";
 import { UpdateLessonRequestPayloadType } from "../validators/lessons";
 
@@ -26,6 +27,7 @@ export default async function (
     );
     return updatedLesson;
   } catch (error) {
+    logger.error(JSON.stringify(error));
     throw new Error("There's an error when updating the lesson");
   }
 }

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import updateCourseInDB from "../../services/updateCourse";
 import { Types } from "mongoose";
+import { logger } from "../../config/logger.config";
 
 export default async function updateCourse(
   req: Request,
@@ -19,6 +20,7 @@ export default async function updateCourse(
       data: updatedCourse,
     });
   } catch (e) {
+    logger.error(JSON.stringify(e));
     return res.status(400).json({
       success: false,
       message: e.message,

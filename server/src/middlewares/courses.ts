@@ -3,6 +3,7 @@ import { Types } from "mongoose";
 import getCourse from "../services/getCourse";
 import { getUserId } from "../helpers/user";
 import User from "../models/user.model";
+import { logger } from "../config/logger.config";
 
 export default async function isAuthorizedToModifyCourse(
   req: Request,
@@ -34,6 +35,7 @@ export default async function isAuthorizedToModifyCourse(
     }
     next();
   } catch (e) {
+    logger.error(JSON.stringify(e));
     return res.status(500).json({
       success: false,
       message: e.message,

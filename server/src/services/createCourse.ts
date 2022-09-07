@@ -2,6 +2,7 @@ import User, { UserDocument } from "../models/user.model";
 import Course from "../models/course.model";
 import { CoursePayloadType } from "../validators/courses";
 import { Types } from "mongoose";
+import { logger } from "../config/logger.config";
 
 export default async function createCourseInDB(
   payload: CoursePayloadType,
@@ -30,6 +31,7 @@ export default async function createCourseInDB(
 
     return newCourse;
   } catch (e) {
+    logger.error(JSON.stringify(e));
     throw new Error(e);
   }
 }
