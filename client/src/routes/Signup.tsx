@@ -8,6 +8,7 @@ import {
   FormStyle,
   InputFormStyles,
   AuthNavigationStyles,
+  InvalidMessageStyles,
 } from "../styles/AuthFormStyles";
 import { signup as signupService } from "services/auth";
 import { SignupResponseType } from "types/auth";
@@ -132,7 +133,7 @@ function SignUp() {
                   );
                 },
               )}
-              {errors.signupError && <p>{errors.signupError.message}</p>}
+              {errors.signupError && <InvalidMessageStyles>{errors.signupError.message}</InvalidMessageStyles>}
               <button type="submit">Get My Notum</button>
             </form>
             <AuthNavigationStyles>
