@@ -1,15 +1,15 @@
-import styled from 'styled-components';
-import {devices, sidebar} from 'styles/Sizes';
+import styled from "styled-components";
+import { devices, sidebar } from "styles/Sizes";
 
 interface SideBarStylesProps {
-    show: boolean
+  show: boolean;
 }
 
 export const SidebarStyles = styled.div<SideBarStylesProps>`
-
   .hamburger-icon {
     height: 30px;
-    background: ${p => p.show ? 'var(--primary-light)' : 'var(--background-color)'};
+    background: ${(p) =>
+      p.show ? "var(--primary-light)" : "var(--background-color)"};
     border-radius: 2px;
     display: none;
     cursor: pointer;
@@ -40,7 +40,7 @@ export const SidebarStyles = styled.div<SideBarStylesProps>`
     }
 
     .sidebar-content {
-      display: ${p => p.show ? 'flex' : 'none'};
+      display: ${(p) => (p.show ? "flex" : "none")};
       justify-content: space-between;
     }
   }
@@ -63,7 +63,7 @@ export const SidebarStyles = styled.div<SideBarStylesProps>`
     }
 
     .sidebar-content {
-      display: ${p => p.show ? 'flex' : 'none'};
+      display: ${(p) => (p.show ? "flex" : "none")};
       justify-content: space-between;
     }
   }

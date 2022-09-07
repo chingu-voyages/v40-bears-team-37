@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import {devices} from 'styles/Sizes';
+import styled from "styled-components";
+import { devices } from "styles/Sizes";
 
 export const CalendarDayStyles = styled.div`
   display: flex;

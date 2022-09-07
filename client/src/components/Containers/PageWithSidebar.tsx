@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import React from 'react';
-import {devices, sidebar} from 'styles/Sizes';
+import styled from "styled-components";
+import React from "react";
+import { devices, sidebar } from "styles/Sizes";
 
 const PageWithSidebarStyles = styled.div`
   display: flex;
@@ -15,14 +15,12 @@ const PageWithSidebarStyles = styled.div`
   @media ${devices.mobile} {
     padding-left: 0;
   }
-`
+`;
 
 type Props = {
-    children: JSX.Element
-}
+  children: JSX.Element;
+};
 
-export const PageWithSidebar = ({children}: Props) => {
-    return <PageWithSidebarStyles>
-        {children}
-    </PageWithSidebarStyles>
-}
+export const PageWithSidebar = ({ children }: Props) => {
+  return <PageWithSidebarStyles>{children}</PageWithSidebarStyles>;
+};

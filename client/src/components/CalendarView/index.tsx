@@ -1,13 +1,13 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CalendarWeek from "components/CalendarView/CalendarWeek";
 
-import {getWeeklySchedule as getWeeklyScheduleService} from "../../services/courses";
+import { getWeeklySchedule as getWeeklyScheduleService } from "../../services/courses";
 import {
   WeeklyScheduleResponseType,
   WeeklyScheduleResultsType,
 } from "types/courses";
-import {PageWithSidebar} from 'components/Containers/PageWithSidebar';
+import { PageWithSidebar } from "components/Containers/PageWithSidebar";
 
 const CalendarViewStyles = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const CalendarViewStyles = styled.div`
 
 const CalendarView = () => {
   const [weeklySchedule, setWeeklySchedule] =
-      useState<WeeklyScheduleResultsType>();
+    useState<WeeklyScheduleResultsType>();
 
   const getWeeklySchedule = async (weekId: number | undefined = undefined) => {
     const weeklyScheduleData = (await getWeeklyScheduleService({
@@ -32,18 +32,18 @@ const CalendarView = () => {
   }, []);
 
   return (
-      <PageWithSidebar>
-        <>
-          {weeklySchedule && (
-              <CalendarViewStyles>
-                <CalendarWeek
-                    week={weeklySchedule}
-                    getWeeklySchedule={getWeeklySchedule}
-                />
-              </CalendarViewStyles>
-          )}
-        </>
-      </PageWithSidebar>
+    <PageWithSidebar>
+      <>
+        {weeklySchedule && (
+          <CalendarViewStyles>
+            <CalendarWeek
+              week={weeklySchedule}
+              getWeeklySchedule={getWeeklySchedule}
+            />
+          </CalendarViewStyles>
+        )}
+      </>
+    </PageWithSidebar>
   );
 };
 

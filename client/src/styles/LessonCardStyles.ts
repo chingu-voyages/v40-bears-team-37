@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {devices} from 'styles/Sizes';
+import { devices } from "styles/Sizes";
 
 interface LessonStyleProps {
-    color: string;
+  color: string;
 }
 
 export const LessonCardStyles = styled.div<LessonStyleProps>`
