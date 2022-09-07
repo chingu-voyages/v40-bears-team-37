@@ -1,6 +1,7 @@
 import { LessonRequestPayloadType } from "../validators/lessons";
 import Lesson, { LessonDocument } from "../models/lesson.model";
 import { Types } from "mongoose";
+import { logger } from "../config/logger.config";
 
 export default async function (lesson: LessonRequestPayloadType) {
   const { unit, note, date, attachments, schedule_id, course_id } = lesson;
@@ -17,6 +18,7 @@ export default async function (lesson: LessonRequestPayloadType) {
     const savedLesson = await lessonDoc.save();
     return savedLesson;
   } catch (e) {
+    logger.error(JSON.stringify(e));
     throw new Error(e.message);
   }
 }

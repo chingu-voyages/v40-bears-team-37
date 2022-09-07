@@ -11,6 +11,7 @@ import User from "../../models/user.model";
 import Course, { CourseDocument } from "../../models/course.model";
 import { WeeklyScheduleQueryType } from "../../validators/courses";
 import Lesson, { LessonDocument } from "../../models/lesson.model";
+import { logger } from "../../config/logger.config";
 
 export const getWeeklySchedule = async (req: Request, res: Response) => {
   const id = getUserId(req);
@@ -63,6 +64,7 @@ export const getWeeklySchedule = async (req: Request, res: Response) => {
       data: results,
     });
   } catch (error) {
+    logger.error(JSON.stringify(error));
     res.status(500).send({
       success: false,
       message: "Unable to get the weekly schedule",

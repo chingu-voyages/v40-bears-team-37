@@ -6,6 +6,7 @@ import { UpdateLessonRequestPayloadType } from "../../validators/lessons";
 import updateLesson from "../../services/updateLesson";
 import { massageSingleLessonNote } from "../../helpers/lessons";
 import { LessonDocument } from "../../models/lesson.model";
+import { logger } from "../../config/logger.config";
 
 export default async function (req: Request, res: Response) {
   const userId = getUserId(req);
@@ -27,6 +28,7 @@ export default async function (req: Request, res: Response) {
       data: structuredLessonNote,
     });
   } catch (e) {
+    logger.error(JSON.stringify(e));
     return res.status(400).json({ success: false, message: e.message });
   }
 }

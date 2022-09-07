@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 import User from "../models/user.model";
 import Lesson from "../models/lesson.model";
 import Course from "../models/course.model";
+import { logger } from "../config/logger.config";
 
 export async function getLessonById(
   lessonId: Types.ObjectId,
@@ -37,6 +38,7 @@ export default async function getLessons(id: Types.ObjectId, tag?: string) {
     });
     return { lessons, courses };
   } catch (e) {
+    logger.error(JSON.stringify(e));
     throw new Error("Could not find any lessons in our database.");
   }
 }

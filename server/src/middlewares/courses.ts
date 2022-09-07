@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Types } from "mongoose";
 import { getUserId } from "../helpers/user";
 import User from "../models/user.model";
+import { logger } from "../config/logger.config";
 
 export default async function isCourseAuthorized(
   req: Request,
@@ -25,6 +26,7 @@ export default async function isCourseAuthorized(
     }
     next();
   } catch (e) {
+    logger.error(JSON.stringify(e));
     return res.status(500).json({
       success: false,
       message: e.message,
