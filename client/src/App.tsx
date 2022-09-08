@@ -3,6 +3,7 @@ import PrivateRoute from "components/Auth/PrivateRoute";
 import Search from "routes/Search";
 import Settings from "routes/Settings";
 import PublicRoute from "components/Auth/PublicRoute";
+import LandingPage from "routes/LandingPage";
 import Login from "routes/Login";
 import Signup from "routes/Signup";
 import React from "react";
@@ -19,7 +20,14 @@ function App() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/" 
+        element={
+          <PublicRoute>
+            <LandingPage />
+          </PublicRoute>
+        } />
+      <Route
+        path="/my-notum"
         element={
           <PrivateRoute>
             <CalendarPage />
@@ -27,7 +35,7 @@ function App() {
         }
       />
       <Route
-        path="/search"
+        path="/my-notum/search"
         element={
           <PrivateRoute>
             <Search />
@@ -35,7 +43,7 @@ function App() {
         }
       />
       <Route
-        path="/settings"
+        path="/my-notum/settings"
         element={
           <PrivateRoute>
             <Settings />
