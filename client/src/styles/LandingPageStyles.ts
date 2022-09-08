@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "./Sizes";
 
 export const LandingPageStyle = styled.div`
   img {
@@ -59,5 +60,16 @@ export const FeaturesStyles = styled.div`
     display: block;
     margin: 32px auto 0 auto;
     padding: 10px 32px;
+  }
+
+  @media ${devices.mobile} {
+    .features {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .features > * + * {
+        margin-top: 32px;
+    }
   }
 `;
