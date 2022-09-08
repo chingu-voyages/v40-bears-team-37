@@ -32,8 +32,6 @@ function LandingPage() {
     const { isCheckingAuth, user } = useAuth();
     const navigate = useNavigate();
 
-    console.log("isCheckingAuth", isCheckingAuth, user)
-
     return (
         <LandingPageStyle>
             <HeaderStyles>
