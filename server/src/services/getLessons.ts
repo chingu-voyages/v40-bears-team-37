@@ -23,11 +23,12 @@ export async function getLessonById(
   return { lesson, course };
 }
 
-export default async function getLessons(id: Types.ObjectId) {
+export default async function getLessons(id: Types.ObjectId, tag?: string) {
   try {
     const user = await User.findById(id).select("courses");
     const lessons = await Lesson.find({
       courses: { $in: user?.courses },
+      ...(tag ? { tags: tag } : {}),
     });
 
     const courseIds = lessons.map((lesson) => lesson.course_id);

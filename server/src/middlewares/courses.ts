@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { Types } from "mongoose";
-import getCourse from "../services/getCourse";
 import { getUserId } from "../helpers/user";
 import User from "../models/user.model";
 import { logger } from "../config/logger.config";
 
-export default async function isAuthorizedToModifyCourse(
+export default async function isCourseAuthorized(
   req: Request,
   res: Response,
   next: NextFunction,
@@ -13,14 +12,6 @@ export default async function isAuthorizedToModifyCourse(
   const courseId = req.params.courseId;
 
   try {
-    const course = await getCourse(new Types.ObjectId(courseId));
-    if (!course) {
-      return res.status(400).json({
-        success: false,
-        message: "The course you're trying to update dos not exist.",
-      });
-    }
-
     const userId = getUserId(req);
     const userWhoOwnsCourse = await User.findOne({
       courses: new Types.ObjectId(courseId),
