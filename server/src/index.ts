@@ -50,7 +50,7 @@ app.use(
       secure: IS_PROD, // SSL only in production
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "lax",
       // domain: ''
     },
   }),
