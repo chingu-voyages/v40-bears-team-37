@@ -47,7 +47,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: IS_PROD, // SSL not supported for free tier heroku
+      secure: false, // SSL not supported for free tier heroku
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
       sameSite: IS_PROD ? "none" : "lax",
