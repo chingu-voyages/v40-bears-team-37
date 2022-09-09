@@ -49,7 +49,7 @@ app.use(
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: IS_PROD ? "lax" : "none",
     },
   }),
 );
