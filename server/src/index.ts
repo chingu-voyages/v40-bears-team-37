@@ -47,10 +47,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: IS_PROD,
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
-      sameSite: IS_PROD ? "none" : "lax",
+      sameSite: "lax",
     },
   }),
 );
