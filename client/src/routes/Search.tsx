@@ -85,9 +85,7 @@ function Search() {
             />
           ))}
 
-        {filteredLessonNotes.length === 0 && (
-          <PCenter>No Lessons Found</PCenter>
-        )}
+        {filteredLessonNotes.length === 0 && <PCenter>No Lesson Found</PCenter>}
       </Container>
     </PageWithSidebar>
   );
