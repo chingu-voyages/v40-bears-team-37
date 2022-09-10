@@ -48,8 +48,6 @@ function Search() {
     }
   };
 
-  console.log(searchValue);
-
   if (isLoading) {
     return (
       <PageWithSidebar>
