@@ -22,7 +22,6 @@ export const CarouselStyles = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  // margin: 64px 32px;
   padding: 32px 0px;
   height: calc(100vh - 300px);
 

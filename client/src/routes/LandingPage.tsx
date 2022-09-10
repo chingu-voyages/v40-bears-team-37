@@ -42,7 +42,6 @@ function LandingPage() {
                 }
             </HeaderStyles>
             <CarouselStyles>
-                {/* <div> */}
                 <Swiper
                     modules={[Pagination, Navigation]}
                     pagination={{
@@ -60,8 +59,6 @@ function LandingPage() {
                     <SwiperSlide>To be added</SwiperSlide>
                     <SwiperSlide>To be added</SwiperSlide>
                 </Swiper>
-                {/* </div> */}
-                
             </CarouselStyles>
             <FeaturesStyles>
                 <div className="features">
