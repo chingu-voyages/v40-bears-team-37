@@ -2,19 +2,14 @@ import styled from "styled-components";
 import { devices } from "./Sizes";
 
 export const LandingPageStyle = styled.div`
-  img {
-    display: flex;
-    margin: 0 auto;
-    width: 60%;
-    height: auto;
-    opacity: 0.8;
-  }
+  margin-bottom: 130px;
 `;
 
 export const HeaderStyles = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px 32px;
+  height: 40px;
   background-color: var(--white);
 
   h1 {
@@ -24,6 +19,17 @@ export const HeaderStyles = styled.div`
 `;
 
 export const CarouselStyles = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  // margin: 64px 32px;
+  padding: 32px 0px;
+  height: calc(100vh - 300px);
+
+  .swiper {
+    height: 100%;
+  }
+
   .swiper-button-prev,
   .swiper-button-next {
     color: var(--primary-dark);
@@ -32,11 +38,36 @@ export const CarouselStyles = styled.div`
   .swiper-pagination-bullet-active {
     background-color: var(--primary-dark);
   }
+
+  .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .swiper img {
+      margin: 0 auto;
+      width: auto;
+      height: 100%;
+      opacity: 0.8;
+  }
+
+  @media ${devices.mobile} {
+    .swiper img {
+      width: 100%;
+      height: auto;
+    }
+  }
 `;
 
 export const FeaturesStyles = styled.div`
-  margin-top: 64px;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
   padding: 48px 0;
+  width: 100%;
+  height: 130px;
   background-color: var(--primary-light);
 
   .features {
