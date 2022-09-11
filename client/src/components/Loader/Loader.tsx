@@ -11,10 +11,14 @@ const LoaderStyles = styled.div`
   color: var(--primary-dark);
 `;
 
-const Loader = () => {
+const Loader = ({
+  displayWelcomeText = true,
+}: {
+  displayWelcomeText?: boolean;
+}) => {
   return (
     <LoaderStyles>
-      <h2>Welcome to Notum</h2>
+      {displayWelcomeText && <h2>Welcome to Notum</h2>}
       <img src={loadingImage} alt="loading image" />
       <p>Loading...</p>
     </LoaderStyles>

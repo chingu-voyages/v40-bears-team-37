@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 import User from "../models/user.model";
 import Lesson from "../models/lesson.model";
 import Course from "../models/course.model";
+import { logger } from "../config/logger.config";
 
 export async function getLessonById(
   lessonId: Types.ObjectId,
@@ -22,11 +23,12 @@ export async function getLessonById(
   return { lesson, course };
 }
 
-export default async function getLessons(id: Types.ObjectId) {
+export default async function getLessons(id: Types.ObjectId, tag?: string) {
   try {
     const user = await User.findById(id).select("courses");
     const lessons = await Lesson.find({
       courses: { $in: user?.courses },
+      ...(tag ? { tags: tag } : {}),
     });
 
     const courseIds = lessons.map((lesson) => lesson.course_id);
@@ -36,6 +38,7 @@ export default async function getLessons(id: Types.ObjectId) {
     });
     return { lessons, courses };
   } catch (e) {
+    logger.error(JSON.stringify(e));
     throw new Error("Could not find any lessons in our database.");
   }
 }

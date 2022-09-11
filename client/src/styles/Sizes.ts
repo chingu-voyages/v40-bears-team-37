@@ -6,11 +6,19 @@ export const fontSize = {
   h4: "16px",
 };
 
-// transition point from mobile to desktop layout
+// default desktop - anything > 768px
 const SCREEN_SIZES = {
-  desktop: "800px",
+  mobile: "480px",
+  tablet: "768px",
+  smallDesktop: "1100px",
 };
 
 export const devices = {
-  desktop: `(min-width:${SCREEN_SIZES.desktop})`,
+  smallDesktop: `(max-width:${SCREEN_SIZES.smallDesktop})`,
+  tablet: `(max-width:${SCREEN_SIZES.tablet})`,
+  mobile: `(max-width:${SCREEN_SIZES.mobile})`,
+};
+
+export const sidebar = {
+  width: "220px",
 };

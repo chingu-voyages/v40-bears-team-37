@@ -1,4 +1,5 @@
 import { Types } from "mongoose";
+import { logger } from "../config/logger.config";
 import User from "../models/user.model";
 
 export default async function getUser(userId: Types.ObjectId) {
@@ -9,6 +10,7 @@ export default async function getUser(userId: Types.ObjectId) {
     }
     return user;
   } catch (e) {
+    logger.error(JSON.stringify(e));
     throw new Error(e.message);
   }
 }

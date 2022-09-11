@@ -5,6 +5,7 @@ import createLesson from "../../services/createLesson";
 import Lesson, { LessonDocument } from "../../models/lesson.model";
 import { LessonRequestPayloadType } from "../../validators/lessons";
 import { Types } from "mongoose";
+import { logger } from "../../config/logger.config";
 
 export default async function (req: Request, res: Response) {
   const { course_id, schedule_id, date } = req.body as LessonRequestPayloadType;
@@ -34,6 +35,7 @@ export default async function (req: Request, res: Response) {
       data: structuredLessonNote,
     });
   } catch (e) {
+    logger.error(JSON.stringify(e));
     res.status(500).json({
       success: false,
       message: e.message,

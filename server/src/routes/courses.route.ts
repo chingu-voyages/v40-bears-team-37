@@ -9,30 +9,36 @@ import {
 } from "../validators/courses";
 import createCourse from "../controllers/courses/createCourse";
 import updateCourse from "../controllers/courses/updateCourse";
-import isAuthorizedToModifyCourse from "../middlewares/courses";
+import isCourseAuthorized from "../middlewares/courses";
+import getUserCourses, {
+  getCoursesById,
+} from "../controllers/courses/getCourses";
+import deleteCourseById from "../controllers/courses/deleteCourse";
 
 const courseRouter = Router();
 
-courseRouter.get(
-  "/weekly-schedule",
-  isAuthenticated,
-  validateRequestQuery(weeklyScheduleQueryValidator),
-  getWeeklySchedule,
-);
-
-courseRouter.post(
-  "/",
-  isAuthenticated,
-  validateRequestBody(CoursePayloadValidator),
-  createCourse,
-);
-
-courseRouter.put(
-  "/:courseId",
-  isAuthenticated,
-  validateRequestBody(CourseUpdatePayloadValidator),
-  isAuthorizedToModifyCourse,
-  updateCourse,
-);
+courseRouter
+  .get("/", isAuthenticated, getUserCourses)
+  .post(
+    "/",
+    isAuthenticated,
+    validateRequestBody(CoursePayloadValidator),
+    createCourse,
+  )
+  .get(
+    "/weekly-schedule",
+    isAuthenticated,
+    validateRequestQuery(weeklyScheduleQueryValidator),
+    getWeeklySchedule,
+  )
+  .get("/:courseId", isAuthenticated, isCourseAuthorized, getCoursesById)
+  .put(
+    "/:courseId",
+    isAuthenticated,
+    validateRequestBody(CourseUpdatePayloadValidator),
+    isCourseAuthorized,
+    updateCourse,
+  )
+  .delete("/:courseId", isAuthenticated, isCourseAuthorized, deleteCourseById);
 
 export default courseRouter;
