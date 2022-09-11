@@ -69,5 +69,26 @@ interface CreateLessonSuccessType {
 
 interface CreateLessonErrorType {
   success: false;
+<<<<<<< HEAD
   message: string;  
 }
+=======
+  message: string;
+}
+
+type CreateLessonResponseType = CreateLessonSuccessType | CreateLessonErrorType
+
+export const createLesson = async (payload: Lesson) => {
+  try {
+    axios.defaults.withCredentials = true
+    const { data } = await axios.post<CreateLessonResponseType>(`${baseUrl}/lessons`, payload)
+    return data as CreateLessonSuccessType
+  }
+  catch (e) {
+    return {
+      success: false,
+      message: "Lesson could not be created."
+    } as CreateLessonErrorType
+  }
+}
+>>>>>>> e10e4a4 (created dynamically generated form fields for lesson modal)

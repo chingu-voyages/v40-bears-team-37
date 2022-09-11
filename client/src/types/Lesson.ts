@@ -10,8 +10,8 @@ export type Lesson = {
   color: string;
   unit: string;
   tags: string[];
-  note: string
-  date: string
+  note: string;
+  date: number;
   attachments: string[];
 };
 

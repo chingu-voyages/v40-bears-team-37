@@ -14,24 +14,13 @@ import { GetLessonResponseType } from "../services/lessons"
 interface ILessonModalContext {
     isModalOpen: boolean;
     lessonId: string | null;
-    lesson: Lesson | {}
+    lesson: Lesson;
     setIsModalOpen: Dispatch<SetStateAction<boolean>>;
     setLessonId: Dispatch<SetStateAction<string>>;
     setLesson: Dispatch<SetStateAction<Lesson>>;
 }
 
-export const defaultContextValues: ILessonModalContext = {
-    isModalOpen: false,
-    lessonId: null,
-    lesson: {},
-    setLessonId: () => {},
-    setIsModalOpen: () => {},
-    setLesson: () => {}
-};
-
-const LessonModalContext = createContext<ILessonModalContext>(defaultContextValues);
-
-const EMPTY_LESSON = {
+export const EMPTY_LESSON = {
     _id: null,
     course_id: "",
     schedule_id: "",
@@ -42,9 +31,20 @@ const EMPTY_LESSON = {
     unit: "",
     tags: [],
     note: '',
-    date: '',
+    date: 0,
     attachments: [] 
 }
+
+export const defaultContextValues: ILessonModalContext = {
+    isModalOpen: false,
+    lessonId: null,
+    lesson: EMPTY_LESSON,
+    setLessonId: () => {},
+    setIsModalOpen: () => {},
+    setLesson: () => {},
+};
+
+const LessonModalContext = createContext<ILessonModalContext>(defaultContextValues);
 
 const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [ isModalOpen, setIsModalOpen ] = useState(false)
@@ -65,7 +65,8 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
         }
         getLesson()
     }, [lessonId])
-    
+
+
     return (
         <LessonModalContext.Provider
             value={{
@@ -74,7 +75,7 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
                 lesson,
                 setIsModalOpen,
                 setLessonId,
-                setLesson
+                setLesson,
             }}
         >
             {children}
