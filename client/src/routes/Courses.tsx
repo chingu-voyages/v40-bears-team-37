@@ -20,12 +20,16 @@ const transformWeeklySchedule = (courseData: DraftCourseType) => {
 
 const convertDateToUTCNumber = (courseData: DraftCourseType) => {
   const { start_date, end_date } = courseData;
-  const convertedStartDate = Date.parse(start_date as string);
-  const convertedEndDate = Date.parse(end_date as string);
+
+  let startDateStr = start_date as string;
+  let endDateStr = end_date as string;
+  let convertedStartDateNum = Number(startDateStr.split("-").join(""));
+  let convertedEndDateNum = Number(endDateStr.split("-").join(""));
+
   return {
     ...courseData,
-    start_date: convertedStartDate,
-    end_date: convertedEndDate,
+    start_date: convertedStartDateNum,
+    end_date: convertedEndDateNum,
   };
 };
 
