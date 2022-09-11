@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { devices, sidebar } from "styles/Sizes";
+import {devices} from "styles/Sizes";
 
 export const CalendarWeekStyles = styled.div`
   display: flex;
