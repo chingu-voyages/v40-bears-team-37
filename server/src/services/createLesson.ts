@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 import { logger } from "../config/logger.config";
 
 export default async function (lesson: LessonRequestPayloadType) {
-  const { unit, note, date, attachments, schedule_id, course_id } = lesson;
+  const { unit, note, date, attachments, schedule_id, course_id, tags } = lesson;
   try {
     const lessonDoc: LessonDocument = new Lesson({
       unit,
@@ -13,6 +13,7 @@ export default async function (lesson: LessonRequestPayloadType) {
       attachments,
       schedule_id: new Types.ObjectId(schedule_id),
       course_id: new Types.ObjectId(course_id),
+      tags: tags
     });
 
     const savedLesson = await lessonDoc.save();

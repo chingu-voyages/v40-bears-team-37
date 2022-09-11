@@ -5,11 +5,12 @@ import Settings from "routes/Settings";
 import PublicRoute from "components/Auth/PublicRoute";
 import Login from "routes/Login";
 import Signup from "routes/Signup";
-import React from "react";
 import CalendarPage from "routes/Calender";
 import { useAuth } from "context/AuthContext";
 import Loader from "components/Loader/Loader";
 import PageNotFound from "routes/404";
+import LessonModal from "components/LessonModal"
+import LessonModalProvider from "context/LessonModalContext";
 
 function App() {
   const { isCheckingAuth } = useAuth();
@@ -21,9 +22,12 @@ function App() {
       <Route
         path="/"
         element={
-          <PrivateRoute>
-            <CalendarPage />
-          </PrivateRoute>
+          <LessonModalProvider>
+              <PrivateRoute>
+                  <CalendarPage />
+                  <LessonModal />
+              </PrivateRoute>
+          </LessonModalProvider>
         }
       />
       <Route

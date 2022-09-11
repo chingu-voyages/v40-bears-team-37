@@ -9,6 +9,8 @@ export type LessonCardType = {
   end_time: string;
   start_time: string;
   name: string;
+  course_id: string;
+  lesson_id?: string;
 };
 
 export type scheduleType = {

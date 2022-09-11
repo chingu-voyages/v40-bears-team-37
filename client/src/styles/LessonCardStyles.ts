@@ -28,6 +28,7 @@ export const LessonCardStyles = styled.div<LessonStyleProps>`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    cursor: pointer;
   }
 
   .card-link {
