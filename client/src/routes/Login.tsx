@@ -5,7 +5,6 @@ import { useAuth } from "context/AuthContext";
 import { Link } from "react-router-dom";
 import {
   AuthNavigationStyles,
-  CarouselStyles,
   FormStyle,
   InputFormStyles,
   InvalidMessageStyles,
