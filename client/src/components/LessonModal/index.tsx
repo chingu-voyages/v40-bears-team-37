@@ -4,9 +4,10 @@ import { formatTime } from "utils/timeFormaters";
 import { useModal } from "../../context/LessonModalContext";
 import { createLesson, updateLesson } from "../../services/lessons";
 import { LessonRequestBodyType } from "../../types/Lesson";
+import Loader from "components/Loader/Loader";
 
 const LessonModal = () => {
-  const { isModalOpen, setIsModalOpen, lessonCard, schedule, lesson, setLessonId, doesLessonAlreadyExist, lessonId, setDoesLessonAlreadyExist, setLesson } = useModal()
+  const { isModalLoading, isModalOpen, setIsModalOpen, lessonCard, schedule, lesson, setLessonId, doesLessonAlreadyExist, lessonId, setDoesLessonAlreadyExist, setLesson } = useModal()
   const [ newTag, setNewTag ] = useState<string>("")
   const [ tags, setTags ] = useState<string[]>([])
   const [ note, setNote ] = useState<string>("")
@@ -58,6 +59,12 @@ const LessonModal = () => {
   }
 
   if (isModalOpen) {
+    if (isModalLoading) {
+      return (
+      <LessonModalStyles>
+        <Loader height={"600px"} />
+      </LessonModalStyles>)
+    }
     return (
       <LessonModalStyles>
         <div className="lesson-header">

@@ -2,23 +2,22 @@ import React from "react";
 import loadingImage from "images/loading.gif";
 import styled from "styled-components";
 
-const LoaderStyles = styled.div`
+interface LoaderProps {
+  height?: string;
+}
+
+const LoaderStyles = styled.div<LoaderProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: ${props => props.height ? props.height : "100vh"};
   color: var(--primary-dark);
 `;
 
-const Loader = ({
-  displayWelcomeText = true,
-}: {
-  displayWelcomeText?: boolean;
-}) => {
+const Loader = ({ height }: {height?: string}) => {
   return (
-    <LoaderStyles>
-      {displayWelcomeText && <h2>Welcome to Notum</h2>}
+    <LoaderStyles height={height}>
       <h2>Welcome to Notum</h2>
       <img src={loadingImage} alt="loading book" />
       <p>Loading...</p>
