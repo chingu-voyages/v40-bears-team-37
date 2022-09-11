@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth } from "context/AuthContext";
 
@@ -6,16 +6,18 @@ interface IProps {
   children: JSX.Element;
 }
 
-const ContainerStyles = styled.div`
-  display: flex;
-`;
+// Delete display: flex; to prevent the error in Swiper
+const ContainerStyles = styled.div``;
 
 function PublicRoute({ children }: IProps) {
-  const location = useLocation();
+  const navigate = useNavigate();
   const auth = useAuth();
+
+  const prevLocation = window.history.state.usr
+    ? window.history.state.usr?.from.pathname
+    : "/my-notum";
   if (auth.isAuthed) {
-    // TODO: Does not seem to work, always redirect to / no matter what url is typed into the address bar
-    return <Navigate to="/" state={{ from: location }} replace />;
+    navigate(prevLocation);
   }
 
   return <ContainerStyles>{children}</ContainerStyles>;

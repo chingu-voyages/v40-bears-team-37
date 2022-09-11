@@ -19,12 +19,12 @@ export const CoursePayloadValidator = z.object({
   }),
   end_date: z
     .number({
-      invalid_type_error: "Start date must be a number",
+      invalid_type_error: "End date must be of type number",
     })
     .optional(),
   color: z.string({
     required_error: "Course color is required",
-    invalid_type_error: "Course color must be of type number",
+    invalid_type_error: "Course color must be of type string",
   }),
   weekly_schedule: z.object({
     monday: z.array(
