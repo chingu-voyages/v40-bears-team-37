@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export const LessonFilterQueryValidator = z.object({
+  tag: z
+    .string({
+      invalid_type_error: "tag must be of type string",
+    })
+    .optional(),
+});
+
+export type LessonFilterQueryType = z.infer<typeof LessonFilterQueryValidator>;
+
 export const LessonRequestPayloadValidator = z.object({
   unit: z
     .string({

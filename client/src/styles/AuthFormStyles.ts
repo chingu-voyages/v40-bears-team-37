@@ -73,3 +73,10 @@ export const AuthNavigationStyles = styled.div`
     text-decoration: underline;
   }
 `;
+
+export const InvalidMessageStyles = styled.div`
+  padding: 10px;
+  background-color: #FCEDEC;
+  color: #5F2120;
+}
+`;

@@ -7,6 +7,7 @@ import {
   WeeklyScheduleResponseType,
   WeeklyScheduleResultsType,
 } from "types/courses";
+import { PageWithSidebar } from "components/Containers/PageWithSidebar";
 
 const CalendarViewStyles = styled.div`
   display: flex;
@@ -31,16 +32,18 @@ const CalendarView = () => {
   }, []);
 
   return (
-    <>
-      {weeklySchedule && (
-        <CalendarViewStyles>
-          <CalendarWeek
-            week={weeklySchedule}
-            getWeeklySchedule={getWeeklySchedule}
-          />
-        </CalendarViewStyles>
-      )}
-    </>
+    <PageWithSidebar>
+      <>
+        {weeklySchedule && (
+          <CalendarViewStyles>
+            <CalendarWeek
+              week={weeklySchedule}
+              getWeeklySchedule={getWeeklySchedule}
+            />
+          </CalendarViewStyles>
+        )}
+      </>
+    </PageWithSidebar>
   );
 };
 

@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { COOKIE_NAME } from "../env";
 import { SignupPayloadType } from "../validators/auth";
 import { Types } from "mongoose";
+import { logger } from "../config/logger.config";
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
   const userData = req.user as UserDocument;
@@ -35,7 +36,7 @@ export const register = async (
   if (isEmailExist) {
     return res.status(400).send({
       success: false,
-      message: "Email already exist",
+      message: "The Email already exists.",
     });
   }
 
@@ -53,6 +54,7 @@ export const register = async (
     req.body.register = true;
     next();
   } catch (error) {
+    logger.error(JSON.stringify(error));
     res.status(500).send({
       success: false,
       message: "Unable to create user",

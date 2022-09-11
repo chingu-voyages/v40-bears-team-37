@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { logger } from "../config/logger.config";
 import { ZodError, AnyZodObject } from "zod";
 
 export const validateRequestBody =
@@ -8,6 +9,7 @@ export const validateRequestBody =
       schema.parse(req.body);
       return next();
     } catch (e) {
+      logger.error(JSON.stringify(e));
       if (e instanceof ZodError) {
         return res.status(400).send({
           success: false,
@@ -28,6 +30,7 @@ export const validateRequestQuery =
       schema.parse(req.query);
       return next();
     } catch (e) {
+      logger.error(JSON.stringify(e));
       if (e instanceof ZodError) {
         return res.status(400).send({
           success: false,

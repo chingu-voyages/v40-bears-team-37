@@ -17,9 +17,11 @@ import passport from "./config/passport.config";
 import authRouter from "./routes/auth.route";
 import lessonRouter from "./routes/lesson.route";
 import courseRouter from "./routes/courses.route";
+import { logger } from "./config/logger.config";
 
 // instantiate express app
 const app = express();
+app.enable("trust proxy");
 
 // middlewares
 app.use(
@@ -45,12 +47,12 @@ app.use(
     secret: COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
-      secure: IS_PROD, // SSL only in production
+      secure: IS_PROD,
       maxAge: 7 * 24 * 60 * 60 * 1000, // expires in 1 week
       httpOnly: true,
-      sameSite: "none",
-      // domain: ''
+      sameSite: IS_PROD ? "none" : "lax",
     },
   }),
 );
@@ -82,8 +84,8 @@ app.use("/api/courses", courseRouter);
 
 // mongodb connection
 mongoose.connect(MONGO_URL).then(() => {
-  console.log("{ MongoDB is running }");
+  logger.info("MongoDB is running");
   app.listen(PORT, () => {
-    console.log(`{ Server is running at http://localhost:${PORT} }`);
+    logger.info(`Server is listening on PORT ${PORT}`);
   });
 });
