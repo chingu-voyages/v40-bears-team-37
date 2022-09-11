@@ -43,13 +43,20 @@ export interface ScheduleType {
   end_time: string;
 }
 
-export interface CourseType {
-  name: string;
-  color: string;
-  start_date: string;
-  end_date: string;
-  weekly_schedule: {
-    [x: string]: any;
+export interface CourseTypeBase {
+  name?: string;
+  color?: string;
+  start_date?: string;
+  end_date?: string;
+}
+
+export interface DraftCourseType extends CourseTypeBase {
+  weekly_schedule?: {
+    [key: string]: ScheduleType;
+  };
+}
+export interface FinalCourseType extends CourseTypeBase {
+  weekly_schedule?: {
     monday?: [CourseHoursType];
     tuesday?: [CourseHoursType];
     wednesday?: [CourseHoursType];

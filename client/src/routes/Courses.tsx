@@ -1,29 +1,31 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { addCourse } from "../services/courses";
 import { CourseStyles } from "styles/CourseStyles";
-import { CourseType, ScheduleType } from "types/courses";
+import { CourseHoursType, DraftCourseType } from "types/courses";
 
-const transformWeeklySchedule = (scheduleData: CourseType) => {
-  const transformedWeeklySchedule = {} as any;
-  scheduleData.weekly_schedule.forEach(
-    (schedule: ScheduleType) =>
-      (transformedWeeklySchedule[schedule.day_of_week] = [
-        { start_time: schedule.start_time, end_time: schedule.end_time },
-      ]),
-  );
+const transformWeeklySchedule = (scheduleData: DraftCourseType) => {
+  const transformedWeeklySchedule: {
+    [key: string]: CourseHoursType;
+  } = {};
+  const originalWeeklySchedule = scheduleData.weekly_schedule;
+  for (const prop in originalWeeklySchedule) {
+    const { day_of_week, start_time, end_time } = originalWeeklySchedule[prop];
+    transformedWeeklySchedule[day_of_week] = { start_time, end_time };
+  }
   return transformedWeeklySchedule;
 };
 
 const Courses = () => {
-  const { register, control, handleSubmit } = useForm<CourseType>();
+  const { register, control, handleSubmit } = useForm();
   const { fields, append, remove } = useFieldArray({
-    name: "weekly_schedule" as any,
+    name: "weekly_schedule",
     control,
   });
-  const onSubmit = async (data: CourseType) => {
-    const transformedWeeklySchedule = transformWeeklySchedule(data);
+
+  const onSubmit = async (values: DraftCourseType) => {
+    const transformedWeeklySchedule = transformWeeklySchedule(values);
     const response = await addCourse({
-      ...data,
+      ...values,
       weekly_schedule: transformedWeeklySchedule,
     });
     console.log(response.data);

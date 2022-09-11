@@ -1,9 +1,10 @@
 import axios from "axios";
+import { baseUrl } from "utils/config";
 
 import {
   WeeklyScheduleParamsType,
   WeeklyScheduleResponseType,
-  CourseType,
+  FinalCourseType,
 } from "../types/courses";
 import { api } from "./config";
 
@@ -31,7 +32,7 @@ export const getWeeklySchedule = async (weekId: WeeklyScheduleParamsType) => {
   }
 };
 
-export const addCourse = async (courseData: CourseType) => {
+export const addCourse = async (courseData: FinalCourseType) => {
   try {
     axios.defaults.withCredentials = true;
     const response = await axios.post(`${baseUrl}/courses`, courseData);
