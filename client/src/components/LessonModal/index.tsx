@@ -66,9 +66,6 @@ const LessonModal = () => {
     setDoesLessonAlreadyExist(false);
     setFullLesson(null);
     setLessonCard(null);
-    setIsModalOpen(false);
-    setDoesLessonAlreadyExist(false);
-    setLessonCard(null);
   }
 
   if (isModalOpen) {

@@ -69,9 +69,11 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({
 
   // grab lesson whenever use clicks on a different lesson card
   useEffect(() => {
-    async function getLesson(id: string) {
+    async function getLesson() {
       setIsModalLoading(true);
-      const response: GetLessonResponseType = await getLessonById(id);
+      const response: GetLessonResponseType = await getLessonById(
+        lessonCard?.lesson_id!,
+      );
       if (response.success) {
         setFullLesson(response.data);
         setDoesLessonAlreadyExist(true);
@@ -82,7 +84,7 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({
       setIsModalLoading(false);
     }
     if (lessonCard?.lesson_id) {
-      getLesson(lessonCard._id);
+      getLesson();
     }
   }, [lessonCard, date]);
 
