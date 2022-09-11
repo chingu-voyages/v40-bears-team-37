@@ -5,20 +5,20 @@ import { useModal } from "../../context/LessonModalContext";
 import { createLesson, updateLesson } from "../../services/lessons";
 import { LessonRequestBodyType } from "../../types/Lesson";
 import Loader from "components/Loader/Loader";
+import moment from "moment";
 
 const LessonModal = () => {
   const {
     isModalLoading,
     isModalOpen,
     setIsModalOpen,
+    date,
     lessonCard,
-    schedule,
-    lesson,
-    setLessonId,
+    fullLesson,
     doesLessonAlreadyExist,
-    lessonId,
     setDoesLessonAlreadyExist,
-    setLesson,
+    setFullLesson,
+    setLessonCard,
   } = useModal();
   const [newTag, setNewTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
@@ -42,9 +42,9 @@ const LessonModal = () => {
 
   async function handleLessonChange() {
     const payload: LessonRequestBodyType = {
-      date: schedule.date,
-      schedule_id: lessonCard._id,
-      course_id: lessonCard.course_id,
+      date,
+      schedule_id: fullLesson?.schedule_id! || lessonCard?._id!,
+      course_id: fullLesson?.course_id! || lessonCard?.course_id!,
       unit: "",
       tags,
       note,
@@ -53,10 +53,8 @@ const LessonModal = () => {
 
     if (!doesLessonAlreadyExist) {
       await createLesson(payload);
-      console.log("succesfully created a lesson");
     } else {
-      await updateLesson(payload, lessonId as string);
-      console.log("succesfully updated a lesson");
+      await updateLesson(payload, fullLesson?._id!);
     }
 
     // since modal will close aftter we create/update a lesson we want to reset all lesson variables in context
@@ -64,6 +62,10 @@ const LessonModal = () => {
   }
 
   function resetLessonToBeNull() {
+    setIsModalOpen(false);
+    setDoesLessonAlreadyExist(false);
+    setFullLesson(null);
+    setLessonCard(null);
     setLessonId(null);
     setIsModalOpen(false);
     setDoesLessonAlreadyExist(false);
@@ -81,21 +83,27 @@ const LessonModal = () => {
     return (
       <LessonModalStyles>
         <div className="lesson-header">
-          <h3 className="lesson-course-name">{lessonCard.name}</h3>
+          <h3 className="lesson-course-name">
+            {fullLesson?.course_name || lessonCard?.name}
+          </h3>
           <h4 className="lesson-date">
-            {formatTime(lessonCard.start_time)} to{" "}
-            {formatTime(lessonCard.end_time)} on {schedule.day}
+            {formatTime(fullLesson?.start_time! || lessonCard?.start_time!)} to{" "}
+            {formatTime(fullLesson?.end_time! || lessonCard?.end_time!)} on{" "}
+            {fullLesson
+              ? moment(fullLesson?.date.toString()).format("MMMM Do YYYY")
+              : moment(date.toString()).format("MMMM Do YYYY")}
           </h4>
         </div>
         <div className="lesson-body">
           <div className="lesson-tags">
             <div>
               <span>Tags:</span>
-              {tags.map((tag, i) => (
-                <span key={i} className="pill gray-pill">
-                  {tag}
-                </span>
-              ))}
+              {tags.length > 0 &&
+                tags.map((tag, i) => (
+                  <span key={i} className="pill gray-pill">
+                    {tag}
+                  </span>
+                ))}
             </div>
             <form className="lesson-new-tag-form">
               <label htmlFor="new-tag">Add tag: </label>

@@ -3,6 +3,7 @@
 export type Lesson = {
   _id: string | null;
   course_id: string;
+  course_name: string;
   schedule_id: string;
   name: string;
   start_time: string;

@@ -11,6 +11,7 @@ export type LessonCardType = {
   name: string;
   course_id: string;
   lesson_id?: string;
+  unit?: string;
 };
 
 export type scheduleType = {

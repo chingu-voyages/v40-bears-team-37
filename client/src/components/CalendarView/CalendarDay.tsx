@@ -16,8 +16,12 @@ const CalendarDay = ({ schedule }: CalendarDayProps) => {
       </div>
 
       {schedule &&
-        schedule.lessons.map((lesson) => (
-          <LessonCard key={lesson._id} lesson={lesson} schedule={schedule} />
+        schedule.lessons.map((lessonCard) => (
+          <LessonCard
+            key={lessonCard._id}
+            lessonCard={lessonCard}
+            date={schedule.date}
+          />
         ))}
     </CalendarDayStyles>
   );

@@ -6,6 +6,12 @@ import useFilterLessonsByTags from "../hooks/useFilterLessonsByTags";
 import styled from "styled-components";
 import { InputFormStyles } from "styles/AuthFormStyles";
 import { useState } from "react";
+import { Lesson } from "types/Lesson";
+import { useModal } from "context/LessonModalContext";
+
+const Blur = styled.div<{ isModalOpen: boolean }>`
+  filter: ${(props) => (props.isModalOpen ? "blur(3px)" : "blur(0px)")};
+`;
 
 const FieldContainer = styled.div`
   width: 60vw;
@@ -30,6 +36,7 @@ function Search() {
   const navigate = useNavigate();
   const tag = searchParams.get("tag") || undefined;
   const { isLoading, filteredLessonNotes } = useFilterLessonsByTags(tag);
+  const { isModalOpen } = useModal();
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -57,43 +64,35 @@ function Search() {
   }
 
   return (
-    <PageWithSidebar>
-      <p>Search through your past lessons on Notum</p>
+    <Blur isModalOpen={isModalOpen}>
+      <PageWithSidebar>
+        <p>Search through your past lessons on Notum</p>
 
-      <FieldContainer>
-        <InputFormStyles>
-          <input
-            placeholder="Type-in the tag and click enter..."
-            onChange={handleSearch}
-            onKeyDown={handleKeyPress}
-          />
-        </InputFormStyles>
-      </FieldContainer>
-
-      <Container>
-        {/* {filteredLessonNotes.length > 0 &&
-          filteredLessonNotes.map((lessonNote) => (
-            <LessonCard
-              key={lessonNote._id}
-              lesson={{
-                _id: lessonNote._id,
-                color: lessonNote.color,
-                start_time: lessonNote.start_time,
-                end_time: lessonNote.end_time,
-                name: lessonNote.course_name,
-                course_id: lessonNote.course_id,
-              }}
-              schedule={{
-                date: lessonNote.date,
-                day: "Monday", // TODO make dynamic
-                lessons: [] // TODO make dynamic
-              }}
+        <FieldContainer>
+          <InputFormStyles>
+            <input
+              placeholder="Type-in the tag and click enter..."
+              onChange={handleSearch}
+              onKeyDown={handleKeyPress}
             />
-          ))}
+          </InputFormStyles>
+        </FieldContainer>
 
-        {filteredLessonNotes.length === 0 && <PCenter>No Lesson Found</PCenter>} */}
-      </Container>
-    </PageWithSidebar>
+        <Container>
+          {filteredLessonNotes.length > 0 &&
+            filteredLessonNotes.map((lessonNote) => (
+              <LessonCard
+                key={lessonNote._id}
+                fullLesson={lessonNote as Lesson}
+              />
+            ))}
+
+          {filteredLessonNotes.length === 0 && (
+            <PCenter>No Lesson Found</PCenter>
+          )}
+        </Container>
+      </PageWithSidebar>
+    </Blur>
   );
 }
 

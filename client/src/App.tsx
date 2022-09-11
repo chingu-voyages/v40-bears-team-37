@@ -42,9 +42,12 @@ function App() {
       <Route
         path="/my-notum/search"
         element={
-          <PrivateRoute>
-            <Search />
-          </PrivateRoute>
+          <LessonModalProvider>
+            <PrivateRoute>
+              <Search />
+              <LessonModal />
+            </PrivateRoute>
+          </LessonModalProvider>
         }
       />
       <Route
