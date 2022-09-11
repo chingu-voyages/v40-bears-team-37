@@ -25,9 +25,9 @@ export async function getLessonById(
 
 export default async function getLessons(id: Types.ObjectId, tag?: string) {
   try {
-    const user = await User.findById(id).select("courses");
+    const user = await User.findById(id).select("courses").select("email");
     const lessons = await Lesson.find({
-      courses: { $in: user?.courses },
+      course_id: { $in: user?.courses },
       ...(tag ? { tags: tag } : {}),
     });
 
