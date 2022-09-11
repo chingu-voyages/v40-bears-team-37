@@ -17,7 +17,7 @@ import {
   loginServer,
   logoutFromServer,
 } from "services/auth";
-
+import { useNavigate } from "react-router-dom";
 interface IAuthContext {
   isAuthed: boolean;
   user: UserType | null;
@@ -42,6 +42,7 @@ export const authContextDefaults: IAuthContext = {
 export const AuthContext = createContext<IAuthContext>(authContextDefaults);
 
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const navigate = useNavigate();
   // initialize AuthContext on Load
   const [user, setUser] = useState<UserType | null>(null);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
@@ -69,12 +70,14 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     )) as LoginResponseType;
     if (loginResponseData.success && loginResponseData.data) {
       setUser(loginResponseData.data);
+      navigate("/");
     }
   };
   const logout = async () => {
     const logoutResponseData = (await logoutFromServer()) as LogoutType;
     if (logoutResponseData.success) {
       setUser(null);
+      navigate("/");
     }
   };
 

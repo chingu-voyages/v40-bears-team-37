@@ -8,15 +8,22 @@ import {
   WeeklyScheduleResultsType,
 } from "types/courses";
 import { PageWithSidebar } from "components/Containers/PageWithSidebar";
+import { useModal } from "context/LessonModalContext";
 
-const CalendarViewStyles = styled.div`
+interface CalendarViewStylesProps {
+  isModalOpen: boolean;
+}
+
+const CalendarViewStyles = styled.div<CalendarViewStylesProps>`
   display: flex;
   margin: 0 auto;
+  filter: ${props => props.isModalOpen ? 'blur(3px)' : 'blur(0px)'}
 `;
 
+
 const CalendarView = () => {
-  const [weeklySchedule, setWeeklySchedule] =
-    useState<WeeklyScheduleResultsType>();
+  const [weeklySchedule, setWeeklySchedule] = useState<WeeklyScheduleResultsType>();
+  const { lessonId, isModalOpen } = useModal();
 
   const getWeeklySchedule = async (weekId: number | undefined = undefined) => {
     const weeklyScheduleData = (await getWeeklyScheduleService({
@@ -27,15 +34,17 @@ const CalendarView = () => {
     }
   };
 
+  // since weekly_schedule has the lesson_id for lessons in the database
+  // we need to synchronize our weekly_schedule with our lessonId (which changes anytime the lesson modal opens or closes)
   useEffect(() => {
     getWeeklySchedule();
-  }, []);
+  }, [lessonId, isModalOpen]);
 
   return (
     <PageWithSidebar>
       <>
         {weeklySchedule && (
-          <CalendarViewStyles>
+          <CalendarViewStyles isModalOpen={isModalOpen}>
             <CalendarWeek
               week={weeklySchedule}
               getWeeklySchedule={getWeeklySchedule}

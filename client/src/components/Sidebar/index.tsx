@@ -9,7 +9,7 @@ import menuIcon from "images/sidebar/menu.svg";
 const SideBar = () => {
   const location = useLocation();
   const activePage = location.pathname;
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <SidebarStyles show={show}>

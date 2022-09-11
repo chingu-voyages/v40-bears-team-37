@@ -71,7 +71,7 @@ function Search() {
       </FieldContainer>
 
       <Container>
-        {filteredLessonNotes.length > 0 &&
+        {/* {filteredLessonNotes.length > 0 &&
           filteredLessonNotes.map((lessonNote) => (
             <LessonCard
               key={lessonNote._id}
@@ -81,11 +81,17 @@ function Search() {
                 start_time: lessonNote.start_time,
                 end_time: lessonNote.end_time,
                 name: lessonNote.course_name,
+                course_id: lessonNote.course_id,
+              }}
+              schedule={{
+                date: lessonNote.date,
+                day: "Monday", // TODO make dynamic
+                lessons: [] // TODO make dynamic
               }}
             />
           ))}
 
-        {filteredLessonNotes.length === 0 && <PCenter>No Lesson Found</PCenter>}
+        {filteredLessonNotes.length === 0 && <PCenter>No Lesson Found</PCenter>} */}
       </Container>
     </PageWithSidebar>
   );
