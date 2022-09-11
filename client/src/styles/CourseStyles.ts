@@ -16,7 +16,8 @@ export const CourseStyles = styled.div`
     font-family: "Roboto", sans-serif;
     padding: 3px;
     display: flex;
-    width: 33vw;
+    width: 35vw;
+    margin: 0 0 10px 0;
   }
   .btn-schedule,
   .btn-delete {
@@ -25,13 +26,16 @@ export const CourseStyles = styled.div`
     font-size: 0.72rem;
     padding: 6px 9px;
   }
-  .btn-delete {
-    margin-top: 10px;
-  }
-  @media (max-width: 650px) {
+  @media (max-width: 950px) {
     input,
     select {
-      width: 50vw;
+      width: 45vw;
+    }
+  }
+  @media (max-width: 600px) {
+    input,
+    select {
+      width: 60vw;
     }
   }
 `;

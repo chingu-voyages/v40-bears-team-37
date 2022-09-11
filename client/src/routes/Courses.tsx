@@ -48,7 +48,7 @@ const Courses = () => {
     );
 
     const response = await addCourse(valuesWithTransformedWeeklySchedule);
-    console.log(response.data);
+    console.log("response", response.data);
   };
 
   return (
