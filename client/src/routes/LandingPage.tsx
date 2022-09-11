@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { LandingPageStyle, HeaderStyles, CarouselStyles, FeaturesStyles } from "styles/LandingPageStyles";
 
 import calendarView from "../images/carousel/calendar-view.png";
+import searchView from "../images/carousel/search-view.png";
 import lessonPlans from "../images/sidebar/lesson-plans.svg";
 import search from "../images/sidebar/search.svg";
 import settings from "../images/sidebar/settings.svg";
@@ -51,13 +52,14 @@ function LandingPage() {
                 >
                     <SwiperSlide>
                         <div className="img-container">
-                        <img src={calendarView} alt="Notum Calendar View" />
+                            <img src={calendarView} alt="Notum Calendar View" />
                         </div>
-                        
                     </SwiperSlide>
-                    <SwiperSlide>To be added</SwiperSlide>
-                    <SwiperSlide>To be added</SwiperSlide>
-                    <SwiperSlide>To be added</SwiperSlide>
+                    <SwiperSlide>
+                        <div className="img-container">
+                            <img src={searchView} alt="Notum Calendar View" />
+                        </div>
+                    </SwiperSlide>
                 </Swiper>
             </CarouselStyles>
             <FeaturesStyles>
