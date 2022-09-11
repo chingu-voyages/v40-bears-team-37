@@ -5,7 +5,6 @@ import { useAuth } from "context/AuthContext";
 import { Link } from "react-router-dom";
 import {
   AuthNavigationStyles,
-  CarouselStyles,
   FormStyle,
   InputFormStyles,
   InvalidMessageStyles,
@@ -78,7 +77,6 @@ function Login() {
 
   return (
     <SignUpStyles>
-      <CarouselStyles>Carousel View</CarouselStyles>
       <FormStyle>
         <h1>Login to your Notum account!</h1>
         {!isSubmitSuccessful && (
