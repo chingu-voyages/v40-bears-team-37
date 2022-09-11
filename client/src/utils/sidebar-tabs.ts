@@ -1,19 +1,19 @@
 export const sidebarTabs = [
   {
     title: "Calendar",
-    path: "/",
+    path: "/my-notum",
     description: "weekly lesson view",
     icon: "lesson-plans.svg",
   },
   {
     title: "Search",
-    path: "/search",
+    path: "/my-notum/search",
     description: "search for a lesson",
     icon: "search.svg",
   },
   {
     title: "Settings",
-    path: "/settings",
+    path: "/my-notum/settings",
     description: "change your settings",
     icon: "settings.svg",
   },
