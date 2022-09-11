@@ -2,35 +2,52 @@ import { useModal } from "../../context/LessonModalContext";
 import { LessonCardStyles } from "styles/LessonCardStyles";
 import { formatTime } from "utils/timeFormaters";
 
-import { LessonCardType, scheduleType } from "types/courses";
+import { LessonCardType } from "types/courses";
+import { Lesson } from "types/Lesson";
 
-interface LessonCardProps {
-  lesson: LessonCardType;
-  schedule: scheduleType;
-}
+const LessonCard = ({
+  lessonCard,
+  date,
+  fullLesson,
+}: {
+  lessonCard?: LessonCardType;
+  date?: number;
+  fullLesson?: Lesson;
+}) => {
+  const {
+    setIsModalOpen,
+    setLessonCard,
+    setDate,
+    setFullLesson,
+    setDoesLessonAlreadyExist,
+  } = useModal();
 
-const LessonCard = ({ lesson, schedule }: LessonCardProps) => {
-  const { setIsModalOpen, setLessonId, setSchedule, setLessonCard } = useModal()
   function openModal() {
-    setLessonCard(lesson)
-    setSchedule(schedule)
-    if (!lesson.lesson_id) {
-      setLessonId(null)
-    } else {
-      setLessonId(lesson.lesson_id)
+    if (fullLesson) {
+      setFullLesson(fullLesson);
+      setDoesLessonAlreadyExist(true);
     }
-    setIsModalOpen(true)
+    if (lessonCard) {
+      setLessonCard(lessonCard);
+    }
+    if (date) {
+      setDate(date);
+    }
+    setIsModalOpen(true);
   }
   return (
-    <LessonCardStyles color={lesson.color}>
+    <LessonCardStyles color={fullLesson?.color! || lessonCard?.color!}>
       <div className="card-header">
         {/*TODO: render the lessons' and course's name*/}
-        <h1>{lesson.name}</h1>
-        <div>Lesson: {lesson.name}</div>
+        <h1>{fullLesson?.course_name! || lessonCard?.name}</h1>
+        {(fullLesson?.unit! || lessonCard?.unit) && (
+          <div>Unit: {fullLesson?.unit! || lessonCard?.unit}</div>
+        )}
       </div>
       <div className="card-content">
         <div>
-          {formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}
+          {formatTime(fullLesson?.start_time! || lessonCard?.start_time!)} -{" "}
+          {formatTime(fullLesson?.end_time! || lessonCard?.end_time!)}
         </div>
         <div className="card-link" onClick={openModal}>
           See Full

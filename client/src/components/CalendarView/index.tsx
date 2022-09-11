@@ -17,13 +17,13 @@ interface CalendarViewStylesProps {
 const CalendarViewStyles = styled.div<CalendarViewStylesProps>`
   display: flex;
   margin: 0 auto;
-  filter: ${props => props.isModalOpen ? 'blur(3px)' : 'blur(0px)'}
+  filter: ${(props) => (props.isModalOpen ? "blur(3px)" : "blur(0px)")};
 `;
 
-
 const CalendarView = () => {
-  const [weeklySchedule, setWeeklySchedule] = useState<WeeklyScheduleResultsType>();
-  const { lessonId, isModalOpen } = useModal();
+  const [weeklySchedule, setWeeklySchedule] =
+    useState<WeeklyScheduleResultsType>();
+  const { lessonCard, isModalOpen } = useModal();
 
   const getWeeklySchedule = async (weekId: number | undefined = undefined) => {
     const weeklyScheduleData = (await getWeeklyScheduleService({
@@ -38,7 +38,7 @@ const CalendarView = () => {
   // we need to synchronize our weekly_schedule with our lessonId (which changes anytime the lesson modal opens or closes)
   useEffect(() => {
     getWeeklySchedule();
-  }, [lessonId, isModalOpen]);
+  }, [lessonCard, isModalOpen]);
 
   return (
     <PageWithSidebar>

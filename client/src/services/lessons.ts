@@ -35,27 +35,29 @@ interface GetLessonSuccessType {
 
 interface GetLessonErrorType {
   success: false;
-  message: string; 
+  message: string;
 }
 
-export type GetLessonResponseType = GetLessonSuccessType | GetLessonErrorType 
+export type GetLessonResponseType = GetLessonSuccessType | GetLessonErrorType;
 
 export const getLessonById = async (lessonId: string) => {
   try {
     axios.defaults.withCredentials = true;
-    const response = await axios.get<GetLessonResponseType>(`${baseUrl}/lessons/${lessonId}`);
-    return response.data as GetLessonSuccessType
+    const response = await axios.get<GetLessonResponseType>(
+      `${baseUrl}/lessons/${lessonId}`,
+    );
+    return response.data as GetLessonSuccessType;
   } catch (e: any) {
     if (axios.isAxiosError(e)) {
-      return ({
+      return {
         success: false,
-        message: `Lesson not found. ${e.message}`
-      }) as GetLessonErrorType;
+        message: `Lesson not found. ${e.message}`,
+      } as GetLessonErrorType;
     } else {
-      return ({
+      return {
         success: false,
-        message: `Lesson not found. ${e.message}`
-    }) as GetLessonErrorType;
+        message: `Lesson not found. ${e.message}`,
+      } as GetLessonErrorType;
     }
   }
 };
@@ -70,21 +72,23 @@ interface CreateLessonErrorType {
   message: string;
 }
 
-type CreateLessonResponseType = CreateLessonSuccessType | CreateLessonErrorType
+type CreateLessonResponseType = CreateLessonSuccessType | CreateLessonErrorType;
 
 export const createLesson = async (payload: LessonRequestBodyType) => {
   try {
-    axios.defaults.withCredentials = true
-    const { data } = await axios.post<CreateLessonResponseType>(`${baseUrl}/lessons`, payload)
-    return data as CreateLessonSuccessType
-  }
-  catch (e: any) {
+    axios.defaults.withCredentials = true;
+    const { data } = await axios.post<CreateLessonResponseType>(
+      `${baseUrl}/lessons`,
+      payload,
+    );
+    return data as CreateLessonSuccessType;
+  } catch (e: any) {
     return {
       success: false,
-      message: `Lesson could not be created. ${e.message}`
-    } as CreateLessonErrorType
+      message: `Lesson could not be created. ${e.message}`,
+    } as CreateLessonErrorType;
   }
-}
+};
 
 interface UpdateLessonSuccessType {
   success: true;
@@ -96,17 +100,23 @@ interface UpdateLessonErrorType {
   message: string;
 }
 
-type UpdateLessonResponseType = UpdateLessonErrorType | UpdateLessonSuccessType
+type UpdateLessonResponseType = UpdateLessonErrorType | UpdateLessonSuccessType;
 
-export const updateLesson = async (payload: LessonRequestBodyType, lessonId: string) => {
+export const updateLesson = async (
+  payload: LessonRequestBodyType,
+  lessonId: string,
+) => {
   try {
-    axios.defaults.withCredentials = true
-    const { data } = await axios.put<UpdateLessonResponseType>(`${baseUrl}/lessons/${lessonId}`, payload)
-    return data as UpdateLessonSuccessType
+    axios.defaults.withCredentials = true;
+    const { data } = await axios.put<UpdateLessonResponseType>(
+      `${baseUrl}/lessons/${lessonId}`,
+      payload,
+    );
+    return data as UpdateLessonSuccessType;
   } catch (e: any) {
     return {
       success: false,
-      message: `Lesson could not be updated. ${e.message}`
-    } as UpdateLessonErrorType
+      message: `Lesson could not be updated. ${e.message}`,
+    } as UpdateLessonErrorType;
   }
-}
+};

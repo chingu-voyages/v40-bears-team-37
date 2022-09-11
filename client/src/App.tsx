@@ -9,7 +9,7 @@ import CalendarPage from "routes/Calender";
 import { useAuth } from "context/AuthContext";
 import Loader from "components/Loader/Loader";
 import PageNotFound from "routes/404";
-import LessonModal from "components/LessonModal"
+import LessonModal from "components/LessonModal";
 import LessonModalProvider from "context/LessonModalContext";
 
 function App() {
@@ -23,19 +23,22 @@ function App() {
         path="/"
         element={
           <LessonModalProvider>
-              <PrivateRoute>
-                  <CalendarPage />
-                  <LessonModal />
-              </PrivateRoute>
+            <PrivateRoute>
+              <CalendarPage />
+              <LessonModal />
+            </PrivateRoute>
           </LessonModalProvider>
         }
       />
       <Route
         path="/search"
         element={
-          <PrivateRoute>
-            <Search />
-          </PrivateRoute>
+          <LessonModalProvider>
+            <PrivateRoute>
+              <Search />
+              <LessonModal />
+            </PrivateRoute>
+          </LessonModalProvider>
         }
       />
       <Route
