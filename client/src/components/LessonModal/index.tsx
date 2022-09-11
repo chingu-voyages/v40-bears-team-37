@@ -25,14 +25,14 @@ const LessonModal = () => {
   const [note, setNote] = useState<string>("");
 
   useEffect(() => {
-    if (lesson === null) {
+    if (fullLesson === null) {
       setTags([]);
       setNote("");
     } else {
-      setTags(lesson.tags);
-      setNote(lesson.note);
+      setTags(fullLesson.tags);
+      setNote(fullLesson.note);
     }
-  }, [lesson, lessonId]);
+  }, [fullLesson, lessonCard]);
 
   function addNewTag(e: React.MouseEvent) {
     e.preventDefault();
@@ -66,10 +66,9 @@ const LessonModal = () => {
     setDoesLessonAlreadyExist(false);
     setFullLesson(null);
     setLessonCard(null);
-    setLessonId(null);
     setIsModalOpen(false);
     setDoesLessonAlreadyExist(false);
-    setLesson(null);
+    setLessonCard(null);
   }
 
   if (isModalOpen) {
