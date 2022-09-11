@@ -9,6 +9,7 @@ import {
 } from "react";
 import { getLessonById } from "services/lessons";
 import { LessonCardType, scheduleType } from "types/courses";
+import { Lesson } from "types/Lesson";
 import { GetLessonResponseType } from "../services/lessons"
 
 interface ILessonModalContext {
@@ -16,10 +17,14 @@ interface ILessonModalContext {
     lessonId: string | null;
     lessonCard: LessonCardType;
     schedule: scheduleType;
+    lesson: Lesson | null;
+    doesLessonAlreadyExist: boolean;
     setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-    setLessonId: Dispatch<SetStateAction<string>>;
+    setLessonId: Dispatch<SetStateAction<string|null>>;
     setLessonCard: Dispatch<SetStateAction<LessonCardType>>;
+    setLesson: Dispatch<SetStateAction<Lesson | null>>;
     setSchedule: Dispatch<SetStateAction<scheduleType>>;
+    setDoesLessonAlreadyExist: Dispatch<SetStateAction<boolean>>;
 }
 
 export const EMPTY_LESSON_CARD: LessonCardType = {
@@ -42,31 +47,41 @@ export const defaultContextValues: ILessonModalContext = {
     lessonId: null,
     lessonCard: EMPTY_LESSON_CARD,
     schedule: EMPTY_SCHEDULE,
+    lesson: null, 
+    doesLessonAlreadyExist: false,
     setLessonId: () => {},
     setIsModalOpen: () => {},
     setLessonCard: () => {},
-    setSchedule: () => {}
+    setLesson: () => {},
+    setSchedule: () => {},
+    setDoesLessonAlreadyExist: () => {}
 };
 
 const LessonModalContext = createContext<ILessonModalContext>(defaultContextValues);
 
 const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [ isModalOpen, setIsModalOpen ] = useState(false)
-    const [ lessonId, setLessonId ] = useState('')
+    const [ lessonId, setLessonId ] = useState<string|null>(null)
     const [ lessonCard, setLessonCard ] = useState<LessonCardType>(EMPTY_LESSON_CARD)
     const [ schedule, setSchedule ] = useState<scheduleType>(EMPTY_SCHEDULE)
+    const [ lesson, setLesson ] = useState<Lesson|null>(null)
+    const [ doesLessonAlreadyExist, setDoesLessonAlreadyExist ] = useState<boolean>(false)
 
     // grab lesson whenever use clicks on a different lesson card
     useEffect(() => {
         async function getLesson() {
-            const response: GetLessonResponseType = await getLessonById(lessonId)
+            const response: GetLessonResponseType = await getLessonById(lessonId as string)
             if (response.success) {
-                console.log("found a lesson!", response.data)
+                setLesson(response.data)
+                setDoesLessonAlreadyExist(true)
             } else {
-                console.log(response.message)
+                setLesson(null)
+                setDoesLessonAlreadyExist(false)
             }
         }
-        getLesson()
+        if (lessonId !== null) {
+            getLesson()
+        }
     }, [lessonId])
 
 
@@ -77,10 +92,14 @@ const LessonModalProvider: React.FC<{ children: ReactNode }> = ({children}) => {
                 lessonId,
                 lessonCard,
                 schedule,
+                lesson,
+                doesLessonAlreadyExist,
                 setIsModalOpen,
                 setLessonId,
                 setLessonCard,
-                setSchedule
+                setLesson,
+                setSchedule,
+                setDoesLessonAlreadyExist
             }}
         >
             {children}

@@ -14,7 +14,11 @@ const LessonCard = ({ lesson, schedule }: LessonCardProps) => {
   function openModal() {
     setLessonCard(lesson)
     setSchedule(schedule)
-    setLessonId(lesson._id)
+    if (!lesson.lesson_id) {
+      setLessonId(null)
+    } else {
+      setLessonId(lesson.lesson_id)
+    }
     setIsModalOpen(true)
   }
   return (
@@ -28,12 +32,9 @@ const LessonCard = ({ lesson, schedule }: LessonCardProps) => {
         <div>
           {formatTime(lesson.start_time)} - {formatTime(lesson.end_time)}
         </div>
-        {/*TODO: direct to lesson detail*/}
-        <div className="card-link" onClick={() => setIsModalOpen(true)}>
         <div className="card-link" onClick={openModal}>
           See Full
         </div>
-      </div>
       </div>
     </LessonCardStyles>
   );

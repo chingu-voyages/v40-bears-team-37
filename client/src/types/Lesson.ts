@@ -16,7 +16,7 @@ export type Lesson = {
 };
 
 export type LessonRequestBodyType = {
-  date: string;
+  date: number;
   schedule_id: string;
   course_id: string;
   unit?: string;
