@@ -46,8 +46,8 @@ export interface ScheduleType {
 export interface CourseTypeBase {
   name?: string;
   color?: string;
-  start_date?: string;
-  end_date?: string;
+  start_date?: string | number;
+  end_date?: string | number;
 }
 
 export interface DraftCourseType extends CourseTypeBase {

@@ -3,16 +3,30 @@ import { addCourse } from "../services/courses";
 import { CourseStyles } from "styles/CourseStyles";
 import { CourseHoursType, DraftCourseType } from "types/courses";
 
-const transformWeeklySchedule = (scheduleData: DraftCourseType) => {
+const transformWeeklySchedule = (courseData: DraftCourseType) => {
   const transformedWeeklySchedule: {
-    [key: string]: CourseHoursType;
-  } = {};
-  const originalWeeklySchedule = scheduleData.weekly_schedule;
+    [key: string]: CourseHoursType[];
+  } = { monday: [], tuesday: [], wednesday: [], thursday: [], friday: [] };
+
+  const originalWeeklySchedule = courseData.weekly_schedule;
+
   for (const prop in originalWeeklySchedule) {
     const { day_of_week, start_time, end_time } = originalWeeklySchedule[prop];
-    transformedWeeklySchedule[day_of_week] = { start_time, end_time };
+    transformedWeeklySchedule[day_of_week] = [{ start_time, end_time }];
   }
-  return transformedWeeklySchedule;
+
+  return { ...courseData, weekly_schedule: transformedWeeklySchedule };
+};
+
+const convertDateToUTCNumber = (courseData: DraftCourseType) => {
+  const { start_date, end_date } = courseData;
+  const convertedStartDate = Date.parse(start_date as string);
+  const convertedEndDate = Date.parse(end_date as string);
+  return {
+    ...courseData,
+    start_date: convertedStartDate,
+    end_date: convertedEndDate,
+  };
 };
 
 const Courses = () => {
@@ -23,11 +37,13 @@ const Courses = () => {
   });
 
   const onSubmit = async (values: DraftCourseType) => {
-    const transformedWeeklySchedule = transformWeeklySchedule(values);
-    const response = await addCourse({
-      ...values,
-      weekly_schedule: transformedWeeklySchedule,
-    });
+    const valuesWithConvertedDate = convertDateToUTCNumber(values);
+
+    const valuesWithTransformedWeeklySchedule = transformWeeklySchedule(
+      valuesWithConvertedDate,
+    );
+
+    const response = await addCourse(valuesWithTransformedWeeklySchedule);
     console.log(response.data);
   };
 
