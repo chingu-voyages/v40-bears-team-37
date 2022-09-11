@@ -2,11 +2,11 @@ import React from "react";
 import loadingImage from "images/loading.gif";
 import styled from "styled-components";
 
-interface LoaderProps {
+interface LoaderStylesProps {
   height?: string;
 }
 
-const LoaderStyles = styled.div<LoaderProps>`
+const LoaderStyles = styled.div<LoaderStylesProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,10 +15,16 @@ const LoaderStyles = styled.div<LoaderProps>`
   color: var(--primary-dark);
 `;
 
-const Loader = ({ height }: {height?: string}) => {
+interface LoaderProps {
+  height?: string;
+  displayWelcomeText?: boolean;
+}
+
+
+const Loader = ({ height, displayWelcomeText }: LoaderProps) => {
   return (
     <LoaderStyles height={height}>
-      <h2>Welcome to Notum</h2>
+      {displayWelcomeText ? <h2>Welcome to Notum</h2> : null}
       <img src={loadingImage} alt="loading book" />
       <p>Loading...</p>
     </LoaderStyles>

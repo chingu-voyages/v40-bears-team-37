@@ -40,6 +40,12 @@ function Search() {
                 start_time: lessonNote.start_time,
                 end_time: lessonNote.end_time,
                 name: lessonNote.course_name,
+                course_id: lessonNote.course_id,
+              }}
+              schedule={{
+                date: lessonNote.date,
+                day: "Monday", // TODO make dynamic
+                lessons: [] // TODO make dynamic
               }}
             />
           ))}
