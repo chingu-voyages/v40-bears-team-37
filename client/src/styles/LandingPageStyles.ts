@@ -46,10 +46,10 @@ export const CarouselStyles = styled.div`
   }
 
   .swiper img {
-      margin: 0 auto;
-      width: auto;
-      height: 100%;
-      opacity: 0.8;
+    margin: 0 auto;
+    width: auto;
+    height: 100%;
+    opacity: 0.8;
   }
 
   @media ${devices.mobile} {
@@ -94,12 +94,12 @@ export const FeaturesStyles = styled.div`
 
   @media ${devices.mobile} {
     .features {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
 
     .features > * + * {
-        margin-top: 32px;
+      margin-top: 32px;
     }
   }
 `;

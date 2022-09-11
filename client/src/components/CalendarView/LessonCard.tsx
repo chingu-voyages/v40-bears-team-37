@@ -10,16 +10,17 @@ interface LessonCardProps {
 }
 
 const LessonCard = ({ lesson, schedule }: LessonCardProps) => {
-  const { setIsModalOpen, setLessonId, setSchedule, setLessonCard } = useModal()
+  const { setIsModalOpen, setLessonId, setSchedule, setLessonCard } =
+    useModal();
   function openModal() {
-    setLessonCard(lesson)
-    setSchedule(schedule)
+    setLessonCard(lesson);
+    setSchedule(schedule);
     if (!lesson.lesson_id) {
-      setLessonId(null)
+      setLessonId(null);
     } else {
-      setLessonId(lesson.lesson_id)
+      setLessonId(lesson.lesson_id);
     }
-    setIsModalOpen(true)
+    setIsModalOpen(true);
   }
   return (
     <LessonCardStyles color={lesson.color}>

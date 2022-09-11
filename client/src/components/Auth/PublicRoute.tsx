@@ -13,7 +13,9 @@ function PublicRoute({ children }: IProps) {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  const prevLocation =  window.history.state.usr ?  window.history.state.usr?.from.pathname : "/my-notum";
+  const prevLocation = window.history.state.usr
+    ? window.history.state.usr?.from.pathname
+    : "/my-notum";
   if (auth.isAuthed) {
     navigate(prevLocation);
   }

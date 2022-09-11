@@ -17,12 +17,12 @@ interface CalendarViewStylesProps {
 const CalendarViewStyles = styled.div<CalendarViewStylesProps>`
   display: flex;
   margin: 0 auto;
-  filter: ${props => props.isModalOpen ? 'blur(3px)' : 'blur(0px)'}
+  filter: ${(props) => (props.isModalOpen ? "blur(3px)" : "blur(0px)")};
 `;
 
-
 const CalendarView = () => {
-  const [weeklySchedule, setWeeklySchedule] = useState<WeeklyScheduleResultsType>();
+  const [weeklySchedule, setWeeklySchedule] =
+    useState<WeeklyScheduleResultsType>();
   const { lessonId, isModalOpen } = useModal();
 
   const getWeeklySchedule = async (weekId: number | undefined = undefined) => {

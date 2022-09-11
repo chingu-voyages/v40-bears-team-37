@@ -11,7 +11,7 @@ const LoaderStyles = styled.div<LoaderStylesProps>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: ${props => props.height ? props.height : "100vh"};
+  height: ${(props) => (props.height ? props.height : "100vh")};
   color: var(--primary-dark);
 `;
 
@@ -19,7 +19,6 @@ interface LoaderProps {
   height?: string;
   displayWelcomeText?: boolean;
 }
-
 
 const Loader = ({ height, displayWelcomeText }: LoaderProps) => {
   return (
