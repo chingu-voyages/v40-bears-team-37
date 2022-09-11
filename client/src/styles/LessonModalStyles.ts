@@ -12,7 +12,6 @@ export const LessonModalStyles = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  min-height: 80%;
   min-width: 60%;
   
   .lesson-header {
@@ -123,6 +122,7 @@ export const LessonModalStyles = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
   }
 
   button {

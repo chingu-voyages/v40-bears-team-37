@@ -19,7 +19,8 @@ const Loader = ({
   return (
     <LoaderStyles>
       {displayWelcomeText && <h2>Welcome to Notum</h2>}
-      <img src={loadingImage} alt="loading image" />
+      <h2>Welcome to Notum</h2>
+      <img src={loadingImage} alt="loading book" />
       <p>Loading...</p>
     </LoaderStyles>
   );

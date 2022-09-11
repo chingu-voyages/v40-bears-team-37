@@ -23,10 +23,10 @@ function App() {
         path="/"
         element={
           <LessonModalProvider>
-            <PrivateRoute>
-              <CalendarPage />
-              <LessonModal />
-            </PrivateRoute>
+              <PrivateRoute>
+                  <CalendarPage />
+                  <LessonModal />
+              </PrivateRoute>
           </LessonModalProvider>
         }
       />
