@@ -12,9 +12,9 @@ export const sidebarTabs = [
     icon: "search.svg",
   },
   {
-    title: "Settings",
-    path: "/my-notum/settings",
-    description: "change your settings",
-    icon: "settings.svg",
+    title: "Courses",
+    path: "/my-notum/courses",
+    description: "add or view courses",
+    icon: "courses.svg",
   },
 ];

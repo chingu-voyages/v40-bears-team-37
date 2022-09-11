@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "components/Auth/PrivateRoute";
 import Search from "routes/Search";
-import Settings from "routes/Settings";
+import Courses from "routes/Courses";
 import PublicRoute from "components/Auth/PublicRoute";
 import LandingPage from "routes/LandingPage";
 import Login from "routes/Login";
@@ -47,10 +47,10 @@ function App() {
         }
       />
       <Route
-        path="/my-notum/settings"
+        path="/my-notum/courses"
         element={
           <PrivateRoute>
-            <Settings />
+            <Courses />
           </PrivateRoute>
         }
       />
