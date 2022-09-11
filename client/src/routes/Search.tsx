@@ -71,7 +71,7 @@ function Search() {
       </FieldContainer>
 
       <Container>
-        {filteredLessonNotes.length > 0 &&
+        {/* {filteredLessonNotes.length > 0 &&
           filteredLessonNotes.map((lessonNote) => (
             <LessonCard
               key={lessonNote._id}
@@ -91,7 +91,7 @@ function Search() {
             />
           ))}
 
-        {filteredLessonNotes.length === 0 && <PCenter>No Lesson Found</PCenter>}
+        {filteredLessonNotes.length === 0 && <PCenter>No Lesson Found</PCenter>} */}
       </Container>
     </PageWithSidebar>
   );
